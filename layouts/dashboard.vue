@@ -22,7 +22,7 @@
           '-translate-x-80': !isOpen
         }"
       >
-        <dashboard-sidebar-organizations />
+        <dashboard-sidebar-workspace />
         <dashboard-sidebar-menu />
       </div>
 

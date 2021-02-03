@@ -48,28 +48,28 @@
         </div>
 
         <!----------------------------->
-        <!-- organization -->
+        <!-- workspace -->
         <div class="mt-10">
           <dashboard-sidebar-menu-category
-            title="ORGANIZATION"
+            title="WORKSPACE"
           />
 
           <dashboard-sidebar-menu-item
             title="General"
             icon="home"
-            to="/dashboard/organization"
+            to="/dashboard/workspace"
           />
 
           <dashboard-sidebar-menu-item
             title="Members"
             icon="users"
-            to="/dashboard/organization/members"
+            to="/dashboard/workspace/members"
           />
 
           <dashboard-sidebar-menu-item
             title="Settings"
             icon="cog"
-            to="/dashboard/organization/settings"
+            to="/dashboard/workspace/settings"
           />
         </div>
 

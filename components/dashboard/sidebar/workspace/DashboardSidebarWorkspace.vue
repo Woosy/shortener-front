@@ -2,16 +2,16 @@
   <div class="fixed h-screen w-16 bg-white dark:bg-gray-900 shadow-xs">
     <div class="h-full flex flex-col items-center justify-between overflow-y-auto hide-scrollbar">
       <div>
-        <!-- loop through all organizations -->
-        <dashboard-sidebar-organization-item
-          v-for="(organization, index) in organizations"
+        <!-- loop through all workspaces -->
+        <dashboard-sidebar-workspace-item
+          v-for="(workspace, index) in workspaces"
           :key="index"
-          :name="organization.name"
-          :color="organization.color"
-          @click.native="switchToOrganization(organization)"
+          :name="workspace.name"
+          :color="workspace.color"
+          @click.native="switchToWorkspace(workspace)"
         />
 
-        <!-- create an organization -->
+        <!-- create an workspace -->
         <div class="mt-5 transform hover:scale-110 transition duration-150" @click="showCreateWorkspace()">
           <button class="h-10 w-10 border border-gray-400 rounded-lg focus:outline-none">
             <p class="text-center text-gray-600 text-2xl">
@@ -33,15 +33,15 @@ import Vue from 'vue'
 
 export default Vue.extend({
   async fetch () {
-    this.organizations = await this.$axios.$get('/user/organizations')
+    this.workspaces = await this.$axios.$get('/user/workspaces')
   },
   data () {
     return {
-      organizations: []
+      workspaces: []
     }
   },
   methods: {
-    switchToOrganization (org) {
+    switchToWorkspace (org) {
       this.$toasted.global.error({ message: `Switched to ${org.name} (not implemented!)` })
     },
     showCreateWorkspace () {
