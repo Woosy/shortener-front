@@ -12,7 +12,6 @@ export const getters: GetterTree<RootState, RootState> = {
 
 export const mutations: MutationTree<RootState> = {
   TOGGLE_SIDEBAR_MENU: (state, status) => {
-    console.log('mutation:', status)
     state.isSidebarMenuOpen = status || !state.isSidebarMenuOpen
   }
 }
