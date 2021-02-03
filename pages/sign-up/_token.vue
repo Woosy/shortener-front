@@ -1,14 +1,6 @@
 <template>
-  <authentication-layout
-    title="Welcome to Shortener"
-  >
+  <authentication-layout title="Email confirmation">
     <div slot="body">
-      <div class="text-center mb-5">
-        <h2 class="text-2xl font-semibold">
-          Email validation
-        </h2>
-      </div>
-
       <div v-show="loading" class="text-center">
         <p class="text-sm mb-5">
           Validating your email address...
@@ -22,6 +14,15 @@
           :class="{ 'bg-green-400': success, 'bg-red-400': error }"
         >
           {{ success || error }}
+        </div>
+
+        <div v-show="success" class="mt-5">
+          <p class="text-center">
+            You can now
+            <nuxt-link to="/sign-in" class="underline font-bold">
+              sign-in.
+            </nuxt-link>
+          </p>
         </div>
       </div>
     </div>

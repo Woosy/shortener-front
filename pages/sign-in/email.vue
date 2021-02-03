@@ -85,9 +85,12 @@ export default Vue.extend({
   methods: {
     submitLoginForm () {
       this.$auth.loginWith('local', { data: this.loginForm })
-        .then(() => {
+        .then((res) => {
           this.$toast.global.success({ message: 'Successfully authenticated!' })
-          this.$router.push('/dashboard')
+          // @ts-ignore
+          res.data.needConfiguration
+            ? this.$router.push('/sign-in/configuration')
+            : this.$router.push('/dashboard')
         })
         .catch((err) => {
           // this.$toast.global.error({ message: 'Authentication failed!' })
