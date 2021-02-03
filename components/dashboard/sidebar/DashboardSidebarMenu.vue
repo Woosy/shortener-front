@@ -35,23 +35,23 @@
           />
 
           <dashboard-sidebar-menu-item
+            title="All links"
+            icon="list"
+            to="/dashboard/links"
+          />
+
+          <dashboard-sidebar-menu-item
             title="Statistics"
             icon="chart-line"
             to="/dashboard/statistics"
           />
-
-          <dashboard-sidebar-menu-item
-            title="Settings"
-            icon="cog"
-            to="/dashboard/settings"
-          />
         </div>
 
         <!----------------------------->
-        <!-- my organization -->
+        <!-- organization -->
         <div class="mt-10">
           <dashboard-sidebar-menu-category
-            title="MY ORGANIZATION"
+            title="ORGANIZATION"
           />
 
           <dashboard-sidebar-menu-item
@@ -61,15 +61,35 @@
           />
 
           <dashboard-sidebar-menu-item
-            title="Users"
-            icon="chart-line"
-            to="/dashboard/organization/users"
+            title="Members"
+            icon="users"
+            to="/dashboard/organization/members"
           />
 
           <dashboard-sidebar-menu-item
             title="Settings"
             icon="cog"
-            to="/dashboard/orgaizations/settings"
+            to="/dashboard/organization/settings"
+          />
+        </div>
+
+        <!----------------------------->
+        <!-- account -->
+        <div class="mt-10">
+          <dashboard-sidebar-menu-category
+            title="ACCOUNT"
+          />
+
+          <dashboard-sidebar-menu-item
+            title="My profile"
+            icon="user"
+            to="/dashboard/account"
+          />
+
+          <dashboard-sidebar-menu-item
+            title="Settings"
+            icon="cog"
+            to="/dashboard/account/settings"
           />
         </div>
       </div>

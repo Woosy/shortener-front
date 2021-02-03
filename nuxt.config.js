@@ -92,7 +92,8 @@ export default {
   fontawesome: {
     icons: {
       solid: ['faBars', 'faTimes', 'faEnvelope', 'faLock', 'faCircleNotch',
-        'faPlus', 'faHome', 'faChartLine', 'faCog', 'faSignOutAlt', 'faUser'],
+        'faPlus', 'faHome', 'faChartLine', 'faCog', 'faSignOutAlt', 'faUser',
+        'faUsers', 'faList'],
       brands: ['faGithub', 'faGoogle']
     }
   },
