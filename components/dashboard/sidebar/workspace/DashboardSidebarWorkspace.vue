@@ -12,7 +12,10 @@
         />
 
         <!-- create an workspace -->
-        <div class="mt-5 transform hover:scale-110 transition duration-150" @click="showCreateWorkspace()">
+        <div
+          class="mt-5 transform hover:scale-110 transition duration-150"
+          @click="$store.commit('layout/TOGGLE_CREATE_WORKSPACE_MODAL', true)"
+        >
           <button class="h-10 w-10 border border-gray-400 rounded-lg focus:outline-none">
             <p class="text-center text-gray-600 text-2xl">
               +
@@ -37,15 +40,13 @@ export default Vue.extend({
   },
   data () {
     return {
-      workspaces: []
+      workspaces: [],
+      showWorkspaceCreateModal: false
     }
   },
   methods: {
     switchToWorkspace (org) {
       this.$toasted.global.error({ message: `Switched to ${org.name} (not implemented!)` })
-    },
-    showCreateWorkspace () {
-      this.$toasted.global.error({ message: 'Creating new workspace (not implemented!)' })
     }
   }
 })

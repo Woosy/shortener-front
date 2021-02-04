@@ -4,7 +4,7 @@
     <!-- backdrop -->
     <transition name="fade" :duration="200">
       <div
-        v-if="isOpen"
+        v-if="isSidebarMenuOpen"
         class="fixed inset-0 z-20"
         @click="$store.commit('layout/TOGGLE_SIDEBAR_MENU', false)"
       >
@@ -13,13 +13,19 @@
     </transition>
 
     <!--------------------------------------->
+    <!-- modals -->
+    <div>
+      <create-workspace-modal />
+    </div>
+
+    <!--------------------------------------->
     <!-- sidebars -->
     <div class="flex flex-row min-h-screen">
       <div
         class="fixed transform transition-all duration-300 md:translate-x-0 md:fixed z-30"
         :class="{
-          'translate-x-0': isOpen,
-          '-translate-x-80': !isOpen
+          'translate-x-0': isSidebarMenuOpen,
+          '-translate-x-80': !isSidebarMenuOpen
         }"
       >
         <dashboard-sidebar-workspace />
@@ -36,13 +42,15 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
+import CreateWorkspaceModal from '~/components/theme/modals/CreateWorkspaceModal.vue'
 
 export default Vue.extend({
+  components: { CreateWorkspaceModal },
   computed: {
-    ...mapGetters('layout', {
-      isOpen: 'isSidebarMenuOpen'
-    })
+    ...mapState('layout', [
+      'isSidebarMenuOpen'
+    ])
   }
 })
 </script>
