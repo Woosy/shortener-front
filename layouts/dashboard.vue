@@ -34,6 +34,7 @@
 
       <div class="flex flex-col w-full md:ml-80">
         <dashboard-header />
+        <breadcrumb />
         <nuxt />
       </div>
     </div>

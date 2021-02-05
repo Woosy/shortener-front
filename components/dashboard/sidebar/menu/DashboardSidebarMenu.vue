@@ -55,7 +55,7 @@
           />
 
           <dashboard-sidebar-menu-item
-            title="General"
+            title="Workspace"
             icon="home"
             to="/dashboard/workspace"
           />
