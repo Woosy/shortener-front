@@ -13,17 +13,12 @@ export const getters: GetterTree<RootState, RootState> = {
 
 export const mutations: MutationTree<RootState> = {
   TOGGLE_SIDEBAR_MENU: (state, status) => {
-    state.isSidebarMenuOpen = status || !state.isSidebarMenuOpen
+    state.isSidebarMenuOpen = status !== undefined ? status : !state.isSidebarMenuOpen
   },
   TOGGLE_CREATE_WORKSPACE_MODAL: (state, status) => {
-    state.showCreateWorkspaceModal = status || !state.showCreateWorkspaceModal
+    state.showCreateWorkspaceModal = status !== undefined ? status : !state.showCreateWorkspaceModal
   }
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  // async fetchThings ({ commit }) {
-  //   const things = await this.$axios.$get('/things')
-  //   console.log(things)
-  //   commit('CHANGE_NAME', 'New name')
-  // }
 }

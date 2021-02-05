@@ -93,7 +93,8 @@ export default {
     icons: {
       solid: ['faBars', 'faTimes', 'faEnvelope', 'faLock', 'faCircleNotch',
         'faPlus', 'faHome', 'faChartLine', 'faCog', 'faSignOutAlt', 'faUser',
-        'faUsers', 'faList', 'faBuilding', 'faExclamationCircle', 'faCheckCircle'],
+        'faUsers', 'faList', 'faBuilding', 'faExclamationCircle', 'faCheckCircle',
+        'faInfoCircle'],
       brands: ['faGithub', 'faGoogle']
     }
   },

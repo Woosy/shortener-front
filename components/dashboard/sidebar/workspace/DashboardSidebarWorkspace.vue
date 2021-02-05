@@ -33,20 +33,25 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { mapState } from 'vuex'
 
 export default Vue.extend({
-  async fetch () {
-    this.workspaces = await this.$axios.$get('/user/workspaces')
+  fetch () {
+    this.$store.dispatch('workspaces/fetch')
   },
   data () {
     return {
-      workspaces: [],
       showWorkspaceCreateModal: false
     }
   },
+  computed: {
+    ...mapState('workspaces', [
+      'workspaces'
+    ])
+  },
   methods: {
-    switchToWorkspace (org) {
-      this.$toasted.global.error({ message: `Switched to ${org.name} (not implemented!)` })
+    switchToWorkspace (workspace) {
+      this.$toasted.global.error({ message: `Switched to ${workspace.name} (not implemented!)` })
     }
   }
 })
