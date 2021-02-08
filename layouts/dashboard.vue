@@ -22,7 +22,7 @@
     <!-- sidebars -->
     <div class="flex flex-row min-h-screen">
       <div
-        class="fixed transform transition-all duration-300 md:translate-x-0 md:fixed z-30"
+        class="fixed transform transition-all duration-300 lg:translate-x-0 lg:fixed z-30"
         :class="{
           'translate-x-0': isSidebarMenuOpen,
           '-translate-x-80': !isSidebarMenuOpen
@@ -32,10 +32,10 @@
         <dashboard-sidebar-menu />
       </div>
 
-      <div class="flex flex-col w-full md:ml-80">
+      <div class="flex flex-col w-full lg:ml-80">
         <dashboard-header />
-        <breadcrumb />
-        <nuxt />
+        <breadcrumb class="px-5 lg:px-8" />
+        <nuxt class="px-5 lg:px-8" />
       </div>
     </div>
   </div>

@@ -7,8 +7,17 @@ module.exports = {
   theme: {
     darkSelector: '.dark-mode',
     extend: {
+      height: {
+        28: '7rem'
+      },
       screens: {
-        xs: '380px'
+        xs: '380px',
+        '2xl': '1590px'
+      },
+      container: {
+        screens: {
+          '2xl': '1280px'
+        }
       },
       spacing: {
         72: '18rem',

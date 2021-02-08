@@ -1,13 +1,14 @@
 <template>
-  <div class="fixed h-screen w-16 bg-white dark:bg-gray-900 shadow-xs">
+  <div class="fixed h-screen w-16 bg-white dark:bg-gray-900">
     <div class="h-full flex flex-col items-center justify-between overflow-y-auto hide-scrollbar">
-      <div>
+      <div class="w-full text-center">
         <!-- loop through all workspaces -->
         <dashboard-sidebar-workspace-item
           v-for="(workspace, index) in workspaces"
           :key="index"
           :name="workspace.name"
           :color="workspace.color"
+          :active="workspace.id === current.id"
           @click.native="switchToWorkspace(workspace)"
         />
 
@@ -46,12 +47,14 @@ export default Vue.extend({
   },
   computed: {
     ...mapState('workspaces', [
-      'workspaces'
+      'workspaces',
+      'current'
     ])
   },
   methods: {
     switchToWorkspace (workspace) {
-      this.$toasted.global.error({ message: `Switched to ${workspace.name} (not implemented!)` })
+      this.$store.commit('workspaces/SET_CURRENT', workspace)
+      this.$toasted.global.success({ message: `Switched to ${workspace.name}.` })
     }
   }
 })

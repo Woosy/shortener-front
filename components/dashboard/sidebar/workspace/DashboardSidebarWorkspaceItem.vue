@@ -1,7 +1,11 @@
 <template>
-  <div class="mt-5">
+  <div
+    class="py-3 my-2 w-full"
+    :class="{ 'bg-gray-100 dark:bg-gray-800 rounded-l-lg shadow-xs': active}"
+  >
     <button
       class="h-10 w-10 rounded-lg focus:outline-none transform hover:scale-110 transition duration-150"
+      :class="{ 'border-2 border-gray-700 dark:border-white': active}"
       :style="`background-color: ${color}`"
     >
       <p class="text-center text-white text-2xl font-semibold">
@@ -23,6 +27,10 @@ export default Vue.extend({
     color: {
       type: String,
       default: '#4299e1'
+    },
+    active: {
+      type: Boolean,
+      default: false
     }
   }
 })

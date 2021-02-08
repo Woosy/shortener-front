@@ -1,15 +1,15 @@
 <template>
-  <div class="fixed h-screen ml-16 w-64 bg-gray-100 dark:bg-gray-800 shadow-xs">
+  <div class="fixed h-screen ml-16 w-64 bg-gray-100 dark:bg-gray-800">
     <div class="h-full flex flex-col items-center justify-between overflow-y-auto hide-scrollbar">
       <div class="w-full px-5">
         <!----------------------------->
         <!-- logo -->
-        <div class="h-16 flex justify-between md:justify-center items-center border-b border-gray-200 dark:border-gray-700">
+        <div class="h-16 flex justify-between lg:justify-center items-center border-b border-gray-200 dark:border-gray-700">
           <img v-if="$colorMode.preference === 'dark'" class="h-8 w-auto" src="@/assets/images/svg/logo-white-text.svg" alt="Workflow">
           <img v-if="$colorMode.preference === 'light'" class="h-8 w-auto" src="@/assets/images/svg/logo-black-text.svg" alt="Workflow">
 
           <div @click="toggleSidebarMenu()">
-            <font-awesome-icon icon="bars" class="block md:hidden text-gray-500" />
+            <font-awesome-icon icon="bars" class="block lg:hidden text-gray-500" />
           </div>
         </div>
 
@@ -45,31 +45,11 @@
             icon="chart-line"
             to="/dashboard/statistics"
           />
-        </div>
-
-        <!----------------------------->
-        <!-- workspace -->
-        <div class="mt-10">
-          <dashboard-sidebar-menu-category
-            title="WORKSPACE"
-          />
 
           <dashboard-sidebar-menu-item
             title="Workspace"
             icon="home"
             to="/dashboard/workspace"
-          />
-
-          <dashboard-sidebar-menu-item
-            title="Members"
-            icon="users"
-            to="/dashboard/workspace/members"
-          />
-
-          <dashboard-sidebar-menu-item
-            title="Settings"
-            icon="cog"
-            to="/dashboard/workspace/settings"
           />
         </div>
 

@@ -3,7 +3,7 @@
     <!------------------------>
     <!-- left -->
     <div @click="toggleSidebarMenu()">
-      <font-awesome-icon icon="bars" class="block md:hidden text-gray-500" />
+      <font-awesome-icon icon="bars" class="block lg:hidden text-gray-500" />
     </div>
 
     <!------------------------>

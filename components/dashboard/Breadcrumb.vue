@@ -1,8 +1,8 @@
 <template>
-  <div class="px-5 h-16 flex justify-between items-center bg-gray-200 dark:bg-gray-900">
+  <div class="h-16 md:h-20 flex justify-between items-center bg-gray-200 dark:bg-gray-900">
     <!------------------------>
     <!-- left -->
-    <div class="mt-2 flex items-center text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-300">
+    <div class="flex items-center text-xl md:text-2xl font-semibold text-gray-600 dark:text-gray-300">
       <font-awesome-icon :icon="current().icon" />
       <p class="ml-3">
         {{ current().page }}
