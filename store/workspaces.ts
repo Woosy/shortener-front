@@ -1,13 +1,16 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 
 export const state = () => ({
-  current: {},
-  workspaces: []
+  workspaces: [],
+  current: {
+    members: []
+  }
 })
 
 export type RootState = ReturnType<typeof state>
 
 export const getters: GetterTree<RootState, RootState> = {
+  currentMembersCount: state => state.current.members.length
 }
 
 export const mutations: MutationTree<RootState> = {
@@ -27,6 +30,7 @@ export const actions: ActionTree<RootState, RootState> = {
   async fetch ({ commit }) {
     const workspaces = await this.$axios.$get('/users/workspaces')
     commit('SET_WORKSPACES', workspaces)
+    console.log(workspaces)
     commit('SET_CURRENT', workspaces[0])
   },
 

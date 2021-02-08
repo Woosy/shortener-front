@@ -62,7 +62,7 @@ export default Vue.extend({
       default: ''
     },
     value: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     detail: {

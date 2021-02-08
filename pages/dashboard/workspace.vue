@@ -7,7 +7,7 @@
       <card-small
         title="MEMBERS"
         icon="users"
-        :value="members.length"
+        :value="currentMembersCount || '?'"
         detail="/ ?? max"
         description="<u>Upgrade your workspace</u> to get more slots!"
       />
@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default Vue.extend({
   middleware: 'user',
@@ -48,6 +48,9 @@ export default Vue.extend({
     }
   },
   computed: {
+    ...mapGetters({
+      currentMembersCount: 'workspaces/currentMembersCount'
+    }),
     ...mapState('workspaces', {
       // @ts-ignore
       currentWorkspace: state => state.current
