@@ -26,11 +26,11 @@
         <!-- button -->
         <button
           type="button"
-          class="relative w-full bg-white border border-gray-300 rounded-md pl-3 pr-10 py-2 text-left cursor-default focus:outline-none sm:text-sm"
+          class="relative w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md pl-3 pr-10 py-2 text-left cursor-default focus:outline-none sm:text-sm"
           @click="open = !open"
         >
           <span class="flex items-center">
-            <span class="ml-3 block truncate">
+            <span class="ml-3 block truncate dark:text-white">
               {{ current }}
             </span>
 
@@ -46,14 +46,14 @@
         <!-------------------->
         <!-- menu -->
         <transition name="fade" :duration="100">
-          <div v-if="open" class="absolute mt-1 w-full rounded-md bg-white shadow-lg">
+          <div v-if="open" class="absolute mt-1 w-full rounded-md bg-white dark:bg-gray-800 shadow-lg">
             <ul class="max-h-56 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm">
               <!-- General -->
               <li
                 v-for="(option, index) in options"
                 :key="index"
                 class="relative py-2 pl-3 pr-9 rounded"
-                :class="current === option ? 'text-white bg-indigo-600': 'text-gray-900 bg-white'"
+                :class="current === option ? 'text-white bg-indigo-600': 'text-gray-900 dark:text-white bg-white dark:bg-gray-800'"
                 @click="$emit('toggle', option), open = false"
               >
                 <div class="flex items-center">
