@@ -23,6 +23,11 @@ export const mutations: MutationTree<RootState> = {
   },
   SET_CURRENT: (state, workspace) => {
     state.current = workspace
+  },
+  REMOVE_WORKSPACE: (state, workspaceId) => {
+    // @ts-ignore
+    const index = state.workspaces.findIndex(ws => ws.id === workspaceId)
+    state.workspaces.splice(index, 1)
   }
 }
 
@@ -30,7 +35,6 @@ export const actions: ActionTree<RootState, RootState> = {
   async fetch ({ commit }) {
     const workspaces = await this.$axios.$get('/users/workspaces')
     commit('SET_WORKSPACES', workspaces)
-    console.log(workspaces)
     commit('SET_CURRENT', workspaces[0])
   },
 

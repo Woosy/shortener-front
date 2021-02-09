@@ -2,7 +2,8 @@ import { GetterTree, ActionTree, MutationTree } from 'vuex'
 
 export const state = () => ({
   isSidebarMenuOpen: false,
-  showCreateWorkspaceModal: false
+  showCreateWorkspaceModal: false,
+  showDeleteWorkspaceModal: false
 })
 
 export type RootState = ReturnType<typeof state>
@@ -17,6 +18,9 @@ export const mutations: MutationTree<RootState> = {
   },
   TOGGLE_CREATE_WORKSPACE_MODAL: (state, status) => {
     state.showCreateWorkspaceModal = status !== undefined ? status : !state.showCreateWorkspaceModal
+  },
+  TOGGLE_DELETE_WORKSPACE_MODAL: (state, status) => {
+    state.showDeleteWorkspaceModal = status !== undefined ? status : !state.showDeleteWorkspaceModal
   }
 }
 

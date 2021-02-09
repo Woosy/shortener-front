@@ -15,6 +15,7 @@
     <!--------------------------------------->
     <!-- modals -->
     <div>
+      <delete-workspace-modal />
       <create-workspace-modal />
     </div>
 
