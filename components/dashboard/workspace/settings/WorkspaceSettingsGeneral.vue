@@ -38,7 +38,11 @@
         Delete workspace
       </div>
 
-      <button class="px-2 py-1 bg-red-500 hover:bg-red-600 transition-all duration-200 rounded-lg focus:outline-none" @click="deleteWorkspace()">
+      <button
+        class="px-2 py-1  transition-all duration-200 rounded-lg focus:outline-none"
+        :class="isOwner ? 'bg-red-600 transform hover:scale-105' : 'bg-red-400 cursor-not-allowed'"
+        @click="deleteWorkspace()"
+      >
         <span class="text-sm text-white">
           Delete workspace
         </span>
@@ -56,18 +60,21 @@ export default Vue.extend({
     ...mapState('workspaces', {
       // @ts-ignore
       currentWorkspace: state => state.current
-    })
+    }),
+    isOwner () {
+      if (this.currentWorkspace.members.length <= 0) { return false }
+      const owner = this.currentWorkspace.members.find(member => member.role === 'owner')
+      return this.$auth.user.id === owner.id
+    }
   },
   methods: {
     deleteWorkspace () {
-      // if user is the owner
-      const owner = this.currentWorkspace.members.find(member => member.role === 'owner')
-      if (this.$auth.user.id === owner.id) {
+      if (this.isOwner) {
         this.$store.commit('layout/TOGGLE_DELETE_WORKSPACE_MODAL', true)
-      // if user is just a member
-      } else {
-        this.$toasted.global.error({ message: 'You are not the owner of this workspace!' })
+        return
       }
+
+      this.$toasted.global.error({ message: "You cannot delete a workspace that you don't own!" })
     }
   }
 })
