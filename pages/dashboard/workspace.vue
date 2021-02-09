@@ -23,14 +23,14 @@
     <div class="mt-2 sm:mt-8">
       <settings-nav
         :current="currentTab"
-        :options="['General', 'Plan', 'Billing', 'Team Members']"
+        :options="['General', 'Team Members', 'Plan', 'Billing' ]"
         @toggle="toggleCurrent"
       />
 
       <workspace-settings-general v-if="currentTab === 'General'" :key="1" />
-      <workspace-settings-plan v-if="currentTab === 'Plan'" :key="2" />
-      <workspace-settings-billing v-if="currentTab === 'Billing'" :key="3" />
-      <workspace-settings-members v-if="currentTab === 'Team Members'" :key="4" />
+      <workspace-settings-members v-if="currentTab === 'Team Members'" :key="2" />
+      <workspace-settings-plan v-if="currentTab === 'Plan'" :key="3" />
+      <workspace-settings-billing v-if="currentTab === 'Billing'" :key="4" />
     </div>
   </div>
 </template>
