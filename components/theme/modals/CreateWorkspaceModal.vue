@@ -123,7 +123,6 @@ export default Vue.extend({
         .then(() => {
           this.$toasted.global.success({ message: 'Workspace successfully created!' })
           this.closeModal()
-          // TODO: switch to workspace
           this.$router.push('/dashboard/workspace')
         })
         .catch((err) => {

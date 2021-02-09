@@ -70,12 +70,8 @@ export default Vue.extend({
     },
     confirm () {
       this.closeModal()
-      // TODO: create an action for that
-      this.$axios.$delete('/workspaces/' + this.currentWorkspace.id)
+      this.$store.dispatch('workspaces/delete', this.currentWorkspace.id)
         .then(() => {
-          this.$store.commit('workspaces/REMOVE_WORKSPACE', this.currentWorkspace.id)
-          // TODO: handle set_current
-          this.$store.dispatch('workspaces/fetch')
           this.$toast.global.success({ message: 'Workspace successfully deleted!' })
         })
         .catch((err) => {

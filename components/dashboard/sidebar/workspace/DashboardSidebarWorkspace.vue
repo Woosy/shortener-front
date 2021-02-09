@@ -4,7 +4,7 @@
       <div class="w-full text-center">
         <!-- loop through all workspaces -->
         <dashboard-sidebar-workspace-item
-          v-for="(workspace, index) in workspaces"
+          v-for="(workspace, index) in workspaceList"
           :key="index"
           :name="workspace.name"
           :color="workspace.color"
@@ -12,7 +12,7 @@
           @click.native="switchToWorkspace(workspace)"
         />
 
-        <!-- create an workspace -->
+        <!-- create a workspace -->
         <div
           class="mt-5 transform hover:scale-110 transition duration-150"
           @click="$store.commit('layout/TOGGLE_CREATE_WORKSPACE_MODAL', true)"
@@ -38,7 +38,8 @@ import { mapState } from 'vuex'
 
 export default Vue.extend({
   fetch () {
-    this.$store.dispatch('workspaces/fetch')
+    this.$store.dispatch('workspaces/fetchList')
+    this.$store.dispatch('workspaces/fetchPersonal')
   },
   data () {
     return {
@@ -47,14 +48,35 @@ export default Vue.extend({
   },
   computed: {
     ...mapState('workspaces', [
-      'workspaces',
+      'workspaceList',
       'current'
     ])
   },
   methods: {
     switchToWorkspace (workspace) {
-      this.$store.commit('workspaces/SET_CURRENT', workspace)
-      this.$toasted.global.success({ message: `Switched to ${workspace.name}.` })
+      this.$nuxt.$loading.start()
+
+      let success = false
+      const before = Date.now()
+      this.$store.dispatch('workspaces/fetch', workspace.id)
+        .then(() => { success = true })
+        .finally(() => {
+          // if execution time was more than 1s
+          if ((Date.now() - before) < 1000) {
+            setTimeout(() => {
+              this.$nuxt.$loading.finish()
+              if (success) {
+                this.$toasted.global.success({ message: `Successfully switched to ${workspace.name}.` })
+              }
+            }, 1000)
+            return
+          }
+
+          this.$nuxt.$loading.finish()
+          if (success) {
+            this.$toasted.global.success({ message: `Successfully switched to ${workspace.name}.` })
+          }
+        })
     }
   }
 })

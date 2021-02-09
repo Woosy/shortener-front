@@ -18,6 +18,9 @@ export default {
     ]
   },
 
+  // custom loading component
+  loading: '~/components/Loading.vue',
+
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     '~/assets/css/global.css',
