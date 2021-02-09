@@ -55,28 +55,10 @@ export default Vue.extend({
   methods: {
     switchToWorkspace (workspace) {
       this.$nuxt.$loading.start()
-
-      let success = false
-      const before = Date.now()
       this.$store.dispatch('workspaces/fetch', workspace.id)
-        .then(() => { success = true })
-        .finally(() => {
-          // if execution time was more than 1s
-          if ((Date.now() - before) < 1000) {
-            setTimeout(() => {
-              this.$nuxt.$loading.finish()
-              if (success) {
-                this.$toasted.global.success({ message: `Successfully switched to ${workspace.name}.` })
-              }
-            }, 1000)
-            return
-          }
-
-          this.$nuxt.$loading.finish()
-          if (success) {
-            this.$toasted.global.success({ message: `Successfully switched to ${workspace.name}.` })
-          }
-        })
+      setTimeout(() => {
+        this.$nuxt.$loading.finish()
+      }, 1000)
     }
   }
 })
