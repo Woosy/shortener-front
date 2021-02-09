@@ -2,12 +2,8 @@
   <transition name="fade">
     <div v-if="show" class="mt-5 mb-2">
       <div
-        class="flex items-center px-4 py-3 rounded-lg"
-        :class="{
-          'bg-red-100 text-red-600': type === 'error',
-          'bg-green-100 text-green-600': type === 'success',
-          'bg-blue-100 text-blue-600': type === 'info'
-        }"
+        class="flex items-center px-4 py-3 rounded-lg bg-ora"
+        :class="getTypeClasses()"
       >
         <font-awesome-icon :icon="getIcon()" />
 
@@ -42,6 +38,10 @@ export default Vue.extend({
     dismissible: {
       type: Boolean,
       default: false
+    },
+    highContrast: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -52,9 +52,27 @@ export default Vue.extend({
   methods: {
     getIcon () {
       switch (this.type) {
-        case 'error': return 'exclamation-circle'
-        case 'success': return 'check-circle'
         case 'info': return 'info-circle'
+        case 'success': return 'check-circle'
+        case 'warning': return 'exclamation-triangle'
+        case 'error': return 'exclamation-circle'
+      }
+    },
+    getTypeClasses () {
+      if (this.highContrast) {
+        switch (this.type) {
+          case 'info': return 'bg-blue-200 text-blue-700'
+          case 'success': return 'bg-green-200 text-green-700'
+          case 'warning': return 'bg-orange-200 text-orange-700'
+          case 'error': return 'bg-red-200 text-red-700'
+        }
+      } else {
+        switch (this.type) {
+          case 'info': return 'bg-blue-100 text-blue-600'
+          case 'success': return 'bg-green-100 text-green-600'
+          case 'warning': return 'bg-orange-100 text-orange-600'
+          case 'error': return 'bg-red-100 text-red-600'
+        }
       }
     },
     close () {

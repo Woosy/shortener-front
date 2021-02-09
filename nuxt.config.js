@@ -94,7 +94,8 @@ export default {
       solid: ['faBars', 'faTimes', 'faEnvelope', 'faLock', 'faCircleNotch',
         'faPlus', 'faHome', 'faChartLine', 'faCog', 'faSignOutAlt', 'faUser',
         'faUsers', 'faList', 'faBuilding', 'faExclamationCircle', 'faCheckCircle',
-        'faInfoCircle', 'faCaretUp', 'faCaretDown', 'faGripLines', 'faMouse'],
+        'faInfoCircle', 'faExclamationTriangle', 'faCaretUp', 'faCaretDown', 'faGripLines',
+        'faMouse'],
       brands: ['faGithub', 'faGoogle']
     }
   },
