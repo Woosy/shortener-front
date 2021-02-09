@@ -5,7 +5,11 @@
       description="Manage your billing details."
     />
 
-    <!--  -->
+    <alert
+      type="info"
+      text="Shortener is 100% free of charge While it remains in preview version."
+      high-contrast
+    />
   </div>
 </template>
 
