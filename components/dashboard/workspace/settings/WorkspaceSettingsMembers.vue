@@ -47,11 +47,14 @@
       </div>
 
       <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-5">
-        <div class="h-12 flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg">
+        <div
+          class="h-12 flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer"
+          @click="$store.commit('layout/TOGGLE_ADD_MEMBER_MODAL', true)"
+        >
           <p class="text-gray-400 dark:text-gray-500">
             <font-awesome-icon icon="plus" />
             <span class="ml-3 font-medium">
-              Invite
+              Add member
             </span>
           </p>
         </div>

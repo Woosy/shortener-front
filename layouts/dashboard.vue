@@ -17,6 +17,7 @@
     <div>
       <delete-workspace-modal />
       <create-workspace-modal />
+      <add-member-modal />
     </div>
 
     <!--------------------------------------->

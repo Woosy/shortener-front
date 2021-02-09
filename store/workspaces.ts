@@ -58,5 +58,10 @@ export const actions: ActionTree<RootState, RootState> = {
     await this.$axios.$delete(`/workspaces/${id}`)
     commit('REMOVE_WORKSPACE', id)
     dispatch('fetchPersonal')
+  },
+
+  async invite ({ commit }, { workspaceId, email }) {
+    const workspace = await this.$axios.$post(`/workspaces/${workspaceId}/members`, { email })
+    commit('SET_CURRENT', workspace)
   }
 }
