@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
   middleware: 'user',
@@ -48,13 +48,10 @@ export default Vue.extend({
     }
   },
   computed: {
-    ...mapGetters({
-      currentMembersCount: 'workspaces/currentMembersCount'
-    }),
-    ...mapState('workspaces', {
-      // @ts-ignore
-      currentWorkspace: state => state.current
-    })
+    ...mapGetters('workspaces', [
+      'currentWorkspace',
+      'currentMembersCount'
+    ])
   },
   methods: {
     toggleCurrent (val) {

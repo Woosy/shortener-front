@@ -91,7 +91,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
 export default Vue.extend({
@@ -111,10 +111,9 @@ export default Vue.extend({
     ...mapState('layout', [
       'showAddMemberModal'
     ]),
-    ...mapState('workspaces', {
-      // @ts-ignore
-      currentWorkspace: state => state.current
-    })
+    ...mapGetters('workspaces', [
+      'currentWorkspace'
+    ])
   },
   methods: {
     closeModal () {

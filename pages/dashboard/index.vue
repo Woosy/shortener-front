@@ -7,7 +7,7 @@
       <card-small
         title="CURRENT WORKSPACE"
         icon="home"
-        :value="currrentWorkSpace.name"
+        :value="currentWorkspace.name"
         description="Created by Arthur Dufour"
       />
 
@@ -28,24 +28,21 @@
         change-type="increase"
         description="The last week"
       />
-
-      <!-- <card-small /> -->
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
   middleware: 'user',
   layout: 'dashboard',
   computed: {
-    ...mapState('workspaces', {
-      // @ts-ignore
-      currrentWorkSpace: state => state.current
-    })
+    ...mapGetters('workspaces', [
+      'currentWorkspace'
+    ])
   }
 })
 </script>

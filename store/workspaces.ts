@@ -10,7 +10,15 @@ export const state = () => ({
 export type RootState = ReturnType<typeof state>
 
 export const getters: GetterTree<RootState, RootState> = {
-  currentMembersCount: state => state.current.members.length
+  currentWorkspace: state => state.current,
+  currentMembersCount: state => state.current.members.length,
+  isOwner (state) {
+    return (userId: number) => {
+      if (state.current.members.length <= 0) { return false }
+      const owner: any = state.current.members.find((m: any) => m.role === 'owner')
+      return owner.id === userId
+    }
+  }
 }
 
 export const mutations: MutationTree<RootState> = {
@@ -38,14 +46,26 @@ export const actions: ActionTree<RootState, RootState> = {
     commit('SET_WORKSPACE_LIST', workspaceList)
   },
 
-  async fetch ({ commit }, id) {
+  async fetch ({ commit }, { id, useDelay = false }) {
     const workspace = await this.$axios.$get(`/workspaces/${id}`)
-    commit('SET_CURRENT', workspace)
+
+    if (!useDelay) { return commit('SET_CURRENT', workspace) }
+    window.$nuxt.$loading.start()
+    setTimeout(() => {
+      commit('SET_CURRENT', workspace)
+      window.$nuxt.$loading.finish()
+    }, 1000)
   },
 
-  async fetchPersonal ({ commit }) {
+  async fetchPersonal ({ commit }, { useDelay = false }) {
     const workspace = await this.$axios.$get('/users/workspace')
-    commit('SET_CURRENT', workspace)
+
+    if (!useDelay) { return commit('SET_CURRENT', workspace) }
+    window.$nuxt.$loading.start()
+    setTimeout(() => {
+      commit('SET_CURRENT', workspace)
+      window.$nuxt.$loading.finish()
+    }, 1000)
   },
 
   async create ({ commit }, data) {
@@ -57,7 +77,7 @@ export const actions: ActionTree<RootState, RootState> = {
   async delete ({ commit, dispatch }, id) {
     await this.$axios.$delete(`/workspaces/${id}`)
     commit('REMOVE_WORKSPACE', id)
-    dispatch('fetchPersonal')
+    dispatch('fetchPersonal', {})
   },
 
   async invite ({ commit }, { workspaceId, email }) {

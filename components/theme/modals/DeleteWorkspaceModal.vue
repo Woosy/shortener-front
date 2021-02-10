@@ -52,17 +52,16 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default Vue.extend({
   computed: {
     ...mapState('layout', [
       'showDeleteWorkspaceModal'
     ]),
-    ...mapState('workspaces', {
-      // @ts-ignore
-      currentWorkspace: state => state.current
-    })
+    ...mapGetters('workspaces', [
+      'currentWorkspace'
+    ])
   },
   methods: {
     closeModal () {

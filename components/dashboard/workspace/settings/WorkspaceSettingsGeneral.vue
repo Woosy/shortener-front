@@ -19,7 +19,10 @@
       </div>
     </div>
 
-    <div class="flex items-center justify-between mt-5 pb-5 border-b-2 border-gray-300 dark:border-gray-700 font-medium">
+    <div
+      class="flex items-center justify-between mt-5 font-medium"
+      :class="{ 'pb-5 border-b-2 border-gray-300 dark:border-gray-700': isOwner($auth.user.id) }"
+    >
       <div class="text-gray-600 dark:text-gray-500">
         Color
       </div>
@@ -33,7 +36,10 @@
       </div>
     </div>
 
-    <div class="flex items-center justify-between mt-5 font-medium">
+    <div
+      v-if="isOwner($auth.user.id)"
+      class="flex items-center justify-between mt-5 font-medium"
+    >
       <div class="text-gray-600 dark:text-gray-500">
         Delete workspace
       </div>
@@ -53,28 +59,18 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
   computed: {
-    ...mapState('workspaces', {
-      // @ts-ignore
-      currentWorkspace: state => state.current
-    }),
-    isOwner () {
-      if (this.currentWorkspace.members.length <= 0) { return false }
-      const owner = this.currentWorkspace.members.find(member => member.role === 'owner')
-      return this.$auth.user.id === owner.id
-    }
+    ...mapGetters('workspaces', [
+      'currentWorkspace',
+      'isOwner'
+    ])
   },
   methods: {
     deleteWorkspace () {
-      if (this.isOwner) {
-        this.$store.commit('layout/TOGGLE_DELETE_WORKSPACE_MODAL', true)
-        return
-      }
-
-      this.$toasted.global.error({ message: "You cannot delete a workspace that you don't own!" })
+      this.$store.commit('layout/TOGGLE_DELETE_WORKSPACE_MODAL', true)
     }
   }
 })

@@ -5,7 +5,7 @@
   >
     <button
       class="h-10 w-10 rounded-lg focus:outline-none transform hover:scale-110 transition duration-150"
-      :class="{ 'transform scale-110': active}"
+      :class="{ 'transform scale-110 cursor-default': active }"
       :style="`background-color: ${color}`"
     >
       <p class="text-center text-white text-2xl font-semibold">

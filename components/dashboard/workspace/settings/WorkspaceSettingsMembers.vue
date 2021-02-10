@@ -8,7 +8,7 @@
     <!--  -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 mt-8">
       <div
-        v-for="(member, index) in currentWorkSpace.members"
+        v-for="(member, index) in currentWorkspace.members"
         :key="index"
         class="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-5"
       >
@@ -46,7 +46,10 @@
         </div>
       </div>
 
-      <div class="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-5">
+      <div
+        v-if="isOwner($auth.user.id)"
+        class="bg-white dark:bg-gray-800 shadow-sm rounded-lg p-5"
+      >
         <div
           class="h-12 flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer"
           @click="$store.commit('layout/TOGGLE_ADD_MEMBER_MODAL', true)"
@@ -65,14 +68,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default Vue.extend({
   computed: {
-    ...mapState('workspaces', {
-      // @ts-ignore
-      currentWorkSpace: state => state.current
-    })
+    ...mapGetters('workspaces', [
+      'currentWorkspace',
+      'isOwner'
+    ])
   }
 })
 </script>

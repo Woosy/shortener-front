@@ -39,7 +39,7 @@ import { mapState } from 'vuex'
 export default Vue.extend({
   fetch () {
     this.$store.dispatch('workspaces/fetchList')
-    this.$store.dispatch('workspaces/fetchPersonal')
+    this.$store.dispatch('workspaces/fetchPersonal', {})
   },
   data () {
     return {
@@ -54,11 +54,13 @@ export default Vue.extend({
   },
   methods: {
     switchToWorkspace (workspace) {
-      this.$nuxt.$loading.start()
-      this.$store.dispatch('workspaces/fetch', workspace.id)
-      setTimeout(() => {
-        this.$nuxt.$loading.finish()
-      }, 1000)
+      // disable switching to current
+      if (this.current.id === workspace.id) { return }
+
+      this.$store.dispatch('workspaces/fetch', { id: workspace.id, useDelay: true })
+        .then(() => {
+          this.$toasted.global.success({ message: `Switching to ${workspace.name}.` })
+        })
     }
   }
 })
