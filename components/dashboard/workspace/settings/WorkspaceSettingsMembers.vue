@@ -51,7 +51,7 @@
           class="h-12 flex items-center justify-center border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg cursor-pointer"
           @click="$store.commit('layout/TOGGLE_ADD_MEMBER_MODAL', true)"
         >
-          <p class="text-gray-400 dark:text-gray-500">
+          <p class="text-gray-400 hover:text-gray-500 dark:text-gray-500 dark-hover:text-gray-400 transition-all duration-200">
             <font-awesome-icon icon="plus" />
             <span class="ml-3 font-medium">
               Add member
