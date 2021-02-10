@@ -122,7 +122,7 @@ export default Vue.extend({
       this.$store.commit('layout/TOGGLE_ADD_MEMBER_MODAL', false)
     },
     submit () {
-      this.$store.dispatch('workspaces/invite', { workspaceId: this.currentWorkspace.id, email: this.form.email })
+      this.$store.dispatch('workspaces/inviteMember', { workspaceId: this.currentWorkspace.id, email: this.form.email })
         .then(() => {
           this.$toasted.global.success({ message: 'User successfully added!' })
           this.closeModal()

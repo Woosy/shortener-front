@@ -98,7 +98,7 @@ export default {
         'faPlus', 'faHome', 'faChartLine', 'faCog', 'faSignOutAlt', 'faUser',
         'faUsers', 'faList', 'faBuilding', 'faExclamationCircle', 'faCheckCircle',
         'faInfoCircle', 'faExclamationTriangle', 'faCaretUp', 'faCaretDown', 'faGripLines',
-        'faMouse'],
+        'faMouse', 'faUserSlash'],
       brands: ['faGithub', 'faGoogle']
     }
   },
