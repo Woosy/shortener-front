@@ -49,10 +49,18 @@ export const actions: ActionTree<RootState, RootState> = {
   async fetch ({ commit }, { id, useDelay = false }) {
     const workspace = await this.$axios.$get(`/workspaces/${id}`)
 
-    if (!useDelay) { return commit('SET_CURRENT', workspace) }
+    if (!useDelay) {
+      commit('SET_CURRENT', workspace)
+      commit('links/SET_LINKS', workspace.links, { root: true })
+      commit('links/SET_CLICKS', workspace.clicks, { root: true })
+      return
+    }
+
     window.$nuxt.$loading.start()
     setTimeout(() => {
       commit('SET_CURRENT', workspace)
+      commit('links/SET_LINKS', workspace.links, { root: true })
+      commit('links/SET_CLICKS', workspace.clicks, { root: true })
       window.$nuxt.$loading.finish()
     }, 1000)
   },
@@ -60,10 +68,18 @@ export const actions: ActionTree<RootState, RootState> = {
   async fetchPersonal ({ commit }, { useDelay = false }) {
     const workspace = await this.$axios.$get('/users/workspace')
 
-    if (!useDelay) { return commit('SET_CURRENT', workspace) }
+    if (!useDelay) {
+      commit('SET_CURRENT', workspace)
+      commit('links/SET_LINKS', workspace.links, { root: true })
+      commit('links/SET_CLICKS', workspace.clicks, { root: true })
+      return
+    }
+
     window.$nuxt.$loading.start()
     setTimeout(() => {
       commit('SET_CURRENT', workspace)
+      commit('links/SET_LINKS', workspace.links, { root: true })
+      commit('links/SET_CLICKS', workspace.clicks, { root: true })
       window.$nuxt.$loading.finish()
     }, 1000)
   },

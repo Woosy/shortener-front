@@ -11,3 +11,15 @@ Object.keys(rules).forEach((rule) => {
     message: messages[rule] // assign message
   })
 })
+
+extend('url', {
+  validate (value: string | null | undefined): boolean {
+    if (value) {
+      const regex = new RegExp(/^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm)
+      return regex.test(value)
+    }
+
+    return false
+  },
+  message: 'This value must be a valid URL'
+})

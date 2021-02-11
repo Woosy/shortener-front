@@ -14,7 +14,7 @@
       <card-small
         title="TOTAL LINKS"
         icon="chart-line"
-        value="???"
+        :value="links.length"
         change="?? new"
         change-type="increase"
         description="The last week"
@@ -23,7 +23,7 @@
       <card-small
         title="TOTAL CLICKS"
         icon="mouse"
-        value="????"
+        :value="clicks.length"
         change="?? %"
         change-type="increase"
         description="The last week"
@@ -34,12 +34,16 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default Vue.extend({
   middleware: 'user',
   layout: 'dashboard',
   computed: {
+    ...mapState('links', [
+      'links',
+      'clicks'
+    ]),
     ...mapGetters('workspaces', [
       'currentWorkspace'
     ])

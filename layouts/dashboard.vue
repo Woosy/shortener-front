@@ -15,6 +15,7 @@
     <!--------------------------------------->
     <!-- modals -->
     <div>
+      <create-link-modal />
       <delete-workspace-modal />
       <create-workspace-modal />
       <add-member-modal />

@@ -16,7 +16,10 @@
         <!----------------------------->
         <!-- new link -->
         <div class="mt-5">
-          <button class="w-full text-white font-medium py-2 rounded-lg focus:outline-none shadow-xs bg-indigo-500 hover:bg-indigo-600 transition duration-150 ">
+          <button
+            class="w-full text-white font-medium py-2 rounded-lg focus:outline-none shadow-xs bg-indigo-500 hover:bg-indigo-600 transition duration-150 "
+            @click="$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', true)"
+          >
             New link
           </button>
         </div>
