@@ -37,10 +37,10 @@
             </div>
 
             <!-- right -->
-            <div class="flex justify-center pl-5 w-20">
+            <div class="flex justify-end pl-5 w-20">
               <img
-                class="object-scale-down h-12 w-12 rounded-full"
-                src="https://pbs.twimg.com/profile_images/887661330832003072/Zp6rA_e2_400x400.jpg"
+                class="h-10 w-10 rounded-full"
+                :src="member.avatar_url"
                 alt="PP"
               >
             </div>

@@ -10,7 +10,11 @@
     <!-- right -->
     <div>
       <!-- avatar -->
-      <div class="h-10 w-10 rounded-full bg-gray-300" />
+      <img
+        :src="$auth.user.avatar_url"
+        alt="Avatar"
+        class="h-10 w-10 rounded-full"
+      >
     </div>
   </div>
 </template>
