@@ -38,7 +38,7 @@
           />
 
           <dashboard-sidebar-menu-item
-            title="All links"
+            title="Manage links"
             icon="list"
             to="/dashboard/links"
           />
