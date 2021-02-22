@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- aze -->
-    <base-table :cols="['AUTHOR', 'LINK', 'CREATED_AT', 'CLICKS', '']">
+    <base-table :cols="['AUTHOR', 'LINK', 'CREATION DATE', 'CLICKS', '']">
       <tr
         v-for="(link, index) in links"
         :key="index"
@@ -16,7 +16,7 @@
               >
             </div>
             <div class="ml-4">
-              <div class="text-sm font-medium text-gray-900">
+              <div class="text-sm font-medium text-gray-900 dark:text-white">
                 {{ link.user.username }}
               </div>
               <div class="text-sm text-gray-500 truncate">
@@ -27,7 +27,7 @@
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap">
-          <div class="text-sm text-gray-900">
+          <div class="text-sm text-gray-900 dark:text-white">
             {{ link.title }}
           </div>
           <div class="text-sm text-gray-500">
@@ -38,7 +38,7 @@
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          {{ link.created_at }}
+          {{ $dateFns.format(link.created_at, 'HH:hh dd-MM-yyyy') }}
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
