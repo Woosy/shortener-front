@@ -31,7 +31,8 @@
       "@nuxtjs/axios",
       "@nuxtjs/toast",
       "@nuxtjs/color-mode",
-      "@types/nuxtjs__auth"
+      "@nuxtjs/date-fns",
+      "@types/nuxtjs__auth",
     ]
   },
   "exclude": [

@@ -48,7 +48,9 @@ export default {
     // Doc: https://github.com/teamnovu/nuxt-breaky
     '@teamnovu/nuxt-breaky',
     // https://color-mode.nuxtjs.org/
-    '@nuxtjs/color-mode'
+    '@nuxtjs/color-mode',
+    // https://github.com/nuxt-community/date-fns-module
+    '@nuxtjs/date-fns'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
