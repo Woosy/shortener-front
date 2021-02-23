@@ -100,7 +100,7 @@ export default {
         'faPlus', 'faHome', 'faChartLine', 'faCog', 'faSignOutAlt', 'faUser',
         'faUsers', 'faList', 'faBuilding', 'faExclamationCircle', 'faCheckCircle',
         'faInfoCircle', 'faExclamationTriangle', 'faCaretUp', 'faCaretDown', 'faGripLines',
-        'faMouse', 'faUserSlash'],
+        'faMouse', 'faUserSlash', 'faMoon'],
       brands: ['faGithub', 'faGoogle']
     }
   },
