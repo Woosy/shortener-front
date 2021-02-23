@@ -1,7 +1,19 @@
 <template>
   <div>
-    <!-- aze -->
-    <base-table :cols="['AUTHOR', 'LINK', 'CREATION DATE', 'CLICKS', '']">
+    <!---------------------------------->
+    <!-- placeholder (aucun lien) -->
+    <!---------------------------------->
+    <div v-if="links.length === 0">
+      <p class="text-gray-600">
+        It looks like this workspace doesn't have any links yet.
+        You can start creating links by <span class="text-indigo-500 hover:underline cursor-pointer" @click="$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', true)">clicking here</span>.
+      </p>
+    </div>
+
+    <!---------------------------------->
+    <!-- liste des liens -->
+    <!---------------------------------->
+    <base-table v-if="links.length > 0" :cols="['AUTHOR', 'LINK', 'CREATION DATE', 'CLICKS', '']">
       <tr
         v-for="(link, index) in links"
         :key="index"
@@ -37,8 +49,8 @@
           </div>
         </td>
 
-        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          {{ $dateFns.format(link.created_at, 'HH:hh dd-MM-yyyy') }}
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 whitespace-no-wrap">
+          {{ $dateFns.format(link.created_at, 'dd-MM-yyyy à HH:hh') }}
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
