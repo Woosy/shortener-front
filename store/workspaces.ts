@@ -87,6 +87,8 @@ export const actions: ActionTree<RootState, RootState> = {
   async create ({ commit }, data) {
     const workspace = await this.$axios.$post('/workspaces', data)
     commit('ADD_WORKSPACE', workspace)
+    commit('links/SET_LINKS', [], { root: true })
+    commit('links/SET_CLICKS', [], { root: true })
     commit('SET_CURRENT', workspace)
   },
 
