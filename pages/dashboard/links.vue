@@ -58,7 +58,12 @@
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-          <a href="#" class="text-red-600 hover:text-red-700">Delete</a>
+          <span
+            class="text-red-600 hover:text-red-700 cursor-pointer hover:underline"
+            @click="deleteLink(link)"
+          >
+            Delete
+          </span>
         </td>
       </tr>
     </base-table>
@@ -76,6 +81,18 @@ export default Vue.extend({
     ...mapState('links', [
       'links'
     ])
+  },
+  methods: {
+    deleteLink (link) {
+      // TODO: modal confirmation
+      this.$store.dispatch('links/removeLink', {
+        linkId: link.id
+      }).then(() => {
+        this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
+      }).catch((err) => {
+        this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+      })
+    }
   }
 })
 </script>
