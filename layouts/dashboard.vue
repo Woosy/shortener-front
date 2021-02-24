@@ -47,10 +47,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import CreateWorkspaceModal from '~/components/theme/modals/CreateWorkspaceModal.vue'
 
 export default Vue.extend({
-  components: { CreateWorkspaceModal },
   computed: {
     ...mapState('layout', [
       'isSidebarMenuOpen'
