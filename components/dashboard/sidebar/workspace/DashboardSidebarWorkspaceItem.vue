@@ -8,6 +8,11 @@
       :class="{ 'transform scale-110 cursor-default': active }"
       :style="`background-color: ${color}`"
     >
+      <div
+        v-if="active"
+        class="absolute left-0 -ml-3 h-0 w-0"
+        :style="`margin-top: 10px; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 8px solid ${color}`"
+      />
       <p class="text-center text-white text-2xl font-semibold">
         {{ name.charAt(0) }}
       </p>
