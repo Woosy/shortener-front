@@ -3,7 +3,7 @@
     :showing="showCreateLinkModal"
     @close="closeModal()"
   >
-    <validation-observer v-slot="{ passed, handleSubmit }">
+    <validation-observer v-slot="{ failed, handleSubmit }">
       <form @submit.prevent="handleSubmit(submit)">
         <!----------------------------------------------------->
         <!-- Body / form -->
@@ -27,29 +27,81 @@
 
               <!--------------------------------------->
               <!-- form -->
-              <div class="mt-5 text-black">
-                <validation-provider
-                  v-slot="{ invalid, errors }"
-                  name="url"
-                  rules="required|url|max:512"
-                >
-                  <label for="url">
-                    Link to shorten :
-                  </label>
-
-                  <input
-                    v-model="form.url"
-                    type="text"
+              <div class="mt-5 text-black text-left">
+                <!-- link url -->
+                <div class="mt-3">
+                  <validation-provider
+                    v-slot="{ errors }"
                     name="url"
-                    placeholder="Enter a valid URL"
-                    class="mt-2 py-2 px-3 text-sm border-2 border-gray-300 rounded-lg w-full focus:outline-none"
-                    :class="{
-                      'border-red-300': errors[0],
-                      'border-green-300': !invalid
-                    }"
+                    rules="required|url|min:5|max:512"
                   >
-                  <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 ">{{ errors[0] }}.</span>
-                </validation-provider>
+                    <label for="url" class="text-sm">
+                      Link to shorten :
+                    </label>
+
+                    <input
+                      v-model="form.url"
+                      type="text"
+                      name="url"
+                      placeholder="Enter a valid URL"
+                      class="mt-1 py-2 px-3 text-sm border-2 border-gray-300 rounded-lg w-full focus:outline-none"
+                      :class="{ 'border-red-300': errors[0] }"
+                    >
+                    <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 ">{{ errors[0] }}.</span>
+                  </validation-provider>
+                </div>
+
+                <!-- title -->
+                <div class="mt-3">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="title"
+                    rules="min:1|max:64"
+                  >
+                    <label for="title" class="text-sm">
+                      Link title (optional)
+                    </label>
+
+                    <input
+                      v-model="form.title"
+                      type="text"
+                      name="title"
+                      placeholder="Untitled"
+                      class="mt-1 py-2 px-3 text-sm border-2 border-gray-300 rounded-lg w-full focus:outline-none"
+                      :class="{ 'border-red-300': errors[0] }"
+                    >
+                    <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 ">{{ errors[0] }}.</span>
+                  </validation-provider>
+                </div>
+
+                <!-- key -->
+                <div class="mt-3">
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="key"
+                    rules="min:1|max:512"
+                  >
+                    <label for="key" class="text-sm">
+                      Custom key (optional)
+                    </label>
+
+                    <div class="flex items-center w-full text-base">
+                      <span class="text-gray-600">
+                        http://127.0.0.1:3333/
+                      </span>
+
+                      <input
+                        v-model="form.key"
+                        type="text"
+                        name="key"
+                        placeholder="custom-key"
+                        class="py-2  focus:outline-none"
+                        :class="{ 'border-red-300': errors[0] }"
+                      >
+                    </div>
+                    <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 ">{{ errors[0] }}.</span>
+                  </validation-provider>
+                </div>
               </div>
 
               <!--------------------------------------->
@@ -79,12 +131,12 @@
             </button>
 
             <button
-              :disabled="!passed || isLoading"
+              :disabled="failed || isLoading"
               type="submit"
               class="ml-3 inline-flex justify-center items-center w-full rounded-md px-4 py-2 text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-6"
               :class="{
-                'bg-indigo-300 cursor-not-allowed': !passed || isLoading,
-                'bg-indigo-500 hover:bg-indigo-600 transition duration-150': passed && !isLoading
+                'bg-indigo-300 cursor-not-allowed': failed || isLoading,
+                'bg-indigo-500 hover:bg-indigo-600 transition duration-150': !failed && !isLoading
               }"
             >
               <font-awesome-icon v-show="isLoading" icon="circle-notch" class="fa-spin mr-2" />
@@ -111,9 +163,7 @@ export default Vue.extend({
     return {
       isLoading: false,
       error: '',
-      form: {
-        url: ''
-      }
+      form: {}
     }
   },
   computed: {
@@ -127,7 +177,7 @@ export default Vue.extend({
   methods: {
     closeModal () {
       this.error = ''
-      this.form.url = ''
+      this.form = {}
       this.$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', false)
     },
     submit () {
@@ -144,7 +194,7 @@ export default Vue.extend({
                 cancel: 'Close'
               }
             })
-          }, 250)
+          }, 200)
         })
         .catch((err) => {
           this.error = err.response.data.code || err.response.data.errors[0].message
