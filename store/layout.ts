@@ -4,7 +4,6 @@ export const state = () => ({
   isSidebarMenuOpen: false,
   showCreateLinkModal: false,
   showCreateWorkspaceModal: false,
-  showDeleteWorkspaceModal: false,
   showAddMemberModal: false
 })
 
@@ -23,9 +22,6 @@ export const mutations: MutationTree<RootState> = {
   },
   TOGGLE_CREATE_WORKSPACE_MODAL: (state, status) => {
     state.showCreateWorkspaceModal = status !== undefined ? status : !state.showCreateWorkspaceModal
-  },
-  TOGGLE_DELETE_WORKSPACE_MODAL: (state, status) => {
-    state.showDeleteWorkspaceModal = status !== undefined ? status : !state.showDeleteWorkspaceModal
   },
   TOGGLE_ADD_MEMBER_MODAL: (state, status) => {
     state.showAddMemberModal = status !== undefined ? status : !state.showAddMemberModal

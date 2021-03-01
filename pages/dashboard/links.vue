@@ -84,13 +84,23 @@ export default Vue.extend({
   },
   methods: {
     deleteLink (link) {
-      // TODO: modal confirmation
-      this.$store.dispatch('links/removeLink', {
-        linkId: link.id
-      }).then(() => {
-        this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
-      }).catch((err) => {
-        this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+      this.$confirm({
+        title: 'Are you sure?',
+        message: 'All clicks associated to this link will also be deleted and removed from your statistics.',
+        buttons: {
+          confirm: 'Confirm',
+          cancel: 'Cancel'
+        },
+        callback: (confirm) => {
+          if (!confirm) { return }
+
+          this.$store.dispatch('links/removeLink', link.id)
+            .then(() => {
+              this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
+            }).catch((err) => {
+              this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+            })
+        }
       })
     }
   }

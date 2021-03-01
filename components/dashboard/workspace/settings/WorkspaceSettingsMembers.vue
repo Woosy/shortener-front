@@ -97,13 +97,25 @@ export default Vue.extend({
     removeMember (member) {
       if (this.isOwner(member.id)) { return }
 
-      this.$store.dispatch('workspaces/removeMember', {
-        workspaceId: this.currentWorkspace.id,
-        memberId: member.id
-      }).then(() => {
-        this.$toasted.global.success({ message: `Sucessfully removed ${member.username} from the workspace!` })
-      }).catch((err) => {
-        this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+      this.$confirm({
+        title: 'Are you sure?',
+        message: `${member.username} will lose access to this workspace.`,
+        buttons: {
+          confirm: 'Confirm',
+          cancel: 'Cancel'
+        },
+        callback: (confirm) => {
+          if (!confirm) { return }
+
+          this.$store.dispatch('workspaces/removeMember', {
+            workspaceId: this.currentWorkspace.id,
+            memberId: member.id
+          }).then(() => {
+            this.$toasted.global.success({ message: `Sucessfully removed ${member.username} from the workspace!` })
+          }).catch((err) => {
+            this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+          })
+        }
       })
     }
   }

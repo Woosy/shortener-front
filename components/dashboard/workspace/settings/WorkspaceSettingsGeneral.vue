@@ -70,7 +70,25 @@ export default Vue.extend({
   },
   methods: {
     deleteWorkspace () {
-      this.$store.commit('layout/TOGGLE_DELETE_WORKSPACE_MODAL', true)
+      this.$confirm({
+        title: 'Are you sure?',
+        message: "All links, statistics and members will be gone, forever.<br>There's no coming back.",
+        buttons: {
+          confirm: 'Confirm',
+          cancel: 'Cancel'
+        },
+        callback: (confirm) => {
+          if (!confirm) { return }
+
+          this.$store.dispatch('workspaces/delete', this.currentWorkspace.id)
+            .then(() => {
+              this.$toast.global.success({ message: 'Workspace successfully deleted!' })
+            })
+            .catch((err) => {
+              this.$toast.global.error({ message: err?.response?.data?.errors[0]?.message })
+            })
+        }
+      })
     }
   }
 })

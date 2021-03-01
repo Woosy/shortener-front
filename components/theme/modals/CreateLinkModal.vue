@@ -79,11 +79,15 @@
             </button>
 
             <button
-              :disabled="!passed"
+              :disabled="!passed || isLoading"
               type="submit"
-              class="ml-3 inline-flex justify-center w-full rounded-md px-4 py-2 text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-6"
-              :class="!passed ? 'bg-indigo-300 cursor-not-allowed' : 'bg-indigo-500 hover:bg-indigo-600 transition duration-150'"
+              class="ml-3 inline-flex justify-center items-center w-full rounded-md px-4 py-2 text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-6"
+              :class="{
+                'bg-indigo-300 cursor-not-allowed': !passed || isLoading,
+                'bg-indigo-500 hover:bg-indigo-600 transition duration-150': passed && !isLoading
+              }"
             >
+              <font-awesome-icon v-show="isLoading" icon="circle-notch" class="fa-spin mr-2" />
               Create
             </button>
           </span>
@@ -105,10 +109,11 @@ export default Vue.extend({
   },
   data () {
     return {
+      isLoading: false,
+      error: '',
       form: {
         url: ''
-      },
-      error: ''
+      }
     }
   },
   computed: {
@@ -126,13 +131,26 @@ export default Vue.extend({
       this.$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', false)
     },
     submit () {
+      this.isLoading = true
       this.$store.dispatch('links/create', { ...this.form, workspaceId: this.currentWorkspace.id })
-        .then(() => {
+        .then((link) => {
           this.$toasted.global.success({ message: 'Link successfully created!' })
           this.closeModal()
+          setTimeout(() => {
+            this.$success({
+              title: 'Link successfully created!',
+              message: `Your link has successfully been created.<br>You can access it with the following key: ${link.key}`,
+              buttons: {
+                cancel: 'Close'
+              }
+            })
+          }, 250)
         })
         .catch((err) => {
           this.error = err.response.data.code || err.response.data.errors[0].message
+        })
+        .finally(() => {
+          this.isLoading = false
         })
     }
   }
