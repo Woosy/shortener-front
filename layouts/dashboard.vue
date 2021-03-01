@@ -15,8 +15,10 @@
     <!--------------------------------------->
     <!-- modals -->
     <div>
+      <base-confirm-modal />
+      <base-success-modal />
+
       <create-link-modal />
-      <delete-workspace-modal />
       <create-workspace-modal />
       <add-member-modal />
     </div>

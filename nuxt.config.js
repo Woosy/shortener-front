@@ -31,7 +31,9 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     { src: '~/plugins/vee-validate.ts', ssr: false },
-    { src: '~/plugins/global-toasts.ts', ssr: false }
+    { src: '~/plugins/global-toasts.ts', ssr: false },
+    { src: '~/plugins/base-confirm-modal.ts', ssr: false },
+    { src: '~/plugins/base-success-modal.ts', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -100,7 +102,7 @@ export default {
         'faPlus', 'faHome', 'faChartLine', 'faCog', 'faSignOutAlt', 'faUser',
         'faUsers', 'faList', 'faBuilding', 'faExclamationCircle', 'faCheckCircle',
         'faInfoCircle', 'faExclamationTriangle', 'faCaretUp', 'faCaretDown', 'faGripLines',
-        'faMouse', 'faUserSlash', 'faMoon'],
+        'faMouse', 'faUserSlash', 'faMoon', 'faCheck'],
       brands: ['faGithub', 'faGoogle']
     }
   },
