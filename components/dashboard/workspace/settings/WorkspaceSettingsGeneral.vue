@@ -79,10 +79,14 @@ export default Vue.extend({
         },
         callback: (confirm) => {
           if (!confirm) { return }
+          const workspaceId = this.currentWorkspace.id
 
-          this.$store.dispatch('workspaces/delete', this.currentWorkspace.id)
+          this.$store.dispatch('workspaces/delete', workspaceId)
             .then(() => {
               this.$toast.global.success({ message: 'Workspace successfully deleted!' })
+              if (localStorage.getItem('shortener.current-workspace-id') === workspaceId) {
+                localStorage.removeItem('shortener.current-workspace-id')
+              }
             })
             .catch((err) => {
               this.$toast.global.error({ message: err?.response?.data?.errors[0]?.message })

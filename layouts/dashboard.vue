@@ -40,7 +40,7 @@
       <div class="flex flex-col w-full lg:ml-80">
         <dashboard-header />
         <breadcrumb class="px-5 lg:px-8" />
-        <nuxt class="px-5 lg:px-8" />
+        <nuxt class="px-5 lg:px-8 pb-5" />
       </div>
     </div>
   </div>

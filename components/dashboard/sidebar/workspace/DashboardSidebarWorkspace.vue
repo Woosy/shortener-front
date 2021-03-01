@@ -14,10 +14,10 @@
 
         <!-- create a workspace -->
         <div
-          class="mt-5 transform hover:scale-110 transition duration-150"
+          class="mt-5"
           @click="$store.commit('layout/TOGGLE_CREATE_WORKSPACE_MODAL', true)"
         >
-          <button class="h-10 w-10 border border-gray-400 rounded-lg focus:outline-none">
+          <button class="h-10 w-10 border border-gray-400 rounded-lg focus:outline-none  transform hover:scale-110 transition duration-150">
             <p class="text-center text-gray-600 text-2xl">
               +
             </p>
@@ -25,7 +25,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="mt-5">
         <theme-switch />
       </div>
     </div>
@@ -42,7 +42,7 @@ export default Vue.extend({
 
     const currentWorkspaceId = localStorage.getItem('shortener.current-workspace-id')
     if (currentWorkspaceId) {
-      this.$store.dispatch('workspaces/fetch', { id: currentWorkspaceId, useDelay: true })
+      this.$store.dispatch('workspaces/fetch', { id: currentWorkspaceId })
     } else {
       this.$store.dispatch('workspaces/fetchPersonal', {})
     }

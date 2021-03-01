@@ -3,7 +3,7 @@
     <transition name="fade">
       <div
         v-if="loading"
-        class="absolute h-screen w-screen bg-gray-100 dark:bg-gray-900 z-50"
+        class="fixed h-screen w-screen bg-gray-100 dark:bg-gray-900 z-50"
       >
         <div class="spinner">
           <div class="cube1 bg-gray-400 dark:bg-gray-700" />
