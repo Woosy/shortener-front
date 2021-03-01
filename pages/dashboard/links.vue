@@ -50,7 +50,7 @@
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 whitespace-no-wrap">
-          {{ $dateFns.format(link.created_at, 'dd-MM-yyyy à HH:hh') }}
+          {{ $dateFns.format(link.created_at, 'dd-MM-yyyy à HH:mm') }}
         </td>
 
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
