@@ -8,7 +8,7 @@
         title="CURRENT WORKSPACE"
         icon="home"
         :value="currentWorkspace.name"
-        description="Created by Arthur Dufour"
+        :description="`Created by ${currentWorkspaceOwner.username} | ${currentWorkspace.members.length} member(s)`"
       />
 
       <card-small
@@ -45,7 +45,8 @@ export default Vue.extend({
       'clicks'
     ]),
     ...mapGetters('workspaces', [
-      'currentWorkspace'
+      'currentWorkspace',
+      'currentWorkspaceOwner'
     ])
   }
 })

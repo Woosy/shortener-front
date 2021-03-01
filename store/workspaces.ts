@@ -11,8 +11,11 @@ export type RootState = ReturnType<typeof state>
 
 export const getters: GetterTree<RootState, RootState> = {
   currentWorkspace: state => state.current,
+  currentWorkspaceOwner: (state) => {
+    return state.current.members.find((m: any) => m.role === 'owner') || '??'
+  },
   currentMembersCount: state => state.current.members.length,
-  isOwner (state) {
+  isOwner: (state) => {
     return (userId: number) => {
       if (state.current.members.length <= 0) { return false }
       const owner: any = state.current.members.find((m: any) => m.role === 'owner')
