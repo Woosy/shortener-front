@@ -12,7 +12,7 @@ export const getters: GetterTree<RootState, RootState> = {
 
 export const mutations: MutationTree<RootState> = {
   ADD_LINK: (state, payload) => {
-    state.links.push(payload)
+    state.links.unshift(payload)
   },
   REMOVE_LINK: (state, linkId) => {
     state.links = state.links.filter((link: any) => link.id !== linkId)
