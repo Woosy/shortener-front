@@ -8,6 +8,14 @@ export const state = () => ({
 export type RootState = ReturnType<typeof state>
 
 export const getters: GetterTree<RootState, RootState> = {
+  recentLinks: (state) => {
+    return state.links.slice(0, 5)
+  },
+  activeLinks: (state) => {
+    const links = [...state.links]
+    links.sort((a: any, b: any) => b.clicks.length - a.clicks.length)
+    return links.slice(0, 5)
+  }
 }
 
 export const mutations: MutationTree<RootState> = {
