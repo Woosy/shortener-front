@@ -140,7 +140,7 @@
             <div class="flex space-x-2 ">
               <button
                 title="Copy link"
-                class="flex items-center justify-center h-6 w-10 border border-indigo-600 bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white rounded transition duration-200 focus:outline-none"
+                class="flex items-center justify-center h-6 w-10 border border-indigo-600 bg-white dark:bg-gray-800 hover:bg-indigo-600 dark-hover:bg-indigo-600 text-indigo-600 hover:text-white rounded transition duration-200 focus:outline-none"
                 @click="copyLink(link)"
               >
                 <font-awesome-icon icon="clipboard" />
@@ -148,7 +148,7 @@
 
               <button
                 title="Delete link"
-                class="flex items-center justify-center h-6 w-10 border border-red-600 bg-white hover:bg-red-600 text-red-600 hover:text-white rounded transition duration-200 focus:outline-none"
+                class="flex items-center justify-center h-6 w-10 border border-red-600 bg-white dark:bg-gray-800 hover:bg-red-600 dark-hover:bg-red-600 text-red-600 hover:text-white rounded transition duration-200 focus:outline-none"
                 @click="deleteLink(link)"
               >
                 <font-awesome-icon icon="trash" />
