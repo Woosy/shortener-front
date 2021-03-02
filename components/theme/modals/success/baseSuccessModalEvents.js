@@ -1,5 +1,5 @@
 import Vue from 'vue'
 
-export const events = new Vue({
+export const baseSuccessModalEvents = new Vue({
   name: 'BaseSuccessModal'
 })

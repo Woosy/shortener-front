@@ -44,7 +44,7 @@
 
 <script>
 import Vue from 'vue'
-import { events } from './events'
+import { baseConfirmModalEvents } from './baseConfirmModalEvents'
 
 export default Vue.extend({
   data () {
@@ -60,8 +60,8 @@ export default Vue.extend({
   },
   mounted () {
     if (!document) { return }
-    events.$on('open', this.open)
-    events.$on('close', () => {
+    baseConfirmModalEvents.$on('open', this.open)
+    baseConfirmModalEvents.$on('close', () => {
       this.handleClickOverlay({ target: { id: 'baseConfirmModal' } })
     })
   },
