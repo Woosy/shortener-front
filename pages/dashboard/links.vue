@@ -56,7 +56,7 @@
         </div>
 
         <div class="my-3 flex">
-          <button class="flex items-center bg-indigo-500 px-3 py-1 rounded shadow text-sm font-medium text-white focus:outline-none transition duration-150 mr-2" @click="$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', true)">
+          <button class="flex items-center bg-indigo-500 hover:bg-indigo-600 px-3 py-1 rounded shadow text-sm font-medium text-white focus:outline-none transition duration-150 mr-2" @click="$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', true)">
             <font-awesome-icon icon="plus" class="mr-1 text-xs" />
             <span>Add</span>
           </button>
@@ -136,13 +136,24 @@
             {{ link.clicks.length }}
           </td>
 
-          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-            <span
-              class="text-red-600 hover:text-red-700 cursor-pointer hover:underline"
-              @click="deleteLink(link)"
-            >
-              Delete
-            </span>
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <div class="flex space-x-2 ">
+              <button
+                title="Copy link"
+                class="flex items-center justify-center h-6 w-10 border border-indigo-600 bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white rounded transition duration-200 focus:outline-none"
+                @click="copyLink(link)"
+              >
+                <font-awesome-icon icon="clipboard" />
+              </button>
+
+              <button
+                title="Delete link"
+                class="flex items-center justify-center h-6 w-10 border border-red-600 bg-white hover:bg-red-600 text-red-600 hover:text-white rounded transition duration-200 focus:outline-none"
+                @click="deleteLink(link)"
+              >
+                <font-awesome-icon icon="trash" />
+              </button>
+            </div>
           </td>
         </tr>
       </base-table>
@@ -204,6 +215,14 @@ export default Vue.extend({
       this.query = ''
       this.selectedMembers = []
       this.onlyOwn = false
+    },
+    copyLink (link) {
+      navigator.clipboard.writeText(`https://127.0.0.1:3333/${link.key}`)
+        .then(() => {
+          this.$toasted.global.success({ message: 'Link copied to clipboard!' })
+        }, () => {
+          this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
+        })
     },
     deleteLink (link) {
       this.$confirm({
