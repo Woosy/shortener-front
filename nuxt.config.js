@@ -103,7 +103,7 @@ export default {
         'faUsers', 'faList', 'faBuilding', 'faExclamationCircle', 'faCheckCircle',
         'faInfoCircle', 'faExclamationTriangle', 'faCaretUp', 'faCaretDown', 'faGripLines',
         'faMouse', 'faUserSlash', 'faMoon', 'faCheck', 'faFilter', 'faSearch', 'faTrash',
-        'faClipboard'],
+        'faClipboard', 'faChevronDown'],
       brands: ['faGithub', 'faGoogle']
     }
   },

@@ -6,115 +6,148 @@
     <validation-observer v-slot="{ failed, handleSubmit }">
       <form @submit.prevent="handleSubmit(submit)">
         <!----------------------------------------------------->
+        <!-- Header -->
+        <!----------------------------------------------------->
+        <div class="bg-indigo-600 px-4 py-3 sm:px-6">
+          <h3 class="text-white uppercase font-medium">
+            Create link
+          </h3>
+        </div>
+
+        <!----------------------------------------------------->
         <!-- Body / form -->
         <!----------------------------------------------------->
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div class="sm:flex sm:items-start">
-            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 sm:mx-0 sm:h-10 sm:w-10">
-              <font-awesome-icon icon="building" class="text-indigo-600" />
-            </div>
-            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-              <!--------------------------------------->
-              <!-- title -->
-              <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Create a new link
-              </h3>
-              <div class="mt-2">
-                <p class="text-sm leading-5 text-gray-500">
-                  Fill the following form to obtain a new short URL.<br>
+        <div class="bg-white p-5 sm:p-6">
+          <!--------------------------------------->
+          <!-- form -->
+          <div class="text-black">
+            <!-- link domain -->
+            <div class="px-4 py-3 border border-gray-300 rounded">
+              <div class="flex justify-between items-center">
+                <p class="text-md">
+                  short.link
                 </p>
-              </div>
 
-              <!--------------------------------------->
-              <!-- form -->
-              <div class="mt-5 text-black text-left">
-                <!-- link url -->
-                <div class="mt-3">
-                  <validation-provider
-                    v-slot="{ errors }"
-                    name="url"
-                    rules="required|url|min:5|max:512"
-                  >
-                    <label for="url" class="text-sm">
-                      Link to shorten :
-                    </label>
-
-                    <input
-                      v-model="form.url"
-                      type="text"
-                      name="url"
-                      placeholder="Enter a valid URL"
-                      class="mt-1 py-2 px-3 text-sm border-2 border-gray-300 rounded-lg w-full focus:outline-none"
-                      :class="{ 'border-red-300': errors[0] }"
-                    >
-                    <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 ">{{ errors[0] }}.</span>
-                  </validation-provider>
+                <div class="flex items-center space-x-2">
+                  <div class="px-2 bg-gray-200 rounded">
+                    <p class="text-sm text-black">
+                      Default
+                    </p>
+                  </div>
+                  <font-awesome-icon icon="chevron-down" class="text-xs text-gray-500" />
                 </div>
+              </div>
+            </div>
+
+            <!-- link url -->
+            <div class="mt-5">
+              <div class="px-4 py-3 border border-indigo-300 rounded bg-indigo-100">
+                <p class="text-sm font-medium uppercase mb-2">
+                  Paste long URL
+                </p>
+                <validation-provider
+                  v-slot="{ errors }"
+                  name="url"
+                  rules="required|url|min:5|max:512"
+                >
+                  <input
+                    v-model="form.url"
+                    type="text"
+                    name="url"
+                    placeholder="https://www.example.org/some/very/long/url"
+                    class="w-full border-none bg-indigo-100 focus:outline-none"
+                    :class="{ 'border-red-300': errors[0] }"
+                  >
+
+                  <span v-show="errors[0]" class="inline-block w-auto text-red-500 text-sm mt-2">
+                    {{ errors[0] }}.
+                  </span>
+                </validation-provider>
+              </div>
+            </div>
+
+            <collapse-transition>
+              <div v-if="showMore">
+                <hr class="mt-5">
 
                 <!-- title -->
-                <div class="mt-3">
-                  <validation-provider
-                    v-slot="{ errors }"
-                    name="title"
-                    rules="min:1|max:64"
-                  >
-                    <label for="title" class="text-sm">
-                      Link title (optional)
-                    </label>
-
-                    <input
-                      v-model="form.title"
-                      type="text"
+                <div class="mt-5">
+                  <div class="px-4 py-3 border border-gray-300 rounded">
+                    <p class="text-sm font-medium uppercase mb-2">
+                      Title
+                    </p>
+                    <validation-provider
+                      v-slot="{ errors }"
                       name="title"
-                      placeholder="Untitled"
-                      class="mt-1 py-2 px-3 text-sm border-2 border-gray-300 rounded-lg w-full focus:outline-none"
-                      :class="{ 'border-red-300': errors[0] }"
+                      rules="min:1|max:64"
                     >
-                    <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 ">{{ errors[0] }}.</span>
-                  </validation-provider>
+                      <div class="w-full flex items-center text-base text-center">
+                        <input
+                          v-model="form.title"
+                          type="text"
+                          name="totme"
+                          placeholder="Untitled"
+                          class="w-full border-none focus:outline-none"
+                          :class="{ 'border-red-300': errors[0] }"
+                        >
+                      </div>
+                      <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 mt-2">
+                        {{ errors[0] }}.
+                      </span>
+                    </validation-provider>
+                  </div>
                 </div>
 
                 <!-- key -->
-                <div class="mt-3">
-                  <validation-provider
-                    v-slot="{ errors }"
-                    name="key"
-                    rules="min:1|max:512"
-                  >
-                    <label for="key" class="text-sm">
-                      Custom key (optional)
-                    </label>
+                <div class="my-5">
+                  <div class="px-4 py-3 border border-gray-300 rounded">
+                    <p class="text-sm font-medium uppercase mb-2">
+                      Customize key
+                    </p>
+                    <validation-provider
+                      v-slot="{ errors }"
+                      name="key"
+                      rules="min:1|max:512"
+                    >
+                      <div class="w-full flex items-center text-base text-center">
+                        <span class="text-black">
+                          http://127.0.0.1:3333/
+                        </span>
 
-                    <div class="flex items-center w-full text-base">
-                      <span class="text-gray-600">
-                        http://127.0.0.1:3333/
+                        <input
+                          v-model="form.key"
+                          type="text"
+                          name="key"
+                          placeholder="custom-key"
+                          class="w-full border-none focus:outline-none"
+                          :class="{ 'border-red-300': errors[0] }"
+                        >
+                      </div>
+                      <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 mt-2">
+                        {{ errors[0] }}.
                       </span>
-
-                      <input
-                        v-model="form.key"
-                        type="text"
-                        name="key"
-                        placeholder="custom-key"
-                        class="py-2  focus:outline-none"
-                        :class="{ 'border-red-300': errors[0] }"
-                      >
-                    </div>
-                    <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 ">{{ errors[0] }}.</span>
-                  </validation-provider>
+                    </validation-provider>
+                  </div>
                 </div>
               </div>
+            </collapse-transition>
 
-              <!--------------------------------------->
-              <!-- alert -->
-              <alert
-                v-if="error"
-                type="error"
-                :text="error"
-                dismissible
-                @close="error = ''"
-              />
+            <div class="mt-5 text-right">
+              <button class="text-indigo-500 hover:font-medium text-xs cursor-pointer focus:outline-none" @click="showMore = !showMore">
+                {{ showMore ? 'Less' : 'More' }} options
+              </button>
             </div>
           </div>
+
+          <!--------------------------------------->
+          <!-- alert -->
+          <alert
+            v-if="error"
+            type="error"
+            :text="error"
+            dismissible
+            @close="error = ''"
+          />
         </div>
 
         <!----------------------------------------------------->
@@ -161,9 +194,10 @@ export default Vue.extend({
   },
   data () {
     return {
+      form: {},
+      showMore: false,
       isLoading: false,
-      error: '',
-      form: {}
+      error: ''
     }
   },
   computed: {
