@@ -99,7 +99,7 @@
                 </div>
 
                 <!-- key -->
-                <div class="my-5">
+                <div class="mt-5">
                   <div class="px-4 py-3 border border-gray-300 rounded">
                     <p class="text-sm font-medium uppercase mb-2">
                       Customize key
@@ -133,7 +133,11 @@
             </collapse-transition>
 
             <div class="mt-5 text-right">
-              <button class="text-indigo-500 hover:font-medium text-xs cursor-pointer focus:outline-none" @click="showMore = !showMore">
+              <button
+                type="button"
+                class="text-indigo-500 hover:underline text-xs cursor-pointer focus:outline-none"
+                @click="showMore = !showMore"
+              >
                 {{ showMore ? 'Less' : 'More' }} options
               </button>
             </div>
@@ -223,9 +227,19 @@ export default Vue.extend({
           setTimeout(() => {
             this.$success({
               title: 'Link successfully created!',
-              message: `Your link has successfully been created.<br>You can access it with the following key: ${link.key}`,
+              message: 'Your link has successfully been created.',
               buttons: {
-                cancel: 'Close'
+                confirm: 'Copy'
+              },
+              callback: (confirm) => {
+                if (!confirm) { return }
+
+                navigator.clipboard.writeText(`http://127.0.0.1:3333/${link.key}`)
+                  .then(() => {
+                    this.$toasted.global.success({ message: 'Link copied to clipboard!' })
+                  }, () => {
+                    this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
+                  })
               }
             })
           }, 200)

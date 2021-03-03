@@ -217,7 +217,7 @@ export default Vue.extend({
       this.onlyOwn = false
     },
     copyLink (link) {
-      navigator.clipboard.writeText(`https://127.0.0.1:3333/${link.key}`)
+      navigator.clipboard.writeText(`http://127.0.0.1:3333/${link.key}`)
         .then(() => {
           this.$toasted.global.success({ message: 'Link copied to clipboard!' })
         }, () => {

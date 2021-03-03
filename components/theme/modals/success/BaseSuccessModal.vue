@@ -23,6 +23,15 @@
 
         <div class="mt-5 w-full">
           <button
+            v-if="dialog.buttons.confirm"
+            type="button"
+            class="bg-indigo-600 w-full rounded-md shadow-sm px-4 py-2 text-white text-sm font-medium focus:outline-none hover:bg-indigo-500 transition duration-150"
+            @click.stop="e => handleClickButton(e, true)"
+          >
+            {{ dialog.buttons.confirm }}
+          </button>
+
+          <button
             v-if="dialog.buttons.cancel"
             type="button"
             class="bg-indigo-600 w-full rounded-md shadow-sm px-4 py-2 text-white text-sm font-medium focus:outline-none hover:bg-indigo-500 transition duration-150"
