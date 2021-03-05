@@ -2,7 +2,7 @@
   <transition name="fade">
     <div
       v-if="showing"
-      class="fixed bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center z-50"
+      class="fixed bottom-0 inset-x-0 px-4 py-4 sm:inset-0 h-screen flex items-end sm:items-center sm:justify-center z-50"
       @click.self="close"
       @keydown.esc="close"
     >
@@ -12,7 +12,7 @@
       </div>
 
       <!-- modal content -->
-      <div class="sm:w-full sm:max-w-xl bg-white rounded-lg overflow-hidden shadow-xl transform transition-all">
+      <div class="w-full max-w-xl bg-white rounded-lg max-h-full overflow-y-auto shadow-xl transform transition-all">
         <slot />
       </div>
     </div>

@@ -81,7 +81,7 @@
                       name="title"
                       rules="min:1|max:64"
                     >
-                      <div class="w-full flex items-center text-base text-center">
+                      <div class="w-full flex items-center text-sm sm:text-base text-center">
                         <input
                           v-model="form.title"
                           type="text"
@@ -109,7 +109,7 @@
                       name="key"
                       rules="min:1|max:512"
                     >
-                      <div class="w-full flex items-center text-base text-center">
+                      <div class="w-full flex items-center text-sm sm:text-base text-center">
                         <span class="text-black">
                           http://127.0.0.1:3333/
                         </span>
@@ -137,7 +137,7 @@
                       TAGS
                     </p>
 
-                    <div class="w-full flex items-center text-base text-center">
+                    <div class="w-full flex items-center text-sm sm:text-base text-center">
                       <vue-tags-input
                         v-model="tag"
                         :tags="form.tags"
