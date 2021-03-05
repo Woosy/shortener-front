@@ -202,7 +202,8 @@ export default Vue.extend({
       let result = this.links.filter(link =>
         link.title.toLowerCase().includes(q) ||
         link.long_url.toLowerCase().includes(q) ||
-        link.key.toLowerCase().includes(q)
+        link.key.toLowerCase().includes(q) ||
+        link.tags.find(tag => tag.value.toLowerCase().includes(q))
       )
 
       // "members selection"
