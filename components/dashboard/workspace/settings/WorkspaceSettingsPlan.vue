@@ -5,7 +5,7 @@
       description="Change your plan to unlock more features."
     />
 
-    <alert
+    <base-alert
       type="info"
       text="Shortener is still in a preview version. Therefore you already have access to all available features."
       high-contrast

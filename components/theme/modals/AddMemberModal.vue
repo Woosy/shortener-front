@@ -50,7 +50,7 @@
 
               <!--------------------------------------->
               <!-- alert -->
-              <alert
+              <base-alert
                 v-if="error"
                 type="error"
                 :text="error"
