@@ -129,6 +129,24 @@
                     </validation-provider>
                   </div>
                 </div>
+
+                <!-- tags -->
+                <div class="mt-5">
+                  <div class="px-4 py-3 border border-gray-300 rounded">
+                    <p class="text-sm font-medium uppercase mb-2">
+                      TAGS
+                    </p>
+
+                    <div class="w-full flex items-center text-base text-center">
+                      <vue-tags-input
+                        v-model="tag"
+                        :tags="form.tags"
+                        :autocomplete-items="filteredTags"
+                        @tags-changed="newTags => form.tags = newTags"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
             </collapse-transition>
 
@@ -201,7 +219,8 @@ export default Vue.extend({
       form: {},
       showMore: false,
       isLoading: false,
-      error: ''
+      error: '',
+      tag: ''
     }
   },
   computed: {
@@ -210,12 +229,20 @@ export default Vue.extend({
     ]),
     ...mapGetters('workspaces', [
       'currentWorkspace'
-    ])
+    ]),
+    ...mapGetters('links', [
+      'tagsList'
+    ]),
+    filteredTags (): any[] {
+      return this.tagsList.filter((i) => {
+        return i.text.toLowerCase().includes(this.tag.toLowerCase())
+      })
+    }
   },
   methods: {
     closeModal () {
       this.error = ''
-      this.form = {}
+      this.form = { tag: '' }
       this.$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', false)
     },
     submit () {
