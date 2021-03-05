@@ -30,6 +30,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    { src: '~/plugins/directives.ts', ssr: false },
     { src: '~/plugins/vee-validate.ts', ssr: false },
     { src: '~/plugins/global-toasts.ts', ssr: false },
     { src: '~/plugins/base-confirm-modal.ts', ssr: false },
@@ -104,7 +105,7 @@ export default {
         'faUsers', 'faList', 'faBuilding', 'faExclamationCircle', 'faCheckCircle',
         'faInfoCircle', 'faExclamationTriangle', 'faCaretUp', 'faCaretDown', 'faGripLines',
         'faMouse', 'faUserSlash', 'faMoon', 'faCheck', 'faFilter', 'faSearch', 'faTrash',
-        'faClipboard', 'faChevronDown'],
+        'faClipboard', 'faChevronDown', 'faTags'],
       brands: ['faGithub', 'faGoogle']
     }
   },

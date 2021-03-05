@@ -20,6 +20,10 @@
   max-width: none !important;
 }
 
+.vue-tags-input, .ti-new-tag-input {
+  background-color: #11ffee00 !important /* transparent */
+}
+
 .ti-input, .ti-new-tag-input-wrapper {
   border: none !important;
   padding-left: 0 !important;

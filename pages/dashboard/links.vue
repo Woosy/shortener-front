@@ -56,13 +56,28 @@
         </div>
 
         <div class="my-3 flex">
-          <button class="flex items-center bg-indigo-500 hover:bg-indigo-600 px-3 py-1 rounded shadow text-sm font-medium text-white focus:outline-none transition duration-150 mr-2" @click="$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', true)">
+          <base-dropdown class="z-30 mr-2">
+            <template v-slot:button>
+              <button class="bg-white dark:bg-gray-700 px-3 py-2 rounded shadow font-medium text-gray-600 dark:text-gray-100 focus:outline-none transition duration-150">
+                <font-awesome-icon icon="tags" />
+              </button>
+            </template>
+
+            <template v-slot:content>
+              <div class="p-4 bg-white dark:bg-gray-700 text-black rounded">
+                <vue-tags-input
+                  v-model="tag"
+                  :tags="tags"
+                  :autocomplete-items="filteredTags"
+                  @tags-changed="newTags => tags = newTags"
+                />
+              </div>
+            </template>
+          </base-dropdown>
+
+          <button class="flex items-center bg-indigo-500 hover:bg-indigo-600 px-3 py-2 rounded shadow text-sm font-medium text-white focus:outline-none transition duration-150" @click="$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', true)">
             <font-awesome-icon icon="plus" class="mr-1 text-xs" />
             <span>Add</span>
-          </button>
-
-          <button class="bg-white dark:bg-gray-700 px-3 py-1 rounded shadow text-sm font-medium text-gray-600 dark:text-gray-100 focus:outline-none transition duration-150">
-            <font-awesome-icon icon="filter" />
           </button>
         </div>
       </div>
@@ -177,7 +192,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default Vue.extend({
   middleware: 'user',
@@ -186,6 +201,8 @@ export default Vue.extend({
     return {
       query: '',
       onlyOwn: false,
+      tag: '',
+      tags: [],
       selectedMembers: [] as number[]
     }
   },
@@ -196,6 +213,14 @@ export default Vue.extend({
     ...mapState('workspaces', [
       'current'
     ]),
+    ...mapGetters('links', [
+      'tagsList'
+    ]),
+    filteredTags (): any[] {
+      return this.tagsList.filter((i) => {
+        return i.text.toLowerCase().includes(this.tag.toLowerCase())
+      })
+    },
     matchingLinks (): Array<object> {
       // "search bar"
       const q = this.query.toLowerCase()
@@ -209,6 +234,17 @@ export default Vue.extend({
       // "members selection"
       if (this.selectedMembers.length > 0) {
         result = result.filter(link => this.selectedMembers.includes(link.user.id))
+      }
+
+      // "filter tags"
+      if (this.tags.length > 0) {
+        result = result.filter((link) => {
+          return link.tags.some((tag) => {
+            return this.tags.some((t: any) => {
+              return t.text.toLowerCase() === tag.value.toLowerCase()
+            })
+          })
+        })
       }
 
       // "only my own"
