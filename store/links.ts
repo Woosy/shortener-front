@@ -15,6 +15,18 @@ export const getters: GetterTree<RootState, RootState> = {
     const links = [...state.links]
     links.sort((a: any, b: any) => b.clicks.length - a.clicks.length)
     return links.slice(0, 5)
+  },
+  tagsList: (state) => {
+    const result = [] as object[]
+    const links = [...state.links]
+    links.forEach((link: any) => {
+      link.tags.forEach((tag: any) => {
+        if (result.some((val: any) => val.text === tag.value)) { return }
+        result.push({ text: tag.value })
+      })
+    })
+
+    return result
   }
 }
 

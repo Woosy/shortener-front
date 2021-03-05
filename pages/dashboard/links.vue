@@ -94,7 +94,7 @@
       <!---------------------------------->
       <base-table
         v-show="links.length > 0 && matchingLinks.length > 0"
-        :cols="['AUTHOR', 'LINK', 'CREATION DATE', 'CLICKS', '']"
+        :cols="['AUTHOR', 'LINK', 'TAGS', 'CREATION DATE', 'CLICKS', '']"
       >
         <tr v-for="(link, index) in matchingLinks" :key="index">
           <td class="px-6 py-4 whitespace-nowrap">
@@ -125,6 +125,20 @@
               <a :href="`http://127.0.0.1:3333/${link.key}`" target="_blank">
                 {{ `http://127.0.0.1:3333/${link.key}` }}
               </a>
+            </div>
+          </td>
+
+          <td class="px-6 py-4 whitespace-nowrap max-w-md overflow-hidden ">
+            <div class="flex space-x-1">
+              <div
+                v-for="(tag, i) in link.tags"
+                :key="i"
+                class="flex items-center justify-center px-2 py-1 bg-indigo-500 rounded"
+              >
+                <span class="text-xs text-white">
+                  {{ tag.value }}
+                </span>
+              </div>
             </div>
           </td>
 
