@@ -10,3 +10,37 @@
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE 10+ */
 }
+
+/**
+** vue-tags-input (override its default style)
+**/
+
+/* input */
+.vue-tags-input {
+  max-width: none !important;
+}
+
+.ti-input, .ti-new-tag-input-wrapper {
+  border: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.vue-tags-input .ti-autocomplete {
+  background: #283944;
+  border: 1px solid #8b9396 !important;
+  border-top: none;
+  text-align: left;
+}
+
+/* tags */
+.ti-tag {
+  margin: 2px 5px 2px 0 !important;
+}
+
+.vue-tags-input .ti-tag {
+  background-color: #667eea !important; 
+  border-radius: 0.25rem !important;
+}

@@ -33,7 +33,8 @@ export default {
     { src: '~/plugins/vee-validate.ts', ssr: false },
     { src: '~/plugins/global-toasts.ts', ssr: false },
     { src: '~/plugins/base-confirm-modal.ts', ssr: false },
-    { src: '~/plugins/base-success-modal.ts', ssr: false }
+    { src: '~/plugins/base-success-modal.ts', ssr: false },
+    { src: '~/plugins/vue-tags-input.ts', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -129,6 +130,7 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    vendor: ['@johmun/vue-tags-input'],
     transpile: [
       'vee-validate/dist/rules'
     ]
