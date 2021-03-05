@@ -133,9 +133,9 @@
               <div
                 v-for="(tag, i) in link.tags"
                 :key="i"
-                class="flex items-center justify-center px-2 py-1 bg-indigo-500 rounded"
+                class="flex items-center justify-center px-2 py-1 bg-indigo-500 rounded "
               >
-                <span class="text-xs text-white">
+                <span class="text-xs text-white whitespace-no-wrap">
                   {{ tag.value }}
                 </span>
               </div>
