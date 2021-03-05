@@ -1,6 +1,6 @@
 <template>
   <authentication-layout
-    title="Log in to Shortener"
+    title="Log in to Linkkk"
     type="sign-in"
   >
     <div slot="body">

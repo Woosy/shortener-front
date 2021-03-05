@@ -19,11 +19,9 @@ export default Vue.extend({
     current () {
       switch (this.$route.path) {
         case '/dashboard': return { page: 'Dashboard', icon: 'home' }
-        case '/dashboard/links': return { page: 'Manage links', icon: 'list' }
-        case '/dashboard/statistics': return { page: 'Statistics', icon: 'chart-line' }
+        case '/dashboard/manage-links': return { page: 'Manage links', icon: 'list' }
+        case '/dashboard/links-statistics': return { page: 'Statistics', icon: 'chart-line' }
         case '/dashboard/workspace': return { page: 'Workspace', icon: 'home' }
-        case '/dashboard/workspace/members': return { page: 'Workspace members', icon: 'users' }
-        case '/dashboard/workspace/settings': return { page: 'Workspace settings', icon: 'cog' }
         case '/dashboard/account': return { page: 'My profile', icon: 'user' }
         case '/dashboard/account/settings': return { page: 'Profile settings', icon: 'cog' }
       }

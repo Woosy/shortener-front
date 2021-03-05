@@ -13,7 +13,7 @@
             </div>
             <div class="px-2">
               <p class="text-xs md:text-sm font-medium">
-                Shortener is still in development.
+                Linkkk is still in development.
               </p>
             </div>
           </div>

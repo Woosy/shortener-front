@@ -40,13 +40,13 @@
           <dashboard-sidebar-menu-item
             title="Manage links"
             icon="list"
-            to="/dashboard/links"
+            to="/dashboard/manage-links"
           />
 
           <dashboard-sidebar-menu-item
-            title="Statistics"
+            title="Links statistics"
             icon="chart-line"
-            to="/dashboard/statistics"
+            to="/dashboard/links-statistics"
           />
 
           <dashboard-sidebar-menu-item

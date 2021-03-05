@@ -40,7 +40,7 @@ export default Vue.extend({
   fetch () {
     this.$store.dispatch('workspaces/fetchList')
 
-    const currentWorkspaceId = localStorage.getItem('shortener.current-workspace-id')
+    const currentWorkspaceId = localStorage.getItem('linkkk.current-workspace-id')
     if (currentWorkspaceId) {
       this.$store.dispatch('workspaces/fetch', { id: currentWorkspaceId })
     } else {
@@ -63,7 +63,7 @@ export default Vue.extend({
       // disable switching to current
       if (this.current.id === workspace.id) { return }
 
-      localStorage.setItem('shortener.current-workspace-id', workspace.id)
+      localStorage.setItem('linkkk.current-workspace-id', workspace.id)
       this.$store.dispatch('workspaces/fetch', { id: workspace.id, useDelay: true })
         .then(() => {
           this.$toasted.global.success({ message: `Switching to ${workspace.name}.` })

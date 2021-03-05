@@ -42,7 +42,7 @@
     <!------------------------->
     <div class="px-4 pb-4 text-center mt-auto">
       <p class="text-xs sm:text-sm text-gray-600">
-        By signing up to Shortener, you agree to our <u><b>terms of service</b></u>.
+        By signing up to Linkkk, you agree to our <u><b>terms of service</b></u>.
       </p>
     </div>
   </div>

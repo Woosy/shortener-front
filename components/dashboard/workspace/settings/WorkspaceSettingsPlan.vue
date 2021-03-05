@@ -7,7 +7,7 @@
 
     <base-alert
       type="info"
-      text="Shortener is still in a preview version. Therefore you already have access to all available features."
+      text="Linkkk is still in a preview version. Therefore you already have access to all available features."
       high-contrast
     />
   </div>
