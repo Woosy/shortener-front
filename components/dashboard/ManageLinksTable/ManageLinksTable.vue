@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col">
     <div class="overflow-x-auto">
-      <div class="py-2 align-middle inline-block min-w-full">
-        <div class="shadow overflow-hidden border-b border-gray-300 dark:border-gray-700 sm:rounded-t-lg">
+      <div class="align-middle inline-block min-w-full">
+        <div class="shadow border-b border-gray-300 dark:border-gray-700">
           <!----------------------------------------------->
           <!-- Pagination -->
           <div class="bg-white dark:bg-gray-800 px-4 sm:px-6 py-3 flex items-center justify-between border-b border-gray-300 dark:border-gray-700">
@@ -28,8 +28,8 @@
                   results
                 </p>
               </div>
-              <div>
-                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px text-sm font-medium text-gray-500">
+              <div class="flex flex-row items-center space-x-2">
+                <nav class="relative inline-flex rounded-md shadow-sm -space-x-px text-sm font-medium text-gray-500">
                   <previous-page @previous-page="$emit('previous-page')" />
 
                   <div v-if="pagesCount <= 5" class="-space-x-px">
@@ -58,6 +58,14 @@
 
                   <next-page @next-page="$emit('next-page')" />
                 </nav>
+
+                <div class="text-sm">
+                  <base-select
+                    :current="perPage"
+                    :options="[5, 10, 20, 50]"
+                    @toggle="togglePerPage"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -225,6 +233,9 @@ export default Vue.extend({
     }
   },
   methods: {
+    togglePerPage (val) {
+      this.$emit('toggle-per-page', val)
+    },
     copyLink (link) {
       navigator.clipboard.writeText(`http://127.0.0.1:3333/${link.key}`)
         .then(() => {

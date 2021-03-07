@@ -124,6 +124,7 @@
       @previous-page="previousPage"
       @change-page="changePage"
       @next-page="nextPage"
+      @toggle-per-page="togglePerPage"
     />
   </div>
 </template>
@@ -206,7 +207,7 @@ export default Vue.extend({
   },
   watch: {
     matchingLinks () {
-    // go back to 1st page when matchingLinks is updated
+      // go back to 1st page when matchingLinks is updated
       this.pagination.currentPage = 1
     }
   },
@@ -223,6 +224,10 @@ export default Vue.extend({
       if ((this.matchingLinks.length % this.pagination.perPage) !== 0) { count += 1 }
       if (this.pagination.currentPage === count) { return }
       this.pagination.currentPage = this.pagination.currentPage + 1
+    },
+    togglePerPage (val) {
+      this.pagination.perPage = val
+      this.pagination.currentPage = 1
     },
     toggleMemberSelected (memberId: number) {
       this.isMemberSelected(memberId)
