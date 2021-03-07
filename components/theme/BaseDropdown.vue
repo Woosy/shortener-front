@@ -16,7 +16,7 @@
     <transition name="fade">
       <div
         v-if="show"
-        class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
+        class="origin-top-right absolute left-0 md:left-auto right-auto md:right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
       >
         <slot name="content" />
       </div>
