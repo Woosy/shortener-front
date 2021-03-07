@@ -32,15 +32,29 @@
                 <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px text-sm font-medium text-gray-500">
                   <previous-page @previous-page="$emit('previous-page')" />
 
-                  <span
-                    v-for="index in (Math.trunc(matchingLinks.length / perPage) + 1)"
-                    :key="index"
-                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-900"
-                    :class="index === currentPage ? 'bg-gray-200 dark:bg-gray-700' : 'bg-white dark:bg-gray-800'"
-                    @click="$emit('change-page', index)"
-                  >
-                    {{ index }}
-                  </span>
+                  <div v-if="pagesCount <= 5" class="-space-x-px">
+                    <span
+                      v-for="index in pagesCount"
+                      :key="index"
+                      class="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-900"
+                      :class="index === currentPage ? 'bg-gray-200 dark:bg-gray-700' : 'bg-white dark:bg-gray-800'"
+                      @click="$emit('change-page', index)"
+                    >
+                      {{ index }}
+                    </span>
+                  </div>
+
+                  <div v-if="pagesCount > 5" class="-space-x-px">
+                    <span
+                      v-for="index in pagesCountSup5"
+                      :key="index"
+                      class="relative inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-900"
+                      :class="index === currentPage ? 'bg-gray-200 dark:bg-gray-700' : 'bg-white dark:bg-gray-800'"
+                      @click="$emit('change-page', index)"
+                    >
+                      {{ index }}
+                    </span>
+                  </div>
 
                   <next-page @next-page="$emit('next-page')" />
                 </nav>
@@ -176,6 +190,38 @@ export default Vue.extend({
     displayedLinks: {
       type: Array,
       default: () => []
+    }
+  },
+  computed: {
+    pagesCount (): number {
+      let count = Math.trunc(this.matchingLinks.length / this.perPage)
+      if ((this.matchingLinks.length % this.perPage) !== 0) { count += 1 }
+      return count
+    },
+    pagesCountSup5 (): Array<number> {
+      const count = this.pagesCount
+      const current = this.currentPage
+
+      let temp = [] as number[]
+      temp.push(current)
+
+      switch (current) {
+        case 1:
+        case 2:
+        case 3:
+          temp = [1, 2, 3, 4, 5]
+          break
+        case count - 2:
+        case count - 1:
+        case count:
+          temp = [count - 4, count - 3, count - 2, count - 1, count]
+          break
+        default:
+          temp = [current - 2, current - 1, current, current + 1, current + 2]
+          break
+      }
+
+      return temp
     }
   },
   methods: {

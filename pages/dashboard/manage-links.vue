@@ -219,7 +219,9 @@ export default Vue.extend({
       this.pagination.currentPage = page
     },
     nextPage () {
-      if (this.pagination.currentPage === (Math.trunc(this.matchingLinks.length / this.pagination.perPage) + 1)) { return }
+      let count = Math.trunc(this.matchingLinks.length / this.pagination.perPage)
+      if ((this.matchingLinks.length % this.pagination.perPage) !== 0) { count += 1 }
+      if (this.pagination.currentPage === count) { return }
       this.pagination.currentPage = this.pagination.currentPage + 1
     },
     toggleMemberSelected (memberId: number) {
