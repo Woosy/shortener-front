@@ -111,7 +111,7 @@
                     >
                       <div class="w-full flex items-center text-sm sm:text-base text-center">
                         <span class="text-black">
-                          http://127.0.0.1:3333/
+                          {{ apiUrl }}
                         </span>
 
                         <input
@@ -216,6 +216,7 @@ export default Vue.extend({
   },
   data () {
     return {
+      apiUrl: process.env.API_URL,
       form: {},
       showMore: false,
       isLoading: false,
@@ -261,7 +262,7 @@ export default Vue.extend({
               callback: (confirm) => {
                 if (!confirm) { return }
 
-                navigator.clipboard.writeText(`http://127.0.0.1:3333/${link.key}`)
+                navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
                   .then(() => {
                     this.$toasted.global.success({ message: 'Link copied to clipboard!' })
                   }, () => {

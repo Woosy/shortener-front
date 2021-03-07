@@ -28,8 +28,8 @@
               {{ link.title }}
             </div>
             <div class="text-sm text-gray-500">
-              <a :href="`http://127.0.0.1:3333/${link.key}`" target="_blank">
-                {{ `http://127.0.0.1:3333/${link.key}` }}
+              <a :href="`${apiUrl}/${link.key}`" target="_blank">
+                {{ `${apiUrl}/${link.key}` }}
               </a>
             </div>
           </div>
@@ -49,6 +49,11 @@ import Vue from 'vue'
 import { mapGetters } from 'vuex'
 
 export default Vue.extend({
+  data () {
+    return {
+      apiUrl: process.env.API_URL
+    }
+  },
   computed: {
     ...mapGetters('links', [
       'activeLinks'

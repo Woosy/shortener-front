@@ -119,8 +119,8 @@
                   {{ link.title }}
                 </div>
                 <div class="text-sm text-gray-500">
-                  <a :href="`http://127.0.0.1:3333/${link.key}`" target="_blank">
-                    {{ `http://127.0.0.1:3333/${link.key}` }}
+                  <a :href="`${apiUrl}/${link.key}`" target="_blank">
+                    {{ `${apiUrl}/${link.key}` }}
                   </a>
                 </div>
               </td>
@@ -200,6 +200,11 @@ export default Vue.extend({
       default: () => []
     }
   },
+  data () {
+    return {
+      apiUrl: process.env.API_URL
+    }
+  },
   computed: {
     pagesCount (): number {
       let count = Math.trunc(this.matchingLinks.length / this.perPage)
@@ -237,7 +242,7 @@ export default Vue.extend({
       this.$emit('toggle-per-page', val)
     },
     copyLink (link) {
-      navigator.clipboard.writeText(`http://127.0.0.1:3333/${link.key}`)
+      navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
         .then(() => {
           this.$toasted.global.success({ message: 'Link copied to clipboard!' })
         }, () => {
