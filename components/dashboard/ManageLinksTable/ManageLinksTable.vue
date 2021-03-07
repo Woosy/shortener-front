@@ -2,7 +2,7 @@
   <div class="flex flex-col">
     <div class="overflow-x-auto">
       <div class="py-2 align-middle inline-block min-w-full">
-        <div class="shadow overflow-hidden border-b border-gray-300 dark:border-gray-700 sm:rounded-lg">
+        <div class="shadow overflow-hidden border-b border-gray-300 dark:border-gray-700 sm:rounded-t-lg">
           <!----------------------------------------------->
           <!-- Pagination -->
           <div class="bg-white dark:bg-gray-800 px-4 sm:px-6 py-3 flex items-center justify-between border-b border-gray-300 dark:border-gray-700">
