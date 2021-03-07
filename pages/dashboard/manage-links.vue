@@ -61,7 +61,7 @@
       <div class="my-3 flex">
         <!---------------------------------->
         <!-- filter by tags -->
-        <base-dropdown class="z-30 mr-2">
+        <base-dropdown class="z-10 mr-2">
           <template v-slot:button>
             <button class="bg-white dark:bg-gray-700 px-3 py-2 rounded shadow font-medium text-gray-600 dark:text-gray-100 focus:outline-none transition duration-150">
               <font-awesome-icon icon="tags" />
