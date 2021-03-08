@@ -5,6 +5,7 @@
         <div class="shadow border-b border-gray-300 dark:border-gray-700">
           <!----------------------------------------------->
           <!-- Pagination -->
+          <!----------------------------------------------->
           <div class="bg-white dark:bg-gray-800 px-4 sm:px-6 py-3 flex items-center justify-between border-b border-gray-300 dark:border-gray-700">
             <div class="flex-1 flex items-center justify-between">
               <div>
@@ -74,24 +75,40 @@
         <table class="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
           <!----------------------------------------------->
           <!-- Table header (columns name) -->
+          <!----------------------------------------------->
           <thead class="bg-gray-100 dark:bg-gray-700">
             <tr>
-              <th
-                v-for="(col, index) in cols"
-                :key="index"
-                scope="col"
-                class="px-6 py-3"
-                :class="index === (cols.length - 1)
-                  ? 'relative'
-                  : 'text-left text-xs font-medium text-gray-500 uppercase tracking-wider'"
-              >
-                {{ col }}
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                AUTHOR
               </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                LINK
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                TAGS
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" @click="toggleDateSort">
+                <span class="pr-2">
+                  CREATION DATE
+                </span>
+                <font-awesome-icon v-show="dateSorting=== 'up'" icon="sort-up" />
+                <font-awesome-icon v-show="dateSorting=== 'down'" icon="sort-down" />
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" @click="toggleClicksSort">
+                <span class="pr-2">
+                  CLICKS
+                </span>
+                <font-awesome-icon v-show="clicksSorting=== 'none'" icon="sort" />
+                <font-awesome-icon v-show="clicksSorting=== 'up'" icon="sort-up" />
+                <font-awesome-icon v-show="clicksSorting=== 'down'" icon="sort-down" />
+              </th>
+              <th scope="col" class="px-6 py-3 relative" />
             </tr>
           </thead>
 
           <!----------------------------------------------->
           <!-- Table body (columns content) -->
+          <!----------------------------------------------->
           <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-300 dark:divide-gray-700">
             <tr v-for="(link, index) in displayedLinks" :key="index">
               <td class="px-6 py-4 whitespace-nowrap">
@@ -202,7 +219,9 @@ export default Vue.extend({
   },
   data () {
     return {
-      apiUrl: process.env.API_URL
+      apiUrl: process.env.API_URL,
+      dateSorting: 'up',
+      clicksSorting: 'none'
     }
   },
   computed: {
@@ -240,6 +259,27 @@ export default Vue.extend({
   methods: {
     togglePerPage (val) {
       this.$emit('toggle-per-page', val)
+    },
+    toggleDateSort () {
+      this.clicksSorting = 'none'
+      switch (this.dateSorting) {
+        case 'up': this.dateSorting = 'down'; break
+        case 'down': this.dateSorting = 'up'; break
+        default: this.dateSorting = 'ip'; break
+      }
+
+      this.$emit('sort-date', this.dateSorting)
+    },
+    toggleClicksSort () {
+      this.dateSorting = 'up'
+      switch (this.clicksSorting) {
+        case 'none': this.clicksSorting = 'up'; break
+        case 'up': this.clicksSorting = 'down'; break
+        case 'down': this.clicksSorting = 'none'; break
+        default: this.clicksSorting = 'none'; break
+      }
+
+      this.$emit('sort-clicks', this.clicksSorting)
     },
     copyLink (link) {
       navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)

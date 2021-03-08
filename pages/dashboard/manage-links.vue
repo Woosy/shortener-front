@@ -125,6 +125,8 @@
       @change-page="changePage"
       @next-page="nextPage"
       @toggle-per-page="togglePerPage"
+      @sort-date="sortDate"
+      @sort-clicks="sortClicks"
     />
   </div>
 </template>
@@ -146,7 +148,9 @@ export default Vue.extend({
       selectedMembers: [] as number[],
       onlyOwn: false,
       tag: '',
-      tags: []
+      tags: [],
+      dateSorting: 'up',
+      clicksSorting: 'none'
     }
   },
   computed: {
@@ -193,6 +197,22 @@ export default Vue.extend({
       // "only my own"
       if (this.onlyOwn) {
         links = links.filter(link => link.user.id === this.$auth.user.id)
+      }
+
+      links.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+
+      // sort by date
+      if (this.dateSorting === 'up') {
+        links.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+      } else if (this.dateSorting === 'down') {
+        links.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime())
+      }
+
+      // sort by clicks
+      if (this.clicksSorting === 'up') {
+        links.sort((a, b) => b.clicks.length - a.clicks.length)
+      } else if (this.clicksSorting === 'down') {
+        links.sort((a, b) => a.clicks.length - b.clicks.length)
       }
 
       return links
@@ -242,6 +262,12 @@ export default Vue.extend({
       this.selectedMembers = []
       this.onlyOwn = false
       this.tags = []
+    },
+    sortDate (val) {
+      this.dateSorting = val
+    },
+    sortClicks (val) {
+      this.clicksSorting = val
     }
   }
 })
