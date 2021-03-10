@@ -3,9 +3,7 @@
     <!------------------------------>
     <!-- "search bar" -->
     <!------------------------------>
-    <div
-      class="w-full xl:max-w-sm bg-white dark:bg-gray-800 rounded-lg"
-    >
+    <div class="w-full xl:max-w-sm bg-white dark:bg-gray-800 rounded-lg">
       <div class="flex flex-col">
         <!---------------------------->
         <!-- search input -->
@@ -28,16 +26,16 @@
         <div
           id="link-container"
           class="flex flex-col overflow-y-auto custom-scrollbar"
-          style="max-height: 625px !important"
+          style="max-height: 725px !important"
         >
           <div
-            v-for="(link, index) in links"
+            v-for="(link, index) in matchingLinks"
             :id="'link-' + link.id"
             :key="index"
             class="px-5 py-4 flex flex-row justify-between space-x-2"
             :class="{
               'bg-gray-100 dark:bg-gray-700': current.id === link.id,
-              'border-b dark:border-gray-700': index !== (links.length - 1)
+              'border-b dark:border-gray-700': index !== (matchingLinks.length - 1)
             }"
             @click="setCurrent(link)"
           >
@@ -49,7 +47,7 @@
                 {{ link.title }}
               </h3>
               <a
-                href=""
+                :href="`${apiUrl}/${current.key}`"
                 target="_blank"
                 class="mt-1 text-sm text-indigo-400 "
               >
@@ -68,11 +66,103 @@
       </div>
     </div>
 
-    <!------------------------------>
+    <!----------------------------------->
     <!-- statistics -->
-    <!------------------------------>
-    <div class="hidden xl:block p-5 xl:w-full bg-white dark:bg-gray-800 rounded-lg">
-      <!--  -->
+    <!----------------------------------->
+    <div class="hidden xl:block p-5 xl:w-full">
+      <!----------------------------------->
+      <!-- placeholder: no selected link -->
+      <!----------------------------------->
+      <div v-if="!current.created_at" class="flex flex-col items-center justify-center">
+        <img src="@/assets/images/svg/undraw_select.svg" class="mb-10 w-80">
+        <p class="text-gray-600 text-center">
+          Start by selecting the link whose statistics you want to see...
+        </p>
+      </div>
+
+      <div v-if="current.created_at">
+        <!---------------------------------->
+        <!-- top part: link informations --->
+        <!---------------------------------->
+        <div class="flex flex-col border-b border-gray-400 dark:border-gray-700">
+          <!-- date & author -->
+          <div class="mb-3">
+            <p class="text-xs text-gray-600 dark:text-gray-500">
+              CREATED {{ $dateFns.format(current.created_at, 'MMM d, H:mm').toUpperCase() }} |
+              <span class="text-indigo-500">
+                {{ current.user.username }}
+              </span>
+            </p>
+          </div>
+
+          <!-- title & tags -->
+          <div class="mb-1 flex flex-row items-center space-x-6">
+            <h3 class="text-lg font-medium text-black dark:text-gray-200">
+              {{ current.title }}
+            </h3>
+
+            <div class="flex space-x-1">
+              <div
+                v-for="(t, i) in current.tags"
+                :key="i"
+                class="flex items-center justify-center px-2 py-1 bg-indigo-500 rounded "
+              >
+                <span class="text-xs text-white whitespace-no-wrap">
+                  {{ t.value }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- long_url (destination) -->
+          <p class="text-sm text-gray-600 ">
+            <a :href="current.long_url" target="_blank" rel="noopener noreferrer">
+              {{ current.long_url }}
+            </a>
+          </p>
+
+          <!-- short url + actions -->
+          <div>
+            <div class="py-6 flex flex-row items-center space-x-2">
+              <p class="text-sm text-indigo-500">
+                <a :href="`${apiUrl}/${current.key}`" target="_blank">
+                  linkkk.to/<span class="font-semibold">{{ current.key }}</span>
+                </a>
+              </p>
+
+              <div>
+                <span class="text-xs text-indigo-500 ">
+                  <!-- TODO: implement -->
+                  <button class="px-2 py-px border border-indigo-500 rounded transition duration-200 focus:outline-none">
+                    COPY
+                  </button>
+
+                  <!-- TODO: implement -->
+                  <button class="px-2 py-px border border-indigo-500 rounded transition duration-200 focus:outline-none">
+                    DELETE
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!---------------------------------->
+        <!-- bottom part: link statistics -->
+        <!---------------------------------->
+        <div class="mt-10">
+          <div v-if="current.clicks.length === 0" class="flex flex-col items-center justify-center">
+            <img src="@/assets/images/svg/undraw_empty.svg" class="mb-10 w-80">
+            <p class="text-gray-600 text-center">
+              Nothing to show. This link has never been clicked on...
+            </p>
+          </div>
+
+          <div v-if="current.clicks.length > 0">
+            <!--  -->
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -86,6 +176,7 @@ export default Vue.extend({
   layout: 'dashboard',
   data () {
     return {
+      apiUrl: process.env.API_URL,
       searchQuery: '',
       selected: 0
     }
@@ -94,6 +185,16 @@ export default Vue.extend({
     ...mapState('links', [
       'links'
     ]),
+    matchingLinks (): Array<object> {
+      const q = this.searchQuery.toLowerCase()
+      const links = this.links.filter(link =>
+        link.title.toLowerCase().includes(q) ||
+        link.long_url.toLowerCase().includes(q) ||
+        link.key.toLowerCase().includes(q) ||
+        link.tags.find(tag => tag.value.toLowerCase().includes(q))
+      )
+      return links
+    },
     current (): object {
       if (!this.selected) { return {} }
       const link = this.links.find(link => link.id === this.selected)
