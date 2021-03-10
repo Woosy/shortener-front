@@ -46,13 +46,9 @@
               <h3 class="text-base font-medium text-black dark:text-gray-300">
                 {{ link.title }}
               </h3>
-              <a
-                :href="`${apiUrl}/${current.key}`"
-                target="_blank"
-                class="mt-1 text-sm text-indigo-400 "
-              >
+              <span class="mt-1 text-sm text-indigo-400 ">
                 linkkk.to/{{ link.key }}
-              </a>
+              </span>
             </div>
 
             <div class="flex items-end">
@@ -125,9 +121,7 @@
           <div>
             <div class="py-6 flex flex-row items-center space-x-2">
               <p class="text-sm text-indigo-500">
-                <a :href="`${apiUrl}/${current.key}`" target="_blank">
-                  linkkk.to/<span class="font-semibold">{{ current.key }}</span>
-                </a>
+                linkkk.to/<span class="font-semibold">{{ current.key }}</span>
               </p>
 
               <div>
