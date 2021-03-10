@@ -159,7 +159,13 @@
           </div>
 
           <div v-if="current.clicks.length > 0">
-            <!--  -->
+            <apexchart
+              type="bar"
+              width="100%"
+              height="300px"
+              :options="options"
+              :series="series"
+            />
           </div>
         </div>
       </div>
@@ -195,10 +201,39 @@ export default Vue.extend({
       )
       return links
     },
-    current (): object {
-      if (!this.selected) { return {} }
-      const link = this.links.find(link => link.id === this.selected)
-      return link || {}
+    current (): object | any {
+      return this.links.find(link => link.id === this.selected) || {}
+    },
+    options (): any {
+      const categories = [] as any[]
+
+      this.current.clicks.forEach((click) => {
+        const date = this.$dateFns.format(click.created_at, 'dd-MM-yyyy')
+        if (!categories.includes(date)) { categories.push(date) }
+      })
+
+      return {
+        chart: { id: 'linkkk-clicks' },
+        xaxis: { categories }
+      }
+    },
+    series (): any {
+      const data = [] as any[]
+      const dates = [] as any[]
+
+      this.current.clicks.forEach((click) => {
+        const date = this.$dateFns.format(click.created_at, 'dd-MM-yyyy')
+        const indexOf = dates.findIndex(el => el === date)
+
+        indexOf === -1
+          ? dates.push(date) && data.push(1)
+          : data[indexOf] += 1
+      })
+
+      return [{
+        name: 'Clicks',
+        data: data || []
+      }]
     }
   },
   mounted () {
