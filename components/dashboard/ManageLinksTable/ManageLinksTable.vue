@@ -175,6 +175,14 @@
                   </button>
 
                   <button
+                    title="Copy link"
+                    class="flex items-center justify-center h-6 w-10 border border-gray-500 bg-white dark:bg-gray-800 hover:bg-gray-500 text-gray-600 hover:text-white rounded transition duration-200 focus:outline-none"
+                    @click="gotoLinkStatistics(link)"
+                  >
+                    <font-awesome-icon icon="chart-line" />
+                  </button>
+
+                  <button
                     title="Delete link"
                     class="flex items-center justify-center h-6 w-10 border border-red-600 bg-white dark:bg-gray-800 hover:bg-red-600 dark-hover:bg-red-600 text-red-600 hover:text-white rounded transition duration-200 focus:outline-none"
                     @click="deleteLink(link)"
@@ -280,6 +288,9 @@ export default Vue.extend({
       }
 
       this.$emit('sort-clicks', this.clicksSorting)
+    },
+    gotoLinkStatistics (link) {
+      this.$router.push(`/dashboard/links-statistics?selected=${link.id}`)
     },
     copyLink (link) {
       navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)

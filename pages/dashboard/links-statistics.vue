@@ -26,23 +26,24 @@
         <!-- links result -->
         <!---------------------------->
         <div
+          id="link-container"
           class="flex flex-col overflow-y-auto custom-scrollbar"
           style="max-height: 625px !important"
         >
           <div
             v-for="(link, index) in links"
+            :id="'link-' + link.id"
             :key="index"
             class="px-5 py-4 flex flex-row justify-between space-x-2"
             :class="{
               'bg-gray-100 dark:bg-gray-700': current.id === link.id,
               'border-b dark:border-gray-700': index !== (links.length - 1)
             }"
-            @click="current = link"
+            @click="setCurrent(link)"
           >
             <div class="flex flex-col">
               <span class="text-xs text-gray-500">
-                {{ $dateFns.format(link.created_at, '') }}
-                MAR 9, 10:47
+                {{ $dateFns.format(link.created_at, 'MMM d, H:mm').toUpperCase() }}
               </span>
               <h3 class="text-base font-medium text-black dark:text-gray-300">
                 {{ link.title }}
@@ -86,13 +87,50 @@ export default Vue.extend({
   data () {
     return {
       searchQuery: '',
-      current: {}
+      selected: 0
     }
   },
   computed: {
     ...mapState('links', [
       'links'
-    ])
+    ]),
+    current (): object {
+      if (!this.selected) { return {} }
+      const link = this.links.find(link => link.id === this.selected)
+      return link || {}
+    }
+  },
+  mounted () {
+    this.selected = Number(this.$route.query.selected)
+
+    // scroll to the selected div
+    setTimeout(() => {
+      const parent = document.getElementById('link-container')
+      const child = document.getElementById('link-' + this.selected.toString())
+
+      if (!parent || !child) { return }
+
+      const parentRect = parent.getBoundingClientRect()
+      const parentViewableArea = {
+        height: parent.clientHeight,
+        width: parent.clientWidth
+      }
+
+      const childRect = child?.getBoundingClientRect()
+      const isChildViewable = (childRect.top >= parentRect.top) && (childRect.top <= parentRect.top + parentViewableArea.height)
+
+      if (!isChildViewable) {
+        // scroll by offset relative to parent
+        parent.scrollTop = (childRect.top + parent.scrollTop) - parentRect.top
+      }
+    }, 250)
+  },
+  methods: {
+    setCurrent (link) {
+      this.selected = link.id
+      const url = location.origin + this.$route.path
+      history.replaceState({}, '', `${url}?selected=${link.id}`)
+    }
   }
 })
 </script>
