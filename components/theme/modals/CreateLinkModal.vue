@@ -111,7 +111,7 @@
                     >
                       <div class="w-full flex items-center text-sm sm:text-base text-center">
                         <span class="text-black">
-                          {{ apiUrl }}
+                          {{ apiUrl }}/
                         </span>
 
                         <input

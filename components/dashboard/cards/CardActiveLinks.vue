@@ -24,12 +24,12 @@
           </div>
 
           <div class="px-3 whitespace-nowrap">
-            <div class="text-sm text-gray-900 dark:text-white">
+            <div class="text-sm mb-1 text-gray-900 dark:text-white">
               {{ link.title }}
             </div>
             <div class="text-sm text-gray-500">
               <a :href="`${apiUrl}/${link.key}`" target="_blank">
-                {{ `${apiUrl}/${link.key}` }}
+                linkkk.to/{{ link.key }}
               </a>
             </div>
           </div>

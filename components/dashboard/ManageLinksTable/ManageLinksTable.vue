@@ -137,7 +137,7 @@
                 </div>
                 <div class="text-sm text-gray-500">
                   <a :href="`${apiUrl}/${link.key}`" target="_blank">
-                    {{ `${apiUrl}/${link.key}` }}
+                    linkkk.to/{{ link.key }}
                   </a>
                 </div>
               </td>

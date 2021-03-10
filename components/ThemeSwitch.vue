@@ -1,5 +1,5 @@
 <template>
-  <div class="h-16 flex items-center justify-center">
+  <div class="mb-2 h-16 flex items-center justify-center">
     <div class="relative inline-block w-10 text-center text-lg">
       <font-awesome-icon icon="moon" class="text-gray-600 mb-2" />
 
