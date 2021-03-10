@@ -35,7 +35,8 @@ export default {
     { src: '~/plugins/global-toasts.ts', ssr: false },
     { src: '~/plugins/base-confirm-modal.ts', ssr: false },
     { src: '~/plugins/base-success-modal.ts', ssr: false },
-    { src: '~/plugins/vue-tags-input.ts', ssr: false }
+    { src: '~/plugins/vue-tags-input.ts', ssr: false },
+    { src: '~/plugins/vue-apexcharts.ts', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
