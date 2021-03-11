@@ -41,8 +41,8 @@ import Vue from 'vue'
 import { mapState, mapGetters } from 'vuex'
 
 export default Vue.extend({
-  middleware: 'user',
   layout: 'dashboard',
+  middleware: 'user',
   computed: {
     ...mapState('links', [
       'links',

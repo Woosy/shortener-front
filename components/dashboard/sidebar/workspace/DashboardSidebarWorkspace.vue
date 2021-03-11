@@ -37,6 +37,11 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 
 export default Vue.extend({
+  data () {
+    return {
+      showWorkspaceCreateModal: false
+    }
+  },
   fetch () {
     this.$store.dispatch('workspaces/fetchList')
 
@@ -45,11 +50,6 @@ export default Vue.extend({
       this.$store.dispatch('workspaces/fetch', { id: currentWorkspaceId })
     } else {
       this.$store.dispatch('workspaces/fetchPersonal', {})
-    }
-  },
-  data () {
-    return {
-      showWorkspaceCreateModal: false
     }
   },
   computed: {

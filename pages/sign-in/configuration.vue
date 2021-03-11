@@ -58,11 +58,11 @@ import Vue from 'vue'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
 export default Vue.extend({
-  middleware: 'user',
   components: {
     ValidationObserver,
     ValidationProvider
   },
+  middleware: 'user',
   data () {
     return {
       configurationForm: {

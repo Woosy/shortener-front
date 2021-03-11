@@ -89,11 +89,11 @@ import Vue from 'vue'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
 export default Vue.extend({
-  middleware: 'guest',
   components: {
     ValidationObserver,
     ValidationProvider
   },
+  middleware: 'guest',
   data () {
     return {
       registerForm: {

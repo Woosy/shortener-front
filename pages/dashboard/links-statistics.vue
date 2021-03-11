@@ -28,35 +28,43 @@
           class="flex flex-col overflow-y-auto custom-scrollbar"
           style="max-height: 725px !important"
         >
-          <div
-            v-for="(link, index) in matchingLinks"
-            :id="'link-' + link.id"
-            :key="index"
-            class="px-5 py-4 flex flex-row justify-between space-x-2"
-            :class="{
-              'bg-gray-100 dark:bg-gray-700': current.id === link.id,
-              'border-b dark:border-gray-700': index !== (matchingLinks.length - 1)
-            }"
-            @click="setCurrent(link)"
-          >
-            <div class="flex flex-col">
-              <span class="text-xs text-gray-500">
-                {{ $dateFns.format(link.created_at, 'MMM d, H:mm').toUpperCase() }}
-              </span>
-              <h3 class="text-base font-medium text-black dark:text-gray-300">
-                {{ link.title }}
-              </h3>
-              <span class="mt-1 text-sm text-indigo-400 ">
-                linkkk.to/{{ link.key }}
-              </span>
-            </div>
+          <div v-if="matchingLinks.length > 0">
+            <div
+              v-for="(link, index) in matchingLinks"
+              :id="'link-' + link.id"
+              :key="index"
+              class="px-5 py-4 flex flex-row justify-between space-x-2"
+              :class="{
+                'bg-gray-100 dark:bg-gray-700': current.id === link.id,
+                'border-b dark:border-gray-700': index !== (matchingLinks.length - 1)
+              }"
+              @click="setCurrent(link)"
+            >
+              <div class="flex flex-col">
+                <span class="text-xs text-gray-500">
+                  {{ $dateFns.format(link.created_at, 'MMM d, H:mm').toUpperCase() }}
+                </span>
+                <h3 class="text-base font-medium text-black dark:text-gray-300">
+                  {{ link.title }}
+                </h3>
+                <span class="mt-1 text-sm text-indigo-400 ">
+                  linkkk.to/{{ link.key }}
+                </span>
+              </div>
 
-            <div class="flex items-end">
-              <p class="text-black dark:text-white text-sm">
-                <span class="pr-2">{{ link.clicks.length }}</span>
-                <font-awesome-icon icon="mouse" class="text-gray-500 dark:text-gray-600 text-xs" />
-              </p>
+              <div class="flex items-end">
+                <p class="text-black dark:text-white text-sm">
+                  <span class="pr-2">{{ link.clicks.length }}</span>
+                  <font-awesome-icon icon="mouse" class="text-gray-500 dark:text-gray-600 text-xs" />
+                </p>
+              </div>
             </div>
+          </div>
+
+          <div v-if="matchingLinks.length=== 0">
+            <p class="mt-5 text-center text-gray-500">
+              Couldn't find any links.
+            </p>
           </div>
         </div>
       </div>
@@ -65,7 +73,7 @@
     <!----------------------------------->
     <!-- statistics -->
     <!----------------------------------->
-    <div class="hidden xl:block xl:p-5 xl:w-full">
+    <div class="block xl:p-5 xl:w-full">
       <!----------------------------------->
       <!-- placeholder: no selected link -->
       <!----------------------------------->
@@ -176,8 +184,8 @@ import Vue from 'vue'
 import { mapState } from 'vuex'
 
 export default Vue.extend({
-  middleware: 'user',
   layout: 'dashboard',
+  middleware: 'user',
   data () {
     return {
       apiUrl: process.env.API_URL,
@@ -296,21 +304,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style>
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background-color: transparent !important;
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
-  }
-
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 4px;
-    background-color: transparent !important;
-  }
-
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    border-radius: 14px;
-    background-color: #b4b3b3;
-  }
-</style>

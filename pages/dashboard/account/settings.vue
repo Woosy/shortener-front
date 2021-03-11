@@ -8,7 +8,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  middleware: 'user',
-  layout: 'dashboard'
+  layout: 'dashboard',
+  middleware: 'user'
 })
 </script>

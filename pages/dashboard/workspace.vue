@@ -40,8 +40,8 @@ import Vue from 'vue'
 import { mapGetters } from 'vuex'
 
 export default Vue.extend({
-  middleware: 'user',
   layout: 'dashboard',
+  middleware: 'user',
   data () {
     return {
       currentTab: 'General'

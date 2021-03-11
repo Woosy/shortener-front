@@ -62,13 +62,13 @@
         <!---------------------------------->
         <!-- filter by tags -->
         <base-dropdown class="z-10 mr-2">
-          <template v-slot:button>
+          <template #button>
             <button class="bg-white dark:bg-gray-700 px-3 py-2 rounded shadow font-medium text-gray-600 dark:text-gray-100 focus:outline-none transition duration-150">
               <font-awesome-icon icon="tags" />
             </button>
           </template>
 
-          <template v-slot:content>
+          <template #content>
             <div class="p-4 bg-white dark:bg-gray-700 text-black rounded">
               <vue-tags-input
                 v-model="tag"
@@ -136,8 +136,8 @@ import Vue from 'vue'
 import { mapState, mapGetters } from 'vuex'
 
 export default Vue.extend({
-  middleware: 'user',
   layout: 'dashboard',
+  middleware: 'user',
   data () {
     return {
       pagination: {
