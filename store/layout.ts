@@ -2,9 +2,9 @@ import { GetterTree, ActionTree, MutationTree } from 'vuex'
 
 export const state = () => ({
   isSidebarMenuOpen: false,
-  showCreateLinkModal: false,
   showCreateWorkspaceModal: false,
-  showAddMemberModal: false
+  showAddMemberModal: false,
+  showCreateLinkSlideover: false
 })
 
 export type RootState = ReturnType<typeof state>
@@ -17,14 +17,14 @@ export const mutations: MutationTree<RootState> = {
   TOGGLE_SIDEBAR_MENU: (state, status) => {
     state.isSidebarMenuOpen = status !== undefined ? status : !state.isSidebarMenuOpen
   },
-  TOGGLE_CREATE_LINK_MODAL: (state, status) => {
-    state.showCreateLinkModal = status !== undefined ? status : !state.showCreateLinkModal
-  },
   TOGGLE_CREATE_WORKSPACE_MODAL: (state, status) => {
     state.showCreateWorkspaceModal = status !== undefined ? status : !state.showCreateWorkspaceModal
   },
   TOGGLE_ADD_MEMBER_MODAL: (state, status) => {
     state.showAddMemberModal = status !== undefined ? status : !state.showAddMemberModal
+  },
+  TOGGLE_CREATE_LINK_SLIDEOVER: (state, status) => {
+    state.showCreateLinkSlideover = status !== undefined ? status : !state.showCreateLinkSlideover
   }
 }
 

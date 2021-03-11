@@ -82,7 +82,7 @@
 
         <!---------------------------------->
         <!-- add new link -->
-        <button class="flex items-center bg-indigo-500 hover:bg-indigo-600 px-3 py-2 rounded shadow text-sm font-medium text-white focus:outline-none transition duration-150" @click="$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', true)">
+        <button class="flex items-center bg-indigo-500 hover:bg-indigo-600 px-3 py-2 rounded shadow text-sm font-medium text-white focus:outline-none transition duration-150" @click="$store.commit('layout/TOGGLE_CREATE_LINK_SLIDEOVER', true)">
           <font-awesome-icon icon="plus" class="mr-1 text-xs" />
           <span>New</span>
         </button>
@@ -97,7 +97,7 @@
         <img src="@/assets/images/svg/undraw_empty.svg" class="my-10 w-80">
         <p class="text-gray-600 text-center">
           It looks like this workspace doesn't have any links yet.
-          You can start creating links by <span class="text-indigo-500 hover:underline cursor-pointer" @click="$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', true)">clicking here</span>.
+          You can start creating links by <span class="text-indigo-500 hover:underline cursor-pointer" @click="$store.commit('layout/TOGGLE_CREATE_LINK_SLIDEOVER', true)">clicking here</span>.
         </p>
       </div>
     </div>

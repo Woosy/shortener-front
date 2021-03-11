@@ -18,9 +18,10 @@
       <base-confirm-modal />
       <base-success-modal />
 
-      <create-link-modal />
       <create-workspace-modal />
       <add-member-modal />
+
+      <create-link-slideover />
     </div>
 
     <!--------------------------------------->

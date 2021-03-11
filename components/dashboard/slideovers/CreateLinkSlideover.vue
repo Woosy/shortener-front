@@ -1,36 +1,25 @@
 <template>
-  <modal
-    :showing="showCreateLinkModal"
-    @close="closeModal()"
+  <base-slideover
+    :showing="showCreateLinkSlideover"
+    title="CREATE LINK"
+    @close="close()"
   >
     <validation-observer v-slot="{ failed, handleSubmit }">
-      <form @submit.prevent="handleSubmit(submit)">
-        <!----------------------------------------------------->
-        <!-- Header -->
-        <!----------------------------------------------------->
-        <div class="bg-indigo-600 px-4 py-3 sm:px-6">
-          <h3 class="text-white uppercase font-medium">
-            Create link
-          </h3>
-        </div>
-
-        <!----------------------------------------------------->
-        <!-- Body / form -->
-        <!----------------------------------------------------->
-        <div class="bg-white p-5 sm:p-6">
-          <!--------------------------------------->
-          <!-- form -->
-          <div class="text-black">
+      <form class="h-full flex flex-col justify-between" @submit.prevent="handleSubmit(submit)">
+        <!--------------------------------------->
+        <!-- form -->
+        <div>
+          <div class="text-black dark:text-white">
             <!-- link domain -->
-            <div class="px-4 py-3 border border-gray-300 rounded">
+            <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
               <div class="flex justify-between items-center">
                 <p class="text-md">
                   short.link
                 </p>
 
                 <div class="flex items-center space-x-2">
-                  <div class="px-2 bg-gray-200 rounded">
-                    <p class="text-sm text-black">
+                  <div class="px-2 bg-gray-200 dark:bg-gray-600 rounded">
+                    <p class="text-sm">
                       Default
                     </p>
                   </div>
@@ -41,7 +30,7 @@
 
             <!-- link url -->
             <div class="mt-5">
-              <div class="px-4 py-3 border border-indigo-300 rounded bg-indigo-100">
+              <div class="px-4 py-3 border rounded  border-indigo-300 dark:border-gray-900  bg-indigo-100 dark:bg-gray-700">
                 <p class="text-sm font-medium uppercase mb-2">
                   Paste long URL
                 </p>
@@ -55,8 +44,7 @@
                     type="text"
                     name="url"
                     placeholder="https://www.example.org/some/very/long/url"
-                    class="w-full border-none bg-indigo-100 focus:outline-none"
-                    :class="{ 'border-red-300': errors[0] }"
+                    class="w-full border-none bg-indigo-100 dark:bg-gray-700 focus:outline-none"
                   >
 
                   <span v-show="errors[0]" class="inline-block w-auto text-red-500 text-sm mt-2">
@@ -68,11 +56,11 @@
 
             <collapse-transition>
               <div v-if="showMore">
-                <hr class="mt-5">
+                <hr class="mt-5 h-px border-none bg-gray-300 dark:bg-gray-700">
 
                 <!-- title -->
                 <div class="mt-5">
-                  <div class="px-4 py-3 border border-gray-300 rounded">
+                  <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
                     <p class="text-sm font-medium uppercase mb-2">
                       Title
                     </p>
@@ -87,8 +75,7 @@
                           type="text"
                           name="totme"
                           placeholder="Untitled"
-                          class="w-full border-none focus:outline-none"
-                          :class="{ 'border-red-300': errors[0] }"
+                          class="w-full border-none dark:bg-gray-800 focus:outline-none"
                         >
                       </div>
                       <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 mt-2">
@@ -100,7 +87,7 @@
 
                 <!-- key -->
                 <div class="mt-5">
-                  <div class="px-4 py-3 border border-gray-300 rounded">
+                  <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
                     <p class="text-sm font-medium uppercase mb-2">
                       Customize key
                     </p>
@@ -110,7 +97,7 @@
                       rules="min:1|max:512"
                     >
                       <div class="w-full flex items-center text-sm sm:text-base text-center">
-                        <span class="text-black">
+                        <span class="text-black dark:text-gray-500">
                           {{ apiUrl }}/
                         </span>
 
@@ -119,8 +106,7 @@
                           type="text"
                           name="key"
                           placeholder="custom-key"
-                          class="w-full border-none focus:outline-none"
-                          :class="{ 'border-red-300': errors[0] }"
+                          class="w-full border-none dark:bg-gray-800 focus:outline-none"
                         >
                       </div>
                       <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 mt-2">
@@ -132,7 +118,7 @@
 
                 <!-- tags -->
                 <div class="mt-5">
-                  <div class="px-4 py-3 border border-gray-300 rounded">
+                  <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
                     <p class="text-sm font-medium uppercase mb-2">
                       TAGS
                     </p>
@@ -149,59 +135,49 @@
                 </div>
               </div>
             </collapse-transition>
-
-            <div class="mt-5 text-right">
-              <button
-                type="button"
-                class="text-indigo-500 hover:underline text-xs cursor-pointer focus:outline-none"
-                @click="showMore = !showMore"
-              >
-                {{ showMore ? 'Less' : 'More' }} options
-              </button>
-            </div>
           </div>
 
-          <!--------------------------------------->
-          <!-- alert -->
-          <base-alert
-            v-if="error"
-            type="error"
-            :text="error"
-            dismissible
-            @close="error = ''"
-          />
+          <div class="mb-5 text-right">
+            <button
+              type="button"
+              class="text-indigo-500 dark:text-indigo-300 hover:underline text-xs cursor-pointer focus:outline-none"
+              @click="showMore = !showMore"
+            >
+              {{ showMore ? 'Less' : 'More' }} options
+            </button>
+          </div>
         </div>
+
+        <!--------------------------------------->
+        <!-- alert -->
+        <base-alert
+          v-if="error"
+          type="error"
+          :text="error"
+          dismissible
+          @close="error = ''"
+        />
 
         <!----------------------------------------------------->
         <!-- Bottom (buttons) -->
         <!----------------------------------------------------->
-        <div class="bg-gray-100 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <span class="flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
-            <button
-              type="button"
-              class="inline-flex justify-center w-full rounded-md border border-gray-400 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-6"
-              @click="closeModal()"
-            >
-              Cancel
-            </button>
-
-            <button
-              :disabled="failed || isLoading"
-              type="submit"
-              class="ml-3 inline-flex justify-center items-center w-full rounded-md px-4 py-2 text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-6"
-              :class="{
-                'bg-indigo-300 cursor-not-allowed': failed || isLoading,
-                'bg-indigo-500 hover:bg-indigo-600 transition duration-150': !failed && !isLoading
-              }"
-            >
-              <font-awesome-icon v-show="isLoading" icon="circle-notch" class="fa-spin mr-2" />
-              Create
-            </button>
-          </span>
+        <div class="flex flex-row-reverse pb-5">
+          <button
+            :disabled="failed || isLoading"
+            type="submit"
+            class="inline-flex justify-center items-center w-full rounded-md px-4 py-2 text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-6"
+            :class="{
+              'bg-indigo-300 cursor-not-allowed': failed || isLoading,
+              'bg-indigo-500 hover:bg-indigo-600 transition duration-150': !failed && !isLoading
+            }"
+          >
+            <font-awesome-icon v-show="isLoading" icon="circle-notch" class="fa-spin mr-2" />
+            Create
+          </button>
         </div>
       </form>
     </validation-observer>
-  </modal>
+  </base-slideover>
 </template>
 
 <script lang="ts">
@@ -226,7 +202,7 @@ export default Vue.extend({
   },
   computed: {
     ...mapState('layout', [
-      'showCreateLinkModal'
+      'showCreateLinkSlideover'
     ]),
     ...mapGetters('workspaces', [
       'currentWorkspace'
@@ -241,36 +217,36 @@ export default Vue.extend({
     }
   },
   methods: {
-    closeModal () {
+    close () {
       this.error = ''
       this.form = { tag: '' }
-      this.$store.commit('layout/TOGGLE_CREATE_LINK_MODAL', false)
+      this.$store.commit('layout/TOGGLE_CREATE_LINK_SLIDEOVER', false)
     },
     submit () {
       this.isLoading = true
       this.$store.dispatch('links/create', { ...this.form, workspaceId: this.currentWorkspace.id })
-        .then((link) => {
+        .then(() => {
           this.$toasted.global.success({ message: 'Link successfully created!' })
-          this.closeModal()
-          setTimeout(() => {
-            this.$success({
-              title: 'Link successfully created!',
-              message: 'Your link has successfully been created.',
-              buttons: {
-                confirm: 'Copy'
-              },
-              callback: (confirm) => {
-                if (!confirm) { return }
+          this.close()
+          // setTimeout(() => {
+          //   this.$success({
+          //     title: 'Link successfully created!',
+          //     message: 'Your link has successfully been created.',
+          //     buttons: {
+          //       confirm: 'Copy'
+          //     },
+          //     callback: (confirm) => {
+          //       if (!confirm) { return }
 
-                navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
-                  .then(() => {
-                    this.$toasted.global.success({ message: 'Link copied to clipboard!' })
-                  }, () => {
-                    this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
-                  })
-              }
-            })
-          }, 200)
+          //       navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
+          //         .then(() => {
+          //           this.$toasted.global.success({ message: 'Link copied to clipboard!' })
+          //         }, () => {
+          //           this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
+          //         })
+          //     }
+          //   })
+          // }, 200)
         })
         .catch((err) => {
           this.error = err.response.data.code || err.response.data.errors[0].message
