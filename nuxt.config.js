@@ -136,7 +136,7 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-    vendor: ['@johmun/vue-tags-input'],
+    // vendor: ['@johmun/vue-tags-input'],
     transpile: [
       'vee-validate/dist/rules'
     ]
