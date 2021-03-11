@@ -65,7 +65,7 @@
     <!----------------------------------->
     <!-- statistics -->
     <!----------------------------------->
-    <div class="hidden xl:block p-5 xl:w-full">
+    <div class="hidden xl:block xl:p-5 xl:w-full">
       <!----------------------------------->
       <!-- placeholder: no selected link -->
       <!----------------------------------->
@@ -202,13 +202,13 @@ export default Vue.extend({
       const categories = [] as any[]
 
       this.current.clicks.forEach((click) => {
-        const date = this.$dateFns.format(click.created_at, 'dd-MM-yyyy')
+        const date = this.$dateFns.format(click.created_at, 'MM-dd-yyyy')
         if (!categories.includes(date)) { categories.push(date) }
       })
 
       return {
-        chart: { id: 'linkkk-clicks' },
-        xaxis: { categories }
+        chart: { id: 'linkkk-clicks', zoom: { enabled: true } },
+        xaxis: { type: 'datetime', categories, tickPlacement: 'on' }
       }
     },
     series (): any {
@@ -216,7 +216,7 @@ export default Vue.extend({
       const dates = [] as any[]
 
       this.current.clicks.forEach((click) => {
-        const date = this.$dateFns.format(click.created_at, 'dd-MM-yyyy')
+        const date = this.$dateFns.format(click.created_at, 'MM-dd-yyyy')
         const indexOf = dates.findIndex(el => el === date)
 
         indexOf === -1
