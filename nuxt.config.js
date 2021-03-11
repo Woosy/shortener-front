@@ -110,7 +110,7 @@ export default {
         'faInfoCircle', 'faExclamationTriangle', 'faCaretUp', 'faCaretDown', 'faGripLines',
         'faMouse', 'faUserSlash', 'faMoon', 'faCheck', 'faFilter', 'faSearch', 'faTrash',
         'faClipboard', 'faChevronLeft', 'faChevronRight', 'faChevronDown', 'faTags',
-        'faSort', 'faSortUp', 'faSortDown'],
+        'faSort', 'faSortUp', 'faSortDown', 'faEdit'],
       brands: ['faGithub', 'faGoogle']
     }
   },

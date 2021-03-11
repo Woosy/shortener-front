@@ -165,24 +165,32 @@
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 <div class="flex space-x-2 ">
                   <button
-                    title="Copy link"
-                    class="flex items-center justify-center h-6 w-10 border border-indigo-600 bg-white dark:bg-gray-800 hover:bg-indigo-600 dark-hover:bg-indigo-600 text-indigo-600 hover:text-white rounded transition duration-200 focus:outline-none"
-                    @click="copyLink(link)"
-                  >
-                    <font-awesome-icon icon="clipboard" />
-                  </button>
-
-                  <button
-                    title="Copy link"
-                    class="flex items-center justify-center h-6 w-10 border border-gray-500 bg-white dark:bg-gray-800 hover:bg-gray-500 text-gray-600 hover:text-white rounded transition duration-200 focus:outline-none"
+                    title="Link's stats"
+                    class="flex items-center justify-center h-6 w-10 border border-indigo-400 bg-white dark:bg-gray-800 hover:bg-indigo-400 dark-hover:bg-indigo-400 text-indigo-400 hover:text-white rounded transition duration-200 focus:outline-none"
                     @click="gotoLinkStatistics(link)"
                   >
                     <font-awesome-icon icon="chart-line" />
                   </button>
 
                   <button
+                    title="Copy link"
+                    class="flex items-center justify-center h-6 w-10 border border-indigo-400 bg-white dark:bg-gray-800 hover:bg-indigo-400 dark-hover:bg-indigo-400 text-indigo-400 hover:text-white rounded transition duration-200 focus:outline-none"
+                    @click="copyLink(link)"
+                  >
+                    <font-awesome-icon icon="clipboard" />
+                  </button>
+
+                  <button
+                    title="Edit link"
+                    class="flex items-center justify-center h-6 w-10 border border-indigo-400 bg-white dark:bg-gray-800 hover:bg-indigo-400 dark-hover:bg-indigo-400 text-indigo-400 hover:text-white rounded transition duration-200 focus:outline-none"
+                    @click="editLink()"
+                  >
+                    <font-awesome-icon icon="edit" />
+                  </button>
+
+                  <button
                     title="Delete link"
-                    class="flex items-center justify-center h-6 w-10 border border-red-600 bg-white dark:bg-gray-800 hover:bg-red-600 dark-hover:bg-red-600 text-red-600 hover:text-white rounded transition duration-200 focus:outline-none"
+                    class="flex items-center justify-center h-6 w-10 border border-indigo-400 bg-white dark:bg-gray-800 hover:bg-indigo-400 dark-hover:bg-indigo-400 text-indigo-400 hover:text-white rounded transition duration-200 focus:outline-none"
                     @click="deleteLink(link.id)"
                   >
                     <font-awesome-icon icon="trash" />
@@ -297,6 +305,9 @@ export default Vue.extend({
         }, () => {
           this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
         })
+    },
+    editLink () {
+      this.$store.commit('layout/TOGGLE_EDIT_LINK_SLIDEOVER', true)
     },
     deleteLink (linkId: number) {
       this.$confirm({
