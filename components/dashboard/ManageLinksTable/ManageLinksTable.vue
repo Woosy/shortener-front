@@ -183,7 +183,7 @@
                   <button
                     title="Delete link"
                     class="flex items-center justify-center h-6 w-10 border border-red-600 bg-white dark:bg-gray-800 hover:bg-red-600 dark-hover:bg-red-600 text-red-600 hover:text-white rounded transition duration-200 focus:outline-none"
-                    @click="deleteLink(link)"
+                    @click="deleteLink(link.id)"
                   >
                     <font-awesome-icon icon="trash" />
                   </button>
@@ -298,7 +298,7 @@ export default Vue.extend({
           this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
         })
     },
-    deleteLink (link) {
+    deleteLink (linkId: number) {
       this.$confirm({
         title: 'Are you sure?',
         message: 'All clicks associated to this link will also be deleted and removed from your statistics.',
@@ -309,7 +309,7 @@ export default Vue.extend({
         callback: (confirm) => {
           if (!confirm) { return }
 
-          this.$store.dispatch('links/removeLink', link.id)
+          this.$store.dispatch('links/removeLink', linkId)
             .then(() => {
               this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
             }).catch((err) => {

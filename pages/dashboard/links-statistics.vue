@@ -126,13 +126,17 @@
 
               <div>
                 <span class="text-xs text-indigo-500 ">
-                  <!-- TODO: implement -->
-                  <button class="px-2 py-px border border-indigo-500 rounded transition duration-200 focus:outline-none">
+                  <button
+                    class="px-2 py-px border border-indigo-500 hover:bg-indigo-500 hover:text-white rounded transition duration-200 focus:outline-none"
+                    @click="copyLink(current)"
+                  >
                     COPY
                   </button>
 
-                  <!-- TODO: implement -->
-                  <button class="px-2 py-px border border-indigo-500 rounded transition duration-200 focus:outline-none">
+                  <button
+                    class="px-2 py-px border border-indigo-500 hover:bg-indigo-500 hover:text-white rounded transition duration-200 focus:outline-none"
+                    @click="deleteLink(current.id)"
+                  >
                     DELETE
                   </button>
                 </span>
@@ -260,6 +264,34 @@ export default Vue.extend({
       this.selected = link.id
       const url = location.origin + this.$route.path
       history.replaceState({}, '', `${url}?selected=${link.id}`)
+    },
+    copyLink (link) {
+      navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
+        .then(() => {
+          this.$toasted.global.success({ message: 'Link copied to clipboard!' })
+        }, () => {
+          this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
+        })
+    },
+    deleteLink (linkId: number) {
+      this.$confirm({
+        title: 'Are you sure?',
+        message: 'All clicks associated to this link will also be deleted and removed from your statistics.',
+        buttons: {
+          confirm: 'Confirm',
+          cancel: 'Cancel'
+        },
+        callback: (confirm) => {
+          if (!confirm) { return }
+
+          this.$store.dispatch('links/removeLink', linkId)
+            .then(() => {
+              this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
+            }).catch((err) => {
+              this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+            })
+        }
+      })
     }
   }
 })
