@@ -32,10 +32,8 @@ export default Vue.extend({
   watch: {
     showing (value) {
       value
-        // @ts-ignore
-        ? document.querySelector('body').classList.add('overflow-hidden')
-        // @ts-ignore
-        : document.querySelector('body').classList.remove('overflow-hidden')
+        ? document.querySelector('body')?.classList.add('overflow-hidden')
+        : document.querySelector('body')?.classList.remove('overflow-hidden')
     }
   },
   mounted () {
