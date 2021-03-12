@@ -4,7 +4,8 @@ export const state = () => ({
   isSidebarMenuOpen: false,
   showCreateWorkspaceModal: false,
   showAddMemberModal: false,
-  showCreateLinkSlideover: false
+  showCreateLinkSlideover: false,
+  showEditLinkSlideover: false
 })
 
 export type RootState = ReturnType<typeof state>
@@ -25,6 +26,9 @@ export const mutations: MutationTree<RootState> = {
   },
   TOGGLE_CREATE_LINK_SLIDEOVER: (state, status) => {
     state.showCreateLinkSlideover = status !== undefined ? status : !state.showCreateLinkSlideover
+  },
+  TOGGLE_EDIT_LINK_SLIDEOVER: (state, status) => {
+    state.showEditLinkSlideover = status !== undefined ? status : !state.showEditLinkSlideover
   }
 }
 
