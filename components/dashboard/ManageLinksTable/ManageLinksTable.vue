@@ -183,7 +183,7 @@
                   <button
                     title="Edit link"
                     class="flex items-center justify-center h-6 w-10 border border-indigo-400 bg-white dark:bg-gray-800 hover:bg-indigo-400 dark-hover:bg-indigo-400 text-indigo-400 hover:text-white rounded transition duration-200 focus:outline-none"
-                    @click="editLink()"
+                    @click="editLink(link)"
                   >
                     <font-awesome-icon icon="edit" />
                   </button>
@@ -306,8 +306,9 @@ export default Vue.extend({
           this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
         })
     },
-    editLink () {
+    editLink (link) {
       this.$store.commit('layout/TOGGLE_EDIT_LINK_SLIDEOVER', true)
+      this.$store.commit('links/SET_LINK_TO_EDIT', link)
     },
     deleteLink (linkId: number) {
       this.$confirm({

@@ -10,122 +10,126 @@
         <!-- form -->
         <div>
           <div class="text-black dark:text-white">
-            <!-- link url -->
-            <div class="px-4 py-3 border rounded  border-indigo-300 dark:border-gray-900  bg-indigo-100 dark:bg-gray-700">
-              <p class="text-sm font-medium uppercase mb-2">
-                URL
-              </p>
-              <validation-provider
-                v-slot="{ errors }"
-                name="url"
-                rules="required|url|min:5|max:512"
-              >
-                <input
-                  v-model="form.url"
-                  disabled
-                  type="text"
-                  name="url"
-                  placeholder="https://www.example.org/some/very/long/url"
-                  class="w-full border-none bg-indigo-100 dark:bg-gray-700 focus:outline-none"
-                >
+            <!---------------------------------------->
+            <!-- top part: url & actions ------------->
+            <!---------------------------------------->
+            <div class="px-4 pb-5 border-b border-gray-300 dark:border-gray-700">
+              <div>
+                <p class="text-sm font-medium text-indigo-500 dark:text-indigo-200">
+                  linkkk.to/<span class="font-semibold">{{ linkToEdit.key }}</span>
+                </p>
 
-                <span v-show="errors[0]" class="inline-block w-auto text-red-500 text-sm mt-2">
-                  {{ errors[0] }}.
+                <p class="text-xs text-indigo-300 dark:text-indigo-400">
+                  {{ linkToEdit.long_url }}
+                </p>
+              </div>
+
+              <div class="mt-3">
+                <span class="text-xs text-indigo-500">
+                  <button
+                    class="px-2 py-px border border-indigo-500 hover:bg-indigo-500 hover:text-white rounded transition duration-200 focus:outline-none"
+                    @click="copyLink(linkToEdit)"
+                  >
+                    COPY
+                  </button>
+
+                  <button
+                    class="px-2 py-px border border-indigo-500 hover:bg-indigo-500 hover:text-white rounded transition duration-200 focus:outline-none"
+                    @click="deleteLink(linkToEdit.id)"
+                  >
+                    DELETE
+                  </button>
                 </span>
-              </validation-provider>
+              </div>
             </div>
 
-            <collapse-transition>
-              <div v-if="showMore">
-                <hr class="mt-5 h-px border-none bg-gray-300 dark:bg-gray-700">
+            <!---------------------------------------->
+            <!-- body part: title & tags ------------->
+            <!---------------------------------------->
+            <div>
+              <!-- date -->
+              <div class="mt-5">
+                <p class="text-xs text-gray-500">
+                  CREATED {{ $dateFns.format(linkToEdit.created_at, 'MMM d, H:mm').toUpperCase() }}
+                </p>
+              </div>
 
-                <!-- title -->
-                <div class="mt-5">
-                  <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
-                    <p class="text-sm font-medium uppercase mb-2">
-                      Title
-                    </p>
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="title"
-                      rules="min:1|max:64"
-                    >
-                      <div class="w-full flex items-center text-sm sm:text-base text-center">
-                        <input
-                          v-model="form.title"
-                          type="text"
-                          name="totme"
-                          placeholder="Untitled"
-                          class="w-full border-none dark:bg-gray-800 focus:outline-none"
-                        >
-                      </div>
-                      <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 mt-2">
-                        {{ errors[0] }}.
-                      </span>
-                    </validation-provider>
-                  </div>
-                </div>
-
-                <!-- key -->
-                <div class="mt-5">
-                  <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
-                    <p class="text-sm font-medium uppercase mb-2">
-                      Customize key
-                    </p>
-                    <validation-provider
-                      v-slot="{ errors }"
-                      name="key"
-                      rules="min:1|max:512"
-                    >
-                      <div class="w-full flex items-center text-sm sm:text-base text-center">
-                        <span class="text-black dark:text-gray-500">
-                          {{ apiUrl }}/
-                        </span>
-
-                        <input
-                          v-model="form.key"
-                          type="text"
-                          name="key"
-                          placeholder="custom-key"
-                          class="w-full border-none dark:bg-gray-800 focus:outline-none"
-                        >
-                      </div>
-                      <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 mt-2">
-                        {{ errors[0] }}.
-                      </span>
-                    </validation-provider>
-                  </div>
-                </div>
-
-                <!-- tags -->
-                <div class="mt-5">
-                  <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
-                    <p class="text-sm font-medium uppercase mb-2">
-                      TAGS
-                    </p>
-
+              <!-- title -->
+              <div class="mt-3">
+                <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
+                  <p class="text-sm font-medium uppercase mb-2">
+                    Title
+                  </p>
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="title"
+                    rules="min:1|max:64"
+                  >
                     <div class="w-full flex items-center text-sm sm:text-base text-center">
-                      <vue-tags-input
-                        v-model="tag"
-                        :tags="form.tags"
-                        :autocomplete-items="filteredTags"
-                        @tags-changed="newTags => form.tags = newTags"
-                      />
+                      <input
+                        v-model="linkToEdit.title"
+                        type="text"
+                        name="totme"
+                        placeholder="Untitled"
+                        class="w-full border-none dark:bg-gray-800 focus:outline-none"
+                      >
                     </div>
+                    <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 mt-2">
+                      {{ errors[0] }}.
+                    </span>
+                  </validation-provider>
+                </div>
+              </div>
+
+              <!-- key -->
+              <div class="mt-5">
+                <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
+                  <p class="text-sm font-medium uppercase mb-2">
+                    Customize key
+                  </p>
+                  <validation-provider
+                    v-slot="{ errors }"
+                    name="key"
+                    rules="min:1|max:512"
+                  >
+                    <div class="w-full flex items-center text-sm sm:text-base text-center">
+                      <span class="text-black dark:text-gray-500">
+                        {{ apiUrl }}/
+                      </span>
+
+                      <input
+                        v-model="linkToEdit.key"
+                        type="text"
+                        name="key"
+                        placeholder="custom-key"
+                        class="w-full border-none dark:bg-gray-800 focus:outline-none"
+                      >
+                    </div>
+                    <span v-show="errors[0]" class="inline-block w-auto text-sm text-red-500 mt-2">
+                      {{ errors[0] }}.
+                    </span>
+                  </validation-provider>
+                </div>
+              </div>
+
+              <!-- tags -->
+              <div class="mt-5">
+                <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
+                  <p class="text-sm font-medium uppercase mb-2">
+                    TAGS
+                  </p>
+
+                  <div class="w-full flex items-center text-sm sm:text-base text-center">
+                    <vue-tags-input
+                      v-model="tag"
+                      :tags="linkToEdit.tags"
+                      :autocomplete-items="filteredTags"
+                      @tags-changed="newTags => linkToEdit.tags = newTags"
+                    />
                   </div>
                 </div>
               </div>
-            </collapse-transition>
-          </div>
-
-          <div class="mb-5 text-right">
-            <button
-              type="button"
-              class="text-indigo-500 dark:text-indigo-300 hover:underline text-xs cursor-pointer focus:outline-none"
-              @click="showMore = !showMore"
-            >
-              {{ showMore ? 'Less' : 'More' }} options
-            </button>
+            </div>
           </div>
         </div>
 
@@ -185,11 +189,14 @@ export default Vue.extend({
     ...mapState('layout', [
       'showEditLinkSlideover'
     ]),
-    ...mapGetters('workspaces', [
-      'currentWorkspace'
+    ...mapState('links', [
+      'linkToEdit'
     ]),
     ...mapGetters('links', [
       'tagsList'
+    ]),
+    ...mapGetters('workspaces', [
+      'currentWorkspace'
     ]),
     filteredTags (): any[] {
       return this.tagsList.filter((i) => {
@@ -204,36 +211,46 @@ export default Vue.extend({
     },
     submit () {
       this.isLoading = true
-      this.$store.dispatch('links/create', { ...this.form, workspaceId: this.currentWorkspace.id })
+      alert('save edit')
+      // this.$store.dispatch('links/edit', { ...this.form, workspaceId: this.currentWorkspace.id })
+      //   .then(() => {
+      //     this.$toasted.global.success({ message: 'Link successfully created!' })
+      //     // this.close()
+      //   })
+      //   .catch((err) => {
+      //     this.error = err.response.data.code || err.response.data.errors[0].message
+      //   })
+      //   .finally(() => {
+      //     this.isLoading = false
+      //   })
+    },
+    copyLink (link) {
+      navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
         .then(() => {
-          this.$toasted.global.success({ message: 'Link successfully created!' })
-          this.close()
-          // setTimeout(() => {
-          //   this.$success({
-          //     title: 'Link successfully created!',
-          //     message: 'Your link has successfully been created.',
-          //     buttons: {
-          //       confirm: 'Copy'
-          //     },
-          //     callback: (confirm) => {
-          //       if (!confirm) { return }
+          this.$toasted.global.success({ message: 'Link copied to clipboard!' })
+        }, () => {
+          this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
+        })
+    },
+    deleteLink (linkId: number) {
+      this.$confirm({
+        title: 'Are you sure?',
+        message: 'All clicks associated to this link will also be deleted and removed from your statistics.',
+        buttons: {
+          confirm: 'Confirm',
+          cancel: 'Cancel'
+        },
+        callback: (confirm) => {
+          if (!confirm) { return }
 
-          //       navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
-          //         .then(() => {
-          //           this.$toasted.global.success({ message: 'Link copied to clipboard!' })
-          //         }, () => {
-          //           this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
-          //         })
-          //     }
-          //   })
-          // }, 200)
-        })
-        .catch((err) => {
-          this.error = err.response.data.code || err.response.data.errors[0].message
-        })
-        .finally(() => {
-          this.isLoading = false
-        })
+          this.$store.dispatch('links/removeLink', linkId)
+            .then(() => {
+              this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
+            }).catch((err) => {
+              this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+            })
+        }
+      })
     }
   }
 })

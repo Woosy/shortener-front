@@ -2,7 +2,8 @@ import { GetterTree, ActionTree, MutationTree } from 'vuex'
 
 export const state = () => ({
   links: [] as object[],
-  clicks: [] as object[]
+  clicks: [] as object[],
+  linkToEdit: {}
 })
 
 export type RootState = ReturnType<typeof state>
@@ -42,6 +43,9 @@ export const mutations: MutationTree<RootState> = {
   },
   SET_CLICKS: (state, payload) => {
     state.clicks = payload
+  },
+  SET_LINK_TO_EDIT: (state, link) => {
+    state.linkToEdit = link
   }
 }
 
