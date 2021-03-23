@@ -11,5 +11,3 @@ RUN npm install
 
 # bundle all source code
 COPY . . 
-
-EXPOSE 3000
