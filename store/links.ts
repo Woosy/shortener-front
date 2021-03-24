@@ -38,6 +38,10 @@ export const mutations: MutationTree<RootState> = {
   REMOVE_LINK: (state, linkId) => {
     state.links = state.links.filter((link: any) => link.id !== linkId)
   },
+  EDIT_LINK: (state, link) => {
+    const index = state.links.findIndex((e: any) => e.id === link.id)
+    state.links[index] = link
+  },
   SET_LINKS: (state, payload) => {
     state.links = payload
   },
@@ -59,5 +63,10 @@ export const actions: ActionTree<RootState, RootState> = {
   async removeLink ({ commit }, linkId) {
     await this.$axios.$delete(`/links/${linkId}`)
     commit('REMOVE_LINK', linkId)
+  },
+
+  async edit ({ commit }, data) {
+    const link = await this.$axios.$put('/links', data)
+    commit('EDIT_LINK', link)
   }
 }

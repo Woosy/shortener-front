@@ -67,7 +67,7 @@
                   >
                     <div class="w-full flex items-center text-sm sm:text-base text-center">
                       <input
-                        v-model="linkToEdit.title"
+                        v-model="form.title"
                         type="text"
                         name="totme"
                         placeholder="Untitled"
@@ -98,7 +98,7 @@
                       </span>
 
                       <input
-                        v-model="linkToEdit.key"
+                        v-model="form.key"
                         type="text"
                         name="key"
                         placeholder="custom-key"
@@ -113,7 +113,7 @@
               </div>
 
               <!-- tags -->
-              <div class="mt-5">
+              <!-- <div class="mt-5">
                 <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
                   <p class="text-sm font-medium uppercase mb-2">
                     TAGS
@@ -128,7 +128,7 @@
                     />
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -146,7 +146,7 @@
         <!----------------------------------------------------->
         <!-- Bottom (buttons) -->
         <!----------------------------------------------------->
-        <div class="flex flex-row-reverse pb-5">
+        <div class="flex flex-row-reverse pb-5 mt-5">
           <button
             :disabled="failed || isLoading"
             type="submit"
@@ -204,6 +204,11 @@ export default Vue.extend({
       })
     }
   },
+  watch: {
+    linkToEdit () {
+      this.form = { ...this.linkToEdit }
+    }
+  },
   methods: {
     close () {
       this.error = ''
@@ -211,18 +216,17 @@ export default Vue.extend({
     },
     submit () {
       this.isLoading = true
-      alert('save edit')
-      // this.$store.dispatch('links/edit', { ...this.form, workspaceId: this.currentWorkspace.id })
-      //   .then(() => {
-      //     this.$toasted.global.success({ message: 'Link successfully created!' })
-      //     // this.close()
-      //   })
-      //   .catch((err) => {
-      //     this.error = err.response.data.code || err.response.data.errors[0].message
-      //   })
-      //   .finally(() => {
-      //     this.isLoading = false
-      //   })
+      this.$store.dispatch('links/edit', { ...this.form, workspaceId: this.currentWorkspace.id })
+        .then(() => {
+          this.$toasted.global.success({ message: 'Link successfully modified!' })
+          this.close()
+        })
+        .catch((err) => {
+          this.error = err.response.data.code || err.response.data.errors[0].message
+        })
+        .finally(() => {
+          this.isLoading = false
+        })
     },
     copyLink (link) {
       navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
