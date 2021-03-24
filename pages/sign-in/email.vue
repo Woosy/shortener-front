@@ -58,9 +58,15 @@
         </div>
 
         <button
-          class="mt-6 text-white bg-indigo-500 rounded-lg my-2 py-2 px-10 sm:px-32 focus:outline-none"
+          :disabled="isLoading"
+          class="mt-6 text-white rounded-lg my-2 py-2 px-10 sm:px-32 focus:outline-none"
           type="submit"
+          :class="{
+            'bg-indigo-300 cursor-not-allowed': isLoading,
+            'bg-indigo-500 hover:bg-indigo-600 transition duration-150': !isLoading
+          }"
         >
+          <font-awesome-icon v-show="isLoading" icon="circle-notch" class="fa-spin mr-2" />
           Sign-in
         </button>
       </form>
@@ -75,6 +81,7 @@ export default Vue.extend({
   middleware: 'guest',
   data () {
     return {
+      isLoading: false,
       loginForm: {
         email: '',
         password: '',
@@ -84,6 +91,7 @@ export default Vue.extend({
   },
   methods: {
     submitLoginForm () {
+      this.isLoading = true
       this.$auth.loginWith('local', { data: this.loginForm })
         .then((res) => {
           this.$toast.global.success({ message: 'Successfully authenticated!' })
@@ -93,8 +101,10 @@ export default Vue.extend({
             : this.$router.push('/dashboard')
         })
         .catch((err) => {
-          // this.$toast.global.error({ message: 'Authentication failed!' })
           this.$toast.global.error({ message: err?.response?.data?.errors[0]?.message })
+        })
+        .finally(() => {
+          this.isLoading = false
         })
     }
   }
