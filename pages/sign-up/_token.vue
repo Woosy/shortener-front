@@ -46,7 +46,7 @@ export default {
         this.success = res.data.message
       })
       .catch((err) => {
-        this.error = err.response.data?.message || err.response.data.errors[0]?.message
+        this.error = err.response.data.message || err.response.data.errors[0].message
       })
       .finally(() => { this.loading = false })
   }

@@ -55,8 +55,8 @@ export default {
   watch: {
     showing (value) {
       value
-        ? document.querySelector('body')?.classList.add('overflow-hidden')
-        : document.querySelector('body')?.classList.remove('overflow-hidden')
+        ? document.querySelector('body').classList.add('overflow-hidden')
+        : document.querySelector('body').classList.remove('overflow-hidden')
 
       if (!this.showing) { return }
 

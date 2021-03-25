@@ -257,7 +257,7 @@ export default {
         width: parent.clientWidth
       }
 
-      const childRect = child?.getBoundingClientRect()
+      const childRect = child.getBoundingClientRect()
       const isChildViewable = (childRect.top >= parentRect.top) && (childRect.top <= parentRect.top + parentViewableArea.height)
 
       if (!isChildViewable) {
