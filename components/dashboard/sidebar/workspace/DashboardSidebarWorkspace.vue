@@ -32,11 +32,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapState } from 'vuex'
 
-export default Vue.extend({
+export default {
   data () {
     return {
       showWorkspaceCreateModal: false
@@ -70,5 +69,5 @@ export default Vue.extend({
         })
     }
   }
-})
+}
 </script>

@@ -82,11 +82,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapGetters } from 'vuex'
 
-export default Vue.extend({
+export default {
   computed: {
     ...mapGetters('workspaces', [
       'currentWorkspace',
@@ -113,11 +112,11 @@ export default Vue.extend({
           }).then(() => {
             this.$toasted.global.success({ message: `Sucessfully removed ${member.username} from the workspace!` })
           }).catch((err) => {
-            this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+            this.$toasted.global.error({ message: err.response.data.errors[0].message })
           })
         }
       })
     }
   }
-})
+}
 </script>

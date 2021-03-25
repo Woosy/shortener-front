@@ -30,13 +30,13 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    { src: '~/plugins/directives.ts', ssr: false },
-    { src: '~/plugins/vee-validate.ts', ssr: false },
-    { src: '~/plugins/global-toasts.ts', ssr: false },
-    { src: '~/plugins/base-confirm-modal.ts', ssr: false },
-    { src: '~/plugins/base-success-modal.ts', ssr: false },
-    { src: '~/plugins/vue-tags-input.ts', ssr: false },
-    { src: '~/plugins/vue-apexcharts.ts', ssr: false }
+    { src: '~/plugins/directives.js', ssr: false },
+    { src: '~/plugins/vee-validate.js', ssr: false },
+    { src: '~/plugins/global-toasts.js', ssr: false },
+    { src: '~/plugins/base-confirm-modal.js', ssr: false },
+    { src: '~/plugins/base-success-modal.js', ssr: false },
+    { src: '~/plugins/vue-tags-input.js', ssr: false },
+    { src: '~/plugins/vue-apexcharts.js', ssr: false }
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -47,8 +47,6 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     // https://github.com/nuxt-community/fontawesome-module
@@ -139,7 +137,12 @@ export default {
     // vendor: ['@johmun/vue-tags-input'],
     transpile: [
       'vee-validate/dist/rules'
-    ]
+    ],
+    babel: {
+      plugins: [
+        '@babel/plugin-proposal-optional-chaining'
+      ]
+    }
   },
   env: {
     API_URL: process.env.API_URL

@@ -48,15 +48,14 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapState } from 'vuex'
 
-export default Vue.extend({
+export default {
   computed: {
     ...mapState('layout', [
       'isSidebarMenuOpen'
     ])
   }
-})
+}
 </script>

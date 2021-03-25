@@ -48,10 +48,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   props: {
     icon: {
       type: String,
@@ -95,5 +93,5 @@ export default Vue.extend({
       }
     }
   }
-})
+}
 </script>

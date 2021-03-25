@@ -90,10 +90,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   methods: {
     toggleSidebarMenu () {
       this.$store.commit('layout/TOGGLE_SIDEBAR_MENU')
@@ -109,5 +107,5 @@ export default Vue.extend({
         })
     }
   }
-})
+}
 </script>

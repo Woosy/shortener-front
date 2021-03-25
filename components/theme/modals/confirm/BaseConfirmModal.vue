@@ -43,10 +43,9 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { baseConfirmModalEvents } from './baseConfirmModalEvents'
 
-export default Vue.extend({
+export default {
   data () {
     return {
       show: false,
@@ -104,5 +103,5 @@ export default Vue.extend({
       })
     }
   }
-})
+}
 </script>

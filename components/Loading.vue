@@ -14,10 +14,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   data () {
     return {
       loading: false
@@ -31,7 +29,7 @@ export default Vue.extend({
       this.loading = false
     }
   }
-})
+}
 </script>
 
 <style>

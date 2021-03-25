@@ -180,12 +180,11 @@
   </base-slideover>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapState, mapGetters } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
-export default Vue.extend({
+export default {
   components: {
     ValidationObserver,
     ValidationProvider
@@ -210,7 +209,7 @@ export default Vue.extend({
     ...mapGetters('links', [
       'tagsList'
     ]),
-    filteredTags (): any[] {
+    filteredTags () {
       return this.tagsList.filter((i) => {
         return i.text.toLowerCase().includes(this.tag.toLowerCase())
       })
@@ -256,5 +255,5 @@ export default Vue.extend({
         })
     }
   }
-})
+}
 </script>

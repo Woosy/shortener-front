@@ -35,10 +35,8 @@
   </transition>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   props: {
     showing: {
       type: Boolean,
@@ -80,5 +78,5 @@ export default Vue.extend({
       }, 50)
     }
   }
-})
+}
 </script>

@@ -74,10 +74,8 @@
   </authentication-layout>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   middleware: 'guest',
   data () {
     return {
@@ -101,12 +99,12 @@ export default Vue.extend({
             : this.$router.push('/dashboard')
         })
         .catch((err) => {
-          this.$toast.global.error({ message: err?.response?.data?.errors[0]?.message })
+          this.$toast.global.error({ message: err.response.data.errors[0].message })
         })
         .finally(() => {
           this.isLoading = false
         })
     }
   }
-})
+}
 </script>

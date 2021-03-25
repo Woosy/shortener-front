@@ -35,11 +35,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapGetters } from 'vuex'
 
-export default Vue.extend({
+export default {
   layout: 'dashboard',
   middleware: 'user',
   data () {
@@ -58,5 +57,5 @@ export default Vue.extend({
       this.currentTab = val
     }
   }
-})
+}
 </script>

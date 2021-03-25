@@ -52,10 +52,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   props: {
     current: {
       type: [String, Number],
@@ -71,5 +69,5 @@ export default Vue.extend({
       open: false
     }
   }
-})
+}
 </script>

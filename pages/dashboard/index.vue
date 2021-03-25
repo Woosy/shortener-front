@@ -36,11 +36,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapState, mapGetters } from 'vuex'
 
-export default Vue.extend({
+export default {
   layout: 'dashboard',
   middleware: 'user',
   computed: {
@@ -53,5 +52,5 @@ export default Vue.extend({
       'currentWorkspaceOwner'
     ])
   }
-})
+}
 </script>

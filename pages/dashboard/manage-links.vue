@@ -131,11 +131,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapState, mapGetters } from 'vuex'
 
-export default Vue.extend({
+export default {
   layout: 'dashboard',
   middleware: 'user',
   data () {
@@ -145,7 +144,7 @@ export default Vue.extend({
         currentPage: 1
       },
       searchQuery: '',
-      selectedMembers: [] as number[],
+      selectedMembers: [],
       onlyOwn: false,
       tag: '',
       tags: [],
@@ -163,12 +162,12 @@ export default Vue.extend({
     ...mapState('workspaces', [
       'current'
     ]),
-    filteredTags (): any[] {
+    filteredTags () {
       return this.tagsList.filter((i) => {
         return i.text.toLowerCase().includes(this.tag.toLowerCase())
       })
     },
-    matchingLinks (): Array<object> {
+    matchingLinks () {
       // "search bar"
       const q = this.searchQuery.toLowerCase()
       let links = this.links.filter(link =>
@@ -187,7 +186,7 @@ export default Vue.extend({
       if (this.tags.length > 0) {
         links = links.filter((link) => {
           return link.tags.some((tag) => {
-            return this.tags.some((t: any) => {
+            return this.tags.some((t) => {
               return t.text.toLowerCase() === tag.value.toLowerCase()
             })
           })
@@ -218,7 +217,7 @@ export default Vue.extend({
       return links
     },
     // links that are displayed (pagination logic)
-    displayedLinks (): Array<object> {
+    displayedLinks () {
       const from = (this.pagination.currentPage * this.pagination.perPage) - this.pagination.perPage
       const to = this.pagination.currentPage * this.pagination.perPage
 
@@ -249,7 +248,7 @@ export default Vue.extend({
       this.pagination.perPage = val
       this.pagination.currentPage = 1
     },
-    toggleMemberSelected (memberId: number) {
+    toggleMemberSelected (memberId) {
       this.isMemberSelected(memberId)
         ? this.selectedMembers = this.selectedMembers.filter(id => id !== memberId)
         : this.selectedMembers.push(memberId)
@@ -270,5 +269,5 @@ export default Vue.extend({
       this.clicksSorting = val
     }
   }
-})
+}
 </script>

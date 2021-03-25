@@ -46,10 +46,9 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { baseSuccessModalEvents } from './baseSuccessModalEvents'
 
-export default Vue.extend({
+export default {
   data () {
     return {
       show: false,
@@ -107,5 +106,5 @@ export default Vue.extend({
       })
     }
   }
-})
+}
 </script>

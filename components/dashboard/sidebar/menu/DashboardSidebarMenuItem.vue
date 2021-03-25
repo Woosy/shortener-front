@@ -20,10 +20,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   props: {
     title: {
       type: String,
@@ -39,9 +37,9 @@ export default Vue.extend({
     }
   },
   methods: {
-    isActive (item: string) {
+    isActive (item) {
       return this.$route.path === item
     }
   }
-})
+}
 </script>

@@ -165,12 +165,11 @@
   </base-slideover>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapState, mapGetters } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
-export default Vue.extend({
+export default {
   components: {
     ValidationObserver,
     ValidationProvider
@@ -198,7 +197,7 @@ export default Vue.extend({
     ...mapGetters('workspaces', [
       'currentWorkspace'
     ]),
-    filteredTags (): any[] {
+    filteredTags () {
       return this.tagsList.filter((i) => {
         return i.text.toLowerCase().includes(this.tag.toLowerCase())
       })
@@ -236,7 +235,7 @@ export default Vue.extend({
           this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
         })
     },
-    deleteLink (linkId: number) {
+    deleteLink (linkId) {
       this.$confirm({
         title: 'Are you sure?',
         message: 'All clicks associated to this link will also be deleted and removed from your statistics.',
@@ -251,11 +250,11 @@ export default Vue.extend({
             .then(() => {
               this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
             }).catch((err) => {
-              this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+              this.$toasted.global.error({ message: err.response.data.errors[0].message })
             })
         }
       })
     }
   }
-})
+}
 </script>

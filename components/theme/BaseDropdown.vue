@@ -24,10 +24,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   data () {
     return {
       show: false
@@ -41,5 +39,5 @@ export default Vue.extend({
       this.show = false
     }
   }
-})
+}
 </script>

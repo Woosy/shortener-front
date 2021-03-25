@@ -37,10 +37,8 @@
   </authentication-layout>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   middleware: 'guest',
   methods: {
     pushTo (method) {
@@ -49,5 +47,5 @@ export default Vue.extend({
       }
     }
   }
-})
+}
 </script>

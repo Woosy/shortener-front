@@ -44,11 +44,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapGetters } from 'vuex'
 
-export default Vue.extend({
+export default {
   data () {
     return {
       apiUrl: process.env.API_URL
@@ -59,5 +58,5 @@ export default Vue.extend({
       'activeLinks'
     ])
   }
-})
+}
 </script>

@@ -179,11 +179,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapState } from 'vuex'
 
-export default Vue.extend({
+export default {
   layout: 'dashboard',
   middleware: 'user',
   data () {
@@ -197,7 +196,7 @@ export default Vue.extend({
     ...mapState('links', [
       'links'
     ]),
-    matchingLinks (): Array<object> {
+    matchingLinks () {
       const q = this.searchQuery.toLowerCase()
       const links = this.links.filter(link =>
         link.title.toLowerCase().includes(q) ||
@@ -207,11 +206,11 @@ export default Vue.extend({
       )
       return links
     },
-    current (): object | any {
+    current () {
       return this.links.find(link => link.id === this.selected) || {}
     },
-    options (): any {
-      const categories = [] as any[]
+    options () {
+      const categories = []
 
       this.current.clicks.forEach((click) => {
         const date = this.$dateFns.format(click.created_at, 'MM-dd-yyyy')
@@ -223,9 +222,9 @@ export default Vue.extend({
         xaxis: { type: 'datetime', categories, tickPlacement: 'on' }
       }
     },
-    series (): any {
-      const data = [] as any[]
-      const dates = [] as any[]
+    series () {
+      const data = []
+      const dates = []
 
       this.current.clicks.forEach((click) => {
         const date = this.$dateFns.format(click.created_at, 'MM-dd-yyyy')
@@ -281,7 +280,7 @@ export default Vue.extend({
           this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
         })
     },
-    deleteLink (linkId: number) {
+    deleteLink (linkId) {
       this.$confirm({
         title: 'Are you sure?',
         message: 'All clicks associated to this link will also be deleted and removed from your statistics.',
@@ -296,11 +295,11 @@ export default Vue.extend({
             .then(() => {
               this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
             }).catch((err) => {
-              this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+              this.$toasted.global.error({ message: err.response.data.errors[0].message })
             })
         }
       })
     }
   }
-})
+}
 </script>

@@ -57,11 +57,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapGetters } from 'vuex'
 
-export default Vue.extend({
+export default {
   computed: {
     ...mapGetters('workspaces', [
       'currentWorkspace',
@@ -89,11 +88,11 @@ export default Vue.extend({
               }
             })
             .catch((err) => {
-              this.$toast.global.error({ message: err?.response?.data?.errors[0]?.message })
+              this.$toast.global.error({ message: err.response.data.errors[0].message })
             })
         }
       })
     }
   }
-})
+}
 </script>

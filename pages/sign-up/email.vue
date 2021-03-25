@@ -83,12 +83,10 @@
   </authentication-layout>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
+<script>
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
-export default Vue.extend({
+export default {
   components: {
     ValidationObserver,
     ValidationProvider
@@ -112,9 +110,9 @@ export default Vue.extend({
         })
         .catch((err) => {
           // this.$toast.global.error({ message: 'Authentication failed!' })
-          this.$toast.global.error({ message: err?.response?.data?.errors[0]?.message })
+          this.$toast.global.error({ message: err.response.data.errors[0].message })
         })
     }
   }
-})
+}
 </script>

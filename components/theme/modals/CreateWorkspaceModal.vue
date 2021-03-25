@@ -89,12 +89,11 @@
   </modal>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script>
 import { mapState } from 'vuex'
 import { ValidationObserver, ValidationProvider } from 'vee-validate'
 
-export default Vue.extend({
+export default {
   components: {
     ValidationObserver,
     ValidationProvider
@@ -130,5 +129,5 @@ export default Vue.extend({
         })
     }
   }
-})
+}
 </script>

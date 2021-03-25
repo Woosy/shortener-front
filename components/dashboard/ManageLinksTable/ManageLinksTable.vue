@@ -205,10 +205,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+<script>
+export default {
   props: {
     cols: {
       type: Array,
@@ -239,16 +237,16 @@ export default Vue.extend({
     }
   },
   computed: {
-    pagesCount (): number {
+    pagesCount () {
       let count = Math.trunc(this.matchingLinks.length / this.perPage)
       if ((this.matchingLinks.length % this.perPage) !== 0) { count += 1 }
       return count
     },
-    pagesCountSup5 (): Array<number> {
+    pagesCountSup5 () {
       const count = this.pagesCount
       const current = this.currentPage
 
-      let temp = [] as number[]
+      let temp = []
       temp.push(current)
 
       switch (current) {
@@ -310,7 +308,7 @@ export default Vue.extend({
       this.$store.commit('layout/TOGGLE_EDIT_LINK_SLIDEOVER', true)
       this.$store.commit('links/SET_LINK_TO_EDIT', link)
     },
-    deleteLink (linkId: number) {
+    deleteLink (linkId) {
       this.$confirm({
         title: 'Are you sure?',
         message: 'All clicks associated to this link will also be deleted and removed from your statistics.',
@@ -325,11 +323,11 @@ export default Vue.extend({
             .then(() => {
               this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
             }).catch((err) => {
-              this.$toasted.global.error({ message: err?.response?.data?.errors[0]?.message })
+              this.$toasted.global.error({ message: err.response.data.errors[0].message })
             })
         }
       })
     }
   }
-})
+}
 </script>
