@@ -191,7 +191,6 @@ export default {
   },
   data () {
     return {
-      apiUrl: process.env.API_URL,
       form: {},
       showMore: false,
       isLoading: false,
@@ -227,25 +226,6 @@ export default {
         .then(() => {
           this.$toasted.global.success({ message: 'Link successfully created!' })
           this.close()
-          // setTimeout(() => {
-          //   this.$success({
-          //     title: 'Link successfully created!',
-          //     message: 'Your link has successfully been created.',
-          //     buttons: {
-          //       confirm: 'Copy'
-          //     },
-          //     callback: (confirm) => {
-          //       if (!confirm) { return }
-
-          //       navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
-          //         .then(() => {
-          //           this.$toasted.global.success({ message: 'Link copied to clipboard!' })
-          //         }, () => {
-          //           this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
-          //         })
-          //     }
-          //   })
-          // }, 200)
         })
         .catch((err) => {
           this.error = err.response.data.code || err.response.data.errors[0].message

@@ -32,6 +32,7 @@ export default {
   plugins: [
     { src: '~/plugins/directives.js', ssr: false },
     { src: '~/plugins/vee-validate.js', ssr: false },
+    { src: '~/plugins/global-mixins.js', ssr: false },
     { src: '~/plugins/global-toasts.js', ssr: false },
     { src: '~/plugins/base-confirm-modal.js', ssr: false },
     { src: '~/plugins/base-success-modal.js', ssr: false },
@@ -56,7 +57,9 @@ export default {
     // https://color-mode.nuxtjs.org/
     '@nuxtjs/color-mode',
     // https://github.com/nuxt-community/date-fns-module
-    '@nuxtjs/date-fns'
+    '@nuxtjs/date-fns',
+    // https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/eslint-module'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)

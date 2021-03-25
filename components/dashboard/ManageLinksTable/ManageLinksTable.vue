@@ -231,7 +231,6 @@ export default {
   },
   data () {
     return {
-      apiUrl: process.env.API_URL,
       dateSorting: 'up',
       clicksSorting: 'none'
     }
@@ -296,37 +295,9 @@ export default {
     gotoLinkStatistics (link) {
       this.$router.push(`/dashboard/links-statistics?selected=${link.id}`)
     },
-    copyLink (link) {
-      navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
-        .then(() => {
-          this.$toasted.global.success({ message: 'Link copied to clipboard!' })
-        }, () => {
-          this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
-        })
-    },
     editLink (link) {
       this.$store.commit('layout/TOGGLE_EDIT_LINK_SLIDEOVER', true)
       this.$store.commit('links/SET_LINK_TO_EDIT', link)
-    },
-    deleteLink (linkId) {
-      this.$confirm({
-        title: 'Are you sure?',
-        message: 'All clicks associated to this link will also be deleted and removed from your statistics.',
-        buttons: {
-          confirm: 'Confirm',
-          cancel: 'Cancel'
-        },
-        callback: (confirm) => {
-          if (!confirm) { return }
-
-          this.$store.dispatch('links/removeLink', linkId)
-            .then(() => {
-              this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
-            }).catch((err) => {
-              this.$toasted.global.error({ message: err.response.data.errors[0].message })
-            })
-        }
-      })
     }
   }
 }

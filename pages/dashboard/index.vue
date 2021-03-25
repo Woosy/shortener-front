@@ -30,7 +30,6 @@
       />
 
       <card-recent-links v-if="links.length > 0" />
-
       <card-active-links v-if="links.length > 0" />
     </div>
   </div>

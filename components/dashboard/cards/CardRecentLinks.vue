@@ -48,11 +48,6 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  data () {
-    return {
-      apiUrl: process.env.API_URL
-    }
-  },
   computed: {
     ...mapGetters('links', [
       'recentLinks'
