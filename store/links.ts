@@ -2,7 +2,8 @@ import { GetterTree, ActionTree, MutationTree } from 'vuex'
 
 export const state = () => ({
   links: [] as object[],
-  clicks: [] as object[]
+  clicks: [] as object[],
+  linkToEdit: {}
 })
 
 export type RootState = ReturnType<typeof state>
@@ -37,11 +38,18 @@ export const mutations: MutationTree<RootState> = {
   REMOVE_LINK: (state, linkId) => {
     state.links = state.links.filter((link: any) => link.id !== linkId)
   },
+  EDIT_LINK: (state, link) => {
+    const index = state.links.findIndex((e: any) => e.id === link.id)
+    state.links[index] = link
+  },
   SET_LINKS: (state, payload) => {
     state.links = payload
   },
   SET_CLICKS: (state, payload) => {
     state.clicks = payload
+  },
+  SET_LINK_TO_EDIT: (state, link) => {
+    state.linkToEdit = link
   }
 }
 
@@ -55,5 +63,10 @@ export const actions: ActionTree<RootState, RootState> = {
   async removeLink ({ commit }, linkId) {
     await this.$axios.$delete(`/links/${linkId}`)
     commit('REMOVE_LINK', linkId)
+  },
+
+  async edit ({ commit }, data) {
+    const link = await this.$axios.$put('/links', data)
+    commit('EDIT_LINK', link)
   }
 }

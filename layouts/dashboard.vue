@@ -22,6 +22,7 @@
       <add-member-modal />
 
       <create-link-slideover />
+      <edit-link-slideover />
     </div>
 
     <!--------------------------------------->
