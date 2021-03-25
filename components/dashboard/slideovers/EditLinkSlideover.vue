@@ -27,6 +27,7 @@
               <div class="mt-3">
                 <span class="text-xs text-indigo-500">
                   <button
+                    type="button"
                     class="px-2 py-px border border-indigo-500 hover:bg-indigo-500 hover:text-white rounded transition duration-200 focus:outline-none"
                     @click="copyLink(linkToEdit)"
                   >
@@ -34,6 +35,7 @@
                   </button>
 
                   <button
+                    type="button"
                     class="px-2 py-px border border-indigo-500 hover:bg-indigo-500 hover:text-white rounded transition duration-200 focus:outline-none"
                     @click="deleteLink(linkToEdit.id)"
                   >
@@ -113,7 +115,7 @@
               </div>
 
               <!-- tags -->
-              <!-- <div class="mt-5">
+              <div class="mt-5">
                 <div class="px-4 py-3 border border-gray-300 dark:border-gray-700 rounded">
                   <p class="text-sm font-medium uppercase mb-2">
                     TAGS
@@ -122,13 +124,13 @@
                   <div class="w-full flex items-center text-sm sm:text-base text-center">
                     <vue-tags-input
                       v-model="tag"
-                      :tags="linkToEdit.tags"
+                      :tags="form.tags"
                       :autocomplete-items="filteredTags"
-                      @tags-changed="newTags => linkToEdit.tags = newTags"
+                      @tags-changed="newTags => form.tags = newTags"
                     />
                   </div>
                 </div>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -176,12 +178,15 @@ export default {
   },
   data () {
     return {
-      apiUrl: process.env.API_URL,
-      form: {},
+      tag: '',
+      form: {
+        title: '',
+        key: '',
+        tags: []
+      },
       showMore: false,
       isLoading: false,
-      error: '',
-      tag: ''
+      error: ''
     }
   },
   computed: {
@@ -205,7 +210,14 @@ export default {
   },
   watch: {
     linkToEdit () {
-      this.form = { ...this.linkToEdit }
+      this.form.id = this.linkToEdit.id
+      this.form.title = this.linkToEdit.title
+      this.form.key = this.linkToEdit.key
+
+      this.form.tags = []
+      this.linkToEdit.tags.forEach((tag) => {
+        this.form.tags.push({ text: tag.value })
+      })
     }
   },
   methods: {
@@ -226,34 +238,6 @@ export default {
         .finally(() => {
           this.isLoading = false
         })
-    },
-    copyLink (link) {
-      navigator.clipboard.writeText(`${this.apiUrl}/${link.key}`)
-        .then(() => {
-          this.$toasted.global.success({ message: 'Link copied to clipboard!' })
-        }, () => {
-          this.$toasted.global.error({ message: 'Couldn\'t copy to clipboard!' })
-        })
-    },
-    deleteLink (linkId) {
-      this.$confirm({
-        title: 'Are you sure?',
-        message: 'All clicks associated to this link will also be deleted and removed from your statistics.',
-        buttons: {
-          confirm: 'Confirm',
-          cancel: 'Cancel'
-        },
-        callback: (confirm) => {
-          if (!confirm) { return }
-
-          this.$store.dispatch('links/removeLink', linkId)
-            .then(() => {
-              this.$toasted.global.success({ message: 'Link sucessfully deleted.' })
-            }).catch((err) => {
-              this.$toasted.global.error({ message: err.response.data.errors[0].message })
-            })
-        }
-      })
     }
   }
 }

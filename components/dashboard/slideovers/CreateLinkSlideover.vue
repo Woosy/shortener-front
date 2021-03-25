@@ -223,9 +223,11 @@ export default {
     submit () {
       this.isLoading = true
       this.$store.dispatch('links/create', { ...this.form, workspaceId: this.currentWorkspace.id })
-        .then(() => {
+        .then((link) => {
           this.$toasted.global.success({ message: 'Link successfully created!' })
           this.close()
+          this.$store.commit('layout/TOGGLE_EDIT_LINK_SLIDEOVER', true)
+          this.$store.commit('links/SET_LINK_TO_EDIT', link)
         })
         .catch((err) => {
           this.error = err.response.data.code || err.response.data.errors[0].message

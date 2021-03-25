@@ -47,6 +47,11 @@ const linksModule = {
     },
     SET_LINK_TO_EDIT: (state, link) => {
       state.linkToEdit = link
+    },
+    RELOAD_LINKS: (state) => {
+      const links = state.links
+      state.links = []
+      state.links = links
     }
   },
 
@@ -65,6 +70,7 @@ const linksModule = {
     async edit ({ commit }, data) {
       const link = await this.$axios.$put('/links', data)
       commit('EDIT_LINK', link)
+      commit('RELOAD_LINKS')
     }
   }
 }

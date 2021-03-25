@@ -16,6 +16,7 @@ export default () => {
       // : i18n.t('toast.success')
   }, {
     type: 'success',
+    position: 'top-center',
     duration: 5000
   })
 
@@ -27,6 +28,7 @@ export default () => {
     // : i18n.t('toast.error')
   }, {
     type: 'error',
+    position: 'top-center',
     duration: 5000
   })
 }
