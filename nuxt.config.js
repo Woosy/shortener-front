@@ -137,12 +137,7 @@ export default {
     // vendor: ['@johmun/vue-tags-input'],
     transpile: [
       'vee-validate/dist/rules'
-    ],
-    babel: {
-      plugins: [
-        '@babel/plugin-proposal-optional-chaining'
-      ]
-    }
+    ]
   },
   env: {
     API_URL: process.env.API_URL
