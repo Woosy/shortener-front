@@ -1,19 +1,19 @@
 <template>
   <div
     class="mt-2 flex items-center text-sm text-white font-semibold py-2 rounded-md transition duration-150"
-    :class="isActive(to) ? 'bg-indigo-400' : 'hover:bg-gray-200 dark-hover:bg-gray-700'"
+    :class="isActive() ? 'bg-indigo-400' : 'cursor-pointer hover:bg-gray-200 dark-hover:bg-gray-700'"
     @click="$router.push(to)"
   >
     <!-- item icon -->
     <font-awesome-icon
       :icon="icon"
       class="mx-4"
-      :class="isActive(to) ? 'text-white' : 'text-gray-600 dark:text-white'"
+      :class="isActive() ? 'text-white' : 'text-gray-600 dark:text-white'"
     />
 
     <p
       class="font-medium"
-      :class="isActive(to) ? 'text-white' : 'text-gray-600 dark:text-white'"
+      :class="isActive() ? 'text-white' : 'text-gray-600 dark:text-white'"
     >
       {{ title }}
     </p>
@@ -37,8 +37,8 @@ export default {
     }
   },
   methods: {
-    isActive (item) {
-      return this.$route.path === item
+    isActive () {
+      return this.$route.path === this.to
     }
   }
 }
